@@ -1,0 +1,106 @@
+import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import {getUser} from '../ducks/reducers/authReducer'
+import axios from 'axios'
+
+class Authentication extends Component {
+    constructor(props){
+        super(props)
+
+        this.state = {
+            username: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            account: '',
+            age: '',
+            viewRegister: false
+
+        }
+
+        this.createNewAccount = this.createNewAccount.bind(this)
+        this.handleLogin = this.handleLogin(this)
+    };
+
+    componentDidMount = () =>{
+
+    }
+
+    createNewAccount(){
+        const {username, password, firstName, lastName, account, age} = this.state
+        axios.post('/auth/register', {username, password, first_name: firstName, last_name: lastName, account_type: account, age:age})
+        .then(response =>{
+            this.props.getUser(response.data)
+            this.props.history.push('/dashboard')
+        })
+        .catch(() => console.log('error with createNewAccount function'))
+        
+    }
+
+    handleLogin(){
+        const { username, password } = this.state
+
+        axios.post('/auth/login', {username, password})
+        .then(res => {
+            this.props.getUser(res.data)
+            this.props.history.push('/dashboard')
+        })
+        .catch(error => console.log(error))
+    }
+
+
+    handleInput = (event) =>{
+        this.setState({[event.target.name]: event.target.value})
+
+    }
+
+    toggleView =()=>{
+        this.setState({viewRegister: !this.state.viewRegister})
+    }
+
+
+
+
+    render() {
+
+        return (
+            <div>
+                <div>
+                    <form>
+                        {this.state.viewRegister
+                        ?
+                        <ul>
+                            <p>Username:</p><input value={this.state.username} name='username' onChange={(element) => this.handleInput(element)}></input>
+                            <p>Password:</p><input value={this.state.password} name='password' onChange={(element) => this.handleInput(element)}></input>
+                            <p>Account Type:</p><input value={this.state.account} name='account' onChange={(element) => this.handleInput(element)}></input>
+                            <p>First Name:</p><input value={this.state.firstName} name='firstName' onChange={(element) => this.handleInput(element)}></input>
+                            <p>Last Name:</p><input value={this.state.lastName} name='lastName' onChange={(element) => this.handleInput(element)}></input>
+                            <p>Age:</p><input value={this.state.age} name='age' onChange={(element) => this.handleInput(element)}></input>
+                            <div>
+                                <button onClick={this.createNewAccount}>Register</button>
+                                <button onClick={this.toggleView}>Login</button>
+                            </div>
+                        </ul>
+                        :
+                        <ul>
+                            <p>Username:</p><input value={this.state.username} name='username' onChange={(element) => this.handleInput(element)}></input>
+                            <p>Password:</p><input value={this.state.password} name='password' onChange={(element) => this.handleInput(element)}></input>
+                            <div>
+                                <button onClick={this.toggleView}>Register</button>
+                                <button onClick={this.handleLogin}>Login</button>
+                            </div>
+                        </ul>
+
+                        }
+                    </form>
+                </div>
+                
+            </div>
+        )
+    }
+}
+
+const mappedStateToProps = state => state.authReducer
+
+
+export default connect(mappedStateToProps, {getUser})(Authentication)
