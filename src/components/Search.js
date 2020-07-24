@@ -7,7 +7,7 @@ function Search(props) {
     
 
     const getInfo = ()=> {
-        axios.get(`https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=bs90g87rh5re5dkf7q7g `)
+        axios.get(`https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token= `)
             .then(response =>{
                 setState(response.data)
             })
