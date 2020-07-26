@@ -3,7 +3,7 @@ const express = require('express'),
     massive = require('massive'),
     {CONNECTION_STRING, SESSION_SECRET } = process.env,
     session = require('express-session'),
-    finCtrl = require('./controllers/apiController'),
+    apiCtrl = require('./controllers/apiController'),
     authCtrl = require('./controllers/authController'),
     mainCtrl = require('./controllers/mainController')
 
@@ -28,22 +28,25 @@ const express = require('express'),
     app.use(session({
         resave: true,
         saveUninitialized: false,
-        secret: SESSION_SECRET
+        secret: SESSION_SECRET,
+        cookie: {maxAge: 1000 * 60 * 60 * 24 * 365} 
     }))
 
 
     //API endpoints
-    app.get('/api/quotes', finCtrl.getStockQuotes)
-    app.get('/api/profile/:symbol', finCtrl.getCompanyProfile)
+    app.get('/api/quotes', apiCtrl.getStockQuotes)
+    app.get('/api/quote/:symbol', apiCtrl.getSingleQuote)
+    // app.get('/api/profile/:symbol', apiCtrl.getCompanyProfile)
     
     //Authentication endpoints
+    app.get('/auth/session',authCtrl.getSession)
     app.post('/auth/register', authCtrl.register)
     app.post('/auth/login', authCtrl.login)
     app.delete('/auth/logout')
 
     //Database endpoints
     app.post('/api/buy', mainCtrl.buyOrder)
-    app.delete('/api/sell/:id')
+    app.put('/api/sell/:id', mainCtrl.sellOrder)
 
 
 

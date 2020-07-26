@@ -1,4 +1,5 @@
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const e = require('express');
 
 
 module.exports = {
@@ -16,12 +17,11 @@ module.exports = {
         const salt = bcrypt.genSaltSync(10)
         const hash = bcrypt.hashSync(password, salt)
 
-       await db.auth.register_account({username, password: hash, account_type, first_name, last_name, age})
+        const newUser = await db.auth.register_account({username, password: hash, account_type, first_name, last_name, age });
+        req.session.user = newUser[0];
+        res.status(201).send(req.session.user);
 
-        req.session.user = {username, first_name, last_name }
-
-
-        res.status(201).send(req.session.user)
+        // console.log(req.session)
 
     },
 
@@ -39,10 +39,26 @@ module.exports = {
         if (!isAuthenticated) {
           return res.status(403).send('Incorrect password');
         }
-        req.session.user = {username: user.username };
 
-        console.log(req.session.user)
-        return res.send(req.session.user);
+
+        delete foundUser[0].password;
+        req.session.user = foundUser[0];
+
+        res.status(202).send(req.session.user);
+      },
+
+      getSession: (req,res) =>{
+        
+        if(req.session.user){ 
+          res.status(200).send(req.session.user)
+        }
+
+        else{
+          res.sendStatus(200)
+
+        }
+
+
       },
 
 

@@ -1,15 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Quotes from '../components/Quotes'
-import Orders from '../components/Orders'
-
+import Quotes from '../Quotes/Quotes'
+import Orders from '../Orders/Orders'
 
 class Dashboard extends Component {
+  constructor(props){
+    super(props)
+
+  };
+
+  componentDidMount = () =>{
+
+  };
+
   render() {
+    // console.log('hit dashboard')
+
     return (
       <div>
         <Quotes/>
-        <Orders/>
+        {/* <Orders/> */}
       </div>
     )
   }

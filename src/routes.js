@@ -1,20 +1,20 @@
 import React from 'react'
 import {Switch, Route } from 'react-router-dom'
-import Search from './components/Search'
-import Dashboard from './components/Dashboard'
-import Authentication from './components/Authentication'
-import Profile from './components/Profile'
-import Orders from './components/Orders'
-import Quotes from './components/Quotes'
+import Search from './components/Search/Search'
+import Dashboard from './components/Dashboard/Dashboard'
+import Authentication from './components/Authentication/Authentication'
+import Profile from './components/Profile/Profile'
+import Orders from './components/Orders/Orders'
+import Quotes from './components/Quotes/Quotes'
 
 
 export default (
     <Switch>
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/auth" component={Authentication} />
+        <Route exact path="/" component={Authentication} />
+        <Route path="/dashboard" component={Dashboard} />
         <Route path="/search" component={Search}/>
         <Route path="/profile" component={Profile}/>
-        <Route path="/orders" component={Orders}/>
+        <Route path="/trade" component={Orders}/>
         <Route path="/quotes" component={Quotes} />
     </Switch>
 )

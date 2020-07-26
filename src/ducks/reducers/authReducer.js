@@ -9,9 +9,12 @@ const initialState = {
 const GET_USER = 'GET_USER'
 
 
+
 //action function
 
 export function getUser(account){
+    console.log(account)
+
     return{
         type: GET_USER,
         payload: account
@@ -19,12 +22,15 @@ export function getUser(account){
 }
 
 
+
+
+
 export default function authReducer(state = initialState, action){
     const {type, payload} = action
 
     switch(type){
-        case GET_USER: 
-            return {...state, user: payload}
+        case GET_USER:
+            return {...state, user: payload};
         
         default: 
             return state

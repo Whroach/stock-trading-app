@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {getUser} from '../ducks/reducers/authReducer'
+import {getUser} from '../../ducks/reducers/authReducer'
 import axios from 'axios'
 
 class Authentication extends Component {
@@ -18,11 +18,16 @@ class Authentication extends Component {
 
         }
 
-        this.createNewAccount = this.createNewAccount.bind(this)
-        this.handleLogin = this.handleLogin(this)
+        this.createNewAccount = this.createNewAccount.bind(this);
+        this.loginUser = this.loginUser.bind(this);
     };
 
     componentDidMount = () =>{
+        if(this.props.user.username){
+            this.props.history.push('/dashboard')
+        }
+
+
 
     }
 
@@ -37,13 +42,20 @@ class Authentication extends Component {
         
     }
 
-    handleLogin(){
+
+
+
+
+    loginUser(event){
+        event.preventDefault()
         const { username, password } = this.state
 
+        // console.log('hit 1')
         axios.post('/auth/login', {username, password})
         .then(res => {
-            this.props.getUser(res.data)
-            this.props.history.push('/dashboard')
+            // console.log('hit 2')
+            this.props.getUser(res.data);
+            this.props.history.push('/dashboard');
         })
         .catch(error => console.log(error))
     }
@@ -62,6 +74,8 @@ class Authentication extends Component {
 
 
     render() {
+
+        // console.log(this.props)
 
         return (
             <div>
@@ -87,7 +101,7 @@ class Authentication extends Component {
                             <p>Password:</p><input value={this.state.password} name='password' onChange={(element) => this.handleInput(element)}></input>
                             <div>
                                 <button onClick={this.toggleView}>Register</button>
-                                <button onClick={this.handleLogin}>Login</button>
+                                <button onClick={this.loginUser}>Login</button>
                             </div>
                         </ul>
 
@@ -101,6 +115,5 @@ class Authentication extends Component {
 }
 
 const mappedStateToProps = state => state.authReducer
-
 
 export default connect(mappedStateToProps, {getUser})(Authentication)

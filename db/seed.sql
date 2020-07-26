@@ -11,15 +11,15 @@ CREATE TABLE accounts(
 );
 
 
-CREATE TABLE users_positions(
+CREATE TABLE account_assets (
   position_id SERIAL PRIMARY KEY,
-  position_name VARCHAR(200),
   symbol VARCHAR(200),
   quantity INT,
-  price INT,
+  bid_price INT,
+  ask_price INT,
   order_type VARCHAR(50),
   asset_type VARCHAR(200),
-  sales_id INT references order_details(order_id)
+  client_id INT references accounts(account_id)
   
 );
 

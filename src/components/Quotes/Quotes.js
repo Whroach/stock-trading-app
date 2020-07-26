@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import {getStockQuotes} from '../ducks/reducers/quotesReducer'
+import {getStockQuotes} from '../../ducks/reducers/quotesReducer'
 import axios from 'axios'
 
 
@@ -25,17 +25,17 @@ function Quotes(props) {
     }
 
    
-    const {high, low, prevClose, open} = quotes
+    const {askPrice, bidPrice, last, volume} = quotes
 
 
 
     return (
         <div>
             <ul>
-                <p>Previous Close:</p><h1>{prevClose}</h1>
-                <p>Open:</p><h2>{open}</h2>
-                <p>High:</p><h2>{high}</h2>
-                <p>Low:</p><h2>{low}</h2>
+                <p>Previous Close:</p><h1>{bidPrice}</h1>
+                <p>Open:</p><h2>{askPrice}</h2>
+                <p>High:</p><h2>{last}</h2>
+                <p>Low:</p><h2>{volume}</h2>
             </ul>
         </div>
     )
