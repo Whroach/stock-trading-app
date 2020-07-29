@@ -1,0 +1,6 @@
+
+.indices-container{
+    display: flex;
+    justify-content: space-evenly;
+    overflow-x: hidden;
+}

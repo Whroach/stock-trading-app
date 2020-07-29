@@ -5,7 +5,8 @@ const express = require('express'),
     session = require('express-session'),
     apiCtrl = require('./controllers/apiController'),
     authCtrl = require('./controllers/authController'),
-    mainCtrl = require('./controllers/mainController')
+    mainCtrl = require('./controllers/mainController'),
+    acctCtrl = require('./controllers/acctsController')
 
 
 
@@ -36,7 +37,7 @@ const express = require('express'),
     //API endpoints
     app.get('/api/quotes', apiCtrl.getStockQuotes)
     app.get('/api/quote/:symbol', apiCtrl.getSingleQuote)
-    // app.get('/api/profile/:symbol', apiCtrl.getCompanyProfile)
+    app.get('/api/report/:symbol', apiCtrl.getCompanyReport)
     
     //Authentication endpoints
     app.get('/auth/session',authCtrl.getSession)
@@ -44,9 +45,12 @@ const express = require('express'),
     app.post('/auth/login', authCtrl.login)
     app.delete('/auth/logout')
 
-    //Database endpoints
+    //Trade endpoints
     app.post('/api/buy', mainCtrl.buyOrder)
     app.put('/api/sell/:id', mainCtrl.sellOrder)
+
+    //Account endpoints
+    app.post('/api/deposit/:id', acctCtrl.depositFunds )
 
 
 

@@ -1,5 +1,4 @@
 const bcrypt = require('bcryptjs');
-const e = require('express');
 
 
 module.exports = {

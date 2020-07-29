@@ -6,6 +6,7 @@ import Header from './components/Header/Header'
 import {connect} from 'react-redux'
 import {getUser} from './ducks/reducers/authReducer'
 import axios from 'axios';
+import Footer from './components/Footer/Footer'
 
 function App(props) {
   
@@ -24,10 +25,12 @@ function App(props) {
 
 
   return (
-    <>
+    <div style={{overflowX: "hidden"}}>
       {props.location.pathname === "/" ? null : <Header/>}
       {routes}
-    </>
+      {props.location.pathname === "/" ? null : <Footer/>}
+    </div>
+
   );
 }
 

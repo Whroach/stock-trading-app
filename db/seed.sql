@@ -12,26 +12,35 @@ CREATE TABLE accounts(
 
 
 CREATE TABLE account_assets (
-  position_id SERIAL PRIMARY KEY,
+  transaction_id SERIAL PRIMARY KEY,
   symbol VARCHAR(200),
   quantity INT,
+  action_type VARCHAR(50)
   bid_price INT,
   ask_price INT,
   order_type VARCHAR(50),
   asset_type VARCHAR(200),
+  date TIMESTAMP,
   client_id INT references accounts(account_id)
   
 );
 
+CREATE TABLE order_history (
+  order_history_id SERIAL PRIMARY KEY,
+  symbol VARCHAR(200),
+  quantity INT,
+  bid_price INT,
+  ask_price INT,
+  action_type VARCHAR(50),
+  order_type VARCHAR(50),
+  asset_type VARCHAR(200),
+  date TIMESTAMP,
+  transaction_id INT,
+  client_id INT references accounts(account_id)
+)
 
-CREATE TABLE order_details(
-  order_id SERIAL PRIMARY KEY,
-  date TIMESTAMP DATETIME,
-  action VARCHAR(50),
-  customer_id INT references accounts(account_id) 
-  
 
-);
+
 
 CREATE TABLE account_balance(
   balance_id SERIAL PRIMARY KEY,

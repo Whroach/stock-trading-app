@@ -1,6 +1,44 @@
 .header-container {
     display: flex;
     justify-content: space-around;
-    background-color: red;
+    background-image: url("https://cdn.hipwallpaper.com/i/0/24/13Fcmq.jpg");
+    width: 100vw;
+
+
 
 }
+
+.nav-container{
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.deposit-container {
+    /* background: #0f0c29;
+    background: -webkit-linear-gradient(to right, #0f0c29, #302b63, #24243e); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height:50vh;   */
+    margin: 0 auto;
+}
+
+.deposit-form{
+    height: 20vh;
+    width: 20vw;
+    position: absolute;
+    top: 30%;
+    background-color: red;
+}
+
+#wallet-id{
+    position: relative;
+    right: 0%
+
+}
+
+
+
+/* // background: "#0f0c29", background: "-webkit-linear-gradient(to right, #0f0c29, #302b63, #24243e)", 
+background: "linear-gradient(to right, #0f0c29, #302b63, #24243e)" */

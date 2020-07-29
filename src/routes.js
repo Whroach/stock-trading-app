@@ -6,6 +6,7 @@ import Authentication from './components/Authentication/Authentication'
 import Profile from './components/Profile/Profile'
 import Orders from './components/Orders/Orders'
 import Quotes from './components/Quotes/Quotes'
+import Markets from './components/Markets/Markets'
 
 
 export default (
@@ -16,5 +17,6 @@ export default (
         <Route path="/profile" component={Profile}/>
         <Route path="/trade" component={Orders}/>
         <Route path="/quotes" component={Quotes} />
+        <Route path="/markets" component={Markets} />
     </Switch>
 )

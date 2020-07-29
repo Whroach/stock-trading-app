@@ -7,6 +7,7 @@ const initialState = {
 //action type variables
 
 const GET_USER = 'GET_USER'
+const HANDLE_DEPOSITS = 'HANDLE_DEPOSITS'
 
 
 
@@ -21,6 +22,14 @@ export function getUser(account){
     }
 }
 
+export function depositFunds(value){
+    return {
+        type: HANDLE_DEPOSITS,
+        payload: value
+
+    }
+}
+
 
 
 
@@ -30,6 +39,8 @@ export default function authReducer(state = initialState, action){
 
     switch(type){
         case GET_USER:
+            return {...state, user: payload};
+        case HANDLE_DEPOSITS: 
             return {...state, user: payload};
         
         default: 

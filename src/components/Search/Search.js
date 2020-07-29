@@ -17,8 +17,9 @@ function Search(props) {
             .then(response =>{
                 props.getProfile(response.data)
                 setState(response.data)
+                setValue(" ")
 
-                if(location.pathname != "/profile"){
+                if(location.pathname != "/profile" && location.pathname != "/trade"){
                     history.push('/profile')
                 }
 

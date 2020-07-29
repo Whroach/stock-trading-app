@@ -1,0 +1,39 @@
+.profile-container{
+    height: 40vh;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    background-color: orange;
+
+
+}
+
+.news-container{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    height: 40vh;
+    width: 25vw;
+    position: relative;
+    right: 2%;
+    overflow-x: hidden;
+    /* overflow-y: hidden; */
+
+}
+
+.quotes-container{
+    position: relative;
+    left: 10%;
+
+}
+
+.image-container{
+    /* display: flex;
+    justify-content: center;
+    position: relative; */
+    /* top: 10% */
+}
+
+#test-image{
+    /* height: 40%; */
+}

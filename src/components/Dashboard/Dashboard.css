@@ -1,0 +1,19 @@
+.dashboard-container{
+    overflow-x: hidden;
+    width: 100vw;
+
+}
+
+
+.heat-map-container{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 20%;
+
+}
+
+#heat-map{
+    width: 20%;
+}
+

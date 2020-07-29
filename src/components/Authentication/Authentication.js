@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {getUser} from '../../ducks/reducers/authReducer'
 import axios from 'axios'
+import './Authentication.css'
 
 class Authentication extends Component {
     constructor(props){

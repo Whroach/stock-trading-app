@@ -1,10 +1,9 @@
-const { getNodeText } = require("@testing-library/react");
 
 module.exports = {
 
     buyOrder: async(req,res) =>{
         const db = req.app.get('db')
-        const { symbol, quantity, bid_price, ask_price, order_type, id } = req.body
+        const { symbol, quantity, bid_price, ask_price, order_type, action_type, asset_type, date, id } = req.body
         // let newNum = parseInt(quantity)
         // console.log(quantity)
 
@@ -15,7 +14,8 @@ module.exports = {
 
         console.log(req.body)
 
-        await db.orders.buy_order({symbol, quantity, bid_price, ask_price, order_type, id})
+        await db.orders.buy_order({symbol, quantity, bid_price, ask_price, order_type, id, action_type, asset_type, date})
+
 
         res.status(200).send('Success')
 
@@ -23,34 +23,72 @@ module.exports = {
     },
 
     sellOrder: async(req,res) => {
-        const db = req.app.get('db'),
-            id = req.params,
-            {symbol, quantity, bid_price, ask_price} = req.body
 
-        let findPosition = await db.orders.find_position({quantity, id, symbol})
+        const db = req.app.get('db'),
+            value = req.params.id,
+            {symbol, quantity} = req.body,
+            id = parseInt(value)
+
+
+        const findPosition = await db.orders.find_position({id, symbol})
         
+        // console.log(findPosition)
         console.log(findPosition)
 
 
         if(findPosition[0]){
-            findPosition.map((element,index) => {
-                if(element.quantity > 0){
-                    return next()
+            findPosition.map((element) => {
+                // console.log(element.quantity)
+                if(element.quantity < 0 ){
+                    console.log('hit bad')
+                    return res.status(400).send('Unable to process your request as the position may not exist in your holdings.')
                 }
-                else{
-                    return res.status(400).send('Unable to process your request. Please reduce quantity amount.')
-                }
-                 
             })
+
+        };
+
+
+        //FIFO method
+
+        let t_id = findPosition[0].transaction_id
+        // console.log(t_id)
+        const savedArray = findPosition.map(obj => ({...obj}));
+
+
+
+        if(findPosition[0].quantity === quantity){
+          await db.orders.sell_order({t_id, c_id, quantity})
 
         }
 
-        // let tradeSize = findPosition.map((element,index) => {
-        //     if(quantity === element.quantity){
 
-        //     }
-        // })
+        function count(findPosition){
+          findPosition.filter((value) => {
+            while(value.quantity > 0 && number > 0) {
 
+            value.quantity--;
+            number--;
+            }})
+          };
+          
+        
+        
+        findPosition.forEach(function(item) {
+          var ItemIndex = savedArray.findIndex(e => e.quantity <= item.quantity);
+        
+          findPosition.splice(ItemIndex, 0)
+        
+        })
+        
+        await db.orders.reduce_position({quantity, t_id})
+
+
+
+
+
+
+
+        res.status(200).send(tradeSize)
 
 
 
