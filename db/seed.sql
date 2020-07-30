@@ -15,12 +15,12 @@ CREATE TABLE account_assets (
   transaction_id SERIAL PRIMARY KEY,
   symbol VARCHAR(200),
   quantity INT,
-  action_type VARCHAR(50)
+  action_type VARCHAR(50),
   bid_price INT,
   ask_price INT,
   order_type VARCHAR(50),
   asset_type VARCHAR(200),
-  date TIMESTAMP,
+  timestamp timestamp default current_timestamp,
   client_id INT references accounts(account_id)
   
 );
@@ -34,7 +34,7 @@ CREATE TABLE order_history (
   action_type VARCHAR(50),
   order_type VARCHAR(50),
   asset_type VARCHAR(200),
-  date TIMESTAMP,
+   timestamp timestamp default current_timestamp,
   transaction_id INT,
   client_id INT references accounts(account_id)
 )
@@ -47,7 +47,7 @@ CREATE TABLE account_balance(
   cash_balance INT,
   buying_power INT,
   customer_id INT references accounts(account_id)
-  
+  timestamp timestamp default current_timestamp  
 
 );
 

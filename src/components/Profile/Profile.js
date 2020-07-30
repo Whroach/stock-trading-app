@@ -78,15 +78,7 @@ function Profile(props) {
       </div>
     );
 
-    console.log(props.quotes)
-
-
-    const companyData = (
-      <div>
-        
-
-      </div>
-    )
+ 
 
 
     // console.log(report.pbRatio)
@@ -109,7 +101,7 @@ function Profile(props) {
               {quotesSection}
             </div>
             <div className="image-container" >
-              <img id="test-image" src="https://wallstreetonparade.com/wp-content/uploads/2020/03/Deutsche-Bank-Trading-Chart-From-February-14-through-March-5-2020-Versus-Wall-Street-Banks-and-U.S.-Insurers.jpg"/>
+              <img id="test-image" src="https://wallstreetonparade.com/wp-content/uploads/2020/03/Deutsche-Bank-Trading-Chart-From-February-14-through-March-5-2020-Versus-Wall-Street-Banks-and-U.S.-Insurers.jpg" alt="test"/>
             </div>
             <div className="news-container">
               {mappedNews}

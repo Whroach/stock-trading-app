@@ -16,11 +16,10 @@ function Orders(props) {
         order_type: 'Market',
         action_type: 'Buy',
         asset_type: 'Equity',
-        date: quotes.stockQuotes.timestamp
         
 
     }
-    const {symbol, quantity, bid_price, ask_price, id, order_type, action_type, asset_type, date} = order
+    const {symbol, quantity, bid_price, ask_price, id, order_type, action_type, asset_type} = order
     
 
 
@@ -43,7 +42,7 @@ function Orders(props) {
         // const {symbol, quantity, bid_price, ask_price, id} = order
         const { value } = order.quantity
         
-      axios.post('/api/buy', {symbol, quantity: parseInt(value), bid_price: parseInt(bid_price), ask_price: parseInt(ask_price), id, order_type, action_type, asset_type, date})
+      axios.post('/api/buy', {symbol, quantity: parseInt(value), bid_price: parseInt(bid_price), ask_price: parseInt(ask_price), id, order_type, action_type, asset_type})
         .then(() =>{
             console.log('Successs!!!')
             
@@ -51,14 +50,6 @@ function Orders(props) {
         .catch(() => console.log('error with sendOrder'))
 
     }
-
-    function sendSellOrder(){
-        
-        
-    }
-
-    console.log(props.quotes)
-
 
 
     return (

@@ -1,20 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Quotes from '../Quotes/Quotes'
-import Orders from '../Orders/Orders'
-import Footer from '../Footer/Footer'
 import './Dashboard.css'
-import { findByLabelText } from '@testing-library/react'
+import History from '../History/History'
 
 class Dashboard extends Component {
-  constructor(props){
-    super(props)
 
-  };
-
-  componentDidMount = () =>{
-
-  };
 
   render() {
     // console.log('hit dashboard')
@@ -22,19 +12,23 @@ class Dashboard extends Component {
     return (
       <div className="dashboard-container">
         <div style={{height: "84vh", width: "100vw", backgroundColor: "#1b2845", backgroundImage: "linear-gradient(315deg, #1b2845 0%, #274060 74%)"}}>
-          <div className="dash-chart" style={{display: "flex", justifyContent: "center"}}>
-            <img style={{height: 300, position: "relative", top: 40}}src="https://wallstreetonparade.com/wp-content/uploads/2020/03/Deutsche-Bank-Trading-Chart-From-February-14-through-March-5-2020-Versus-Wall-Street-Banks-and-U.S.-Insurers.jpg"/>
+          <div style={{padding: "30px"}}>
+            <div className="dash-chart" style={{display: "flex", justifyContent: "space-evenly"}}>
+              <h1>Helloooooo World</h1>
+              <img style={{height: 300, position: "relative"}}src="https://wallstreetonparade.com/wp-content/uploads/2020/03/Deutsche-Bank-Trading-Chart-From-February-14-through-March-5-2020-Versus-Wall-Street-Banks-and-U.S.-Insurers.jpg" alt="testimgimg"/>
+              <div className="history">
+                <History />
+              </div>
+            </div>
           </div>
           <div className="heat-map-container">
-            <img id="heat-map" src="https://user-images.githubusercontent.com/1509692/64646747-09b45080-d3ee-11e9-922c-269e4f654090.png"/>
+            <img id="heat-map" src="https://user-images.githubusercontent.com/1509692/64646747-09b45080-d3ee-11e9-922c-269e4f654090.png" alt="testimg"/>
           </div>
         </div>
-        {/* <Footer/> */}
       </div>
     )
   }
 }
-
 
 
 

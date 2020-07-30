@@ -3,7 +3,7 @@ module.exports = {
 
     buyOrder: async(req,res) =>{
         const db = req.app.get('db')
-        const { symbol, quantity, bid_price, ask_price, order_type, action_type, asset_type, date, id } = req.body
+        const { symbol, quantity, bid_price, ask_price, order_type, action_type, asset_type, id } = req.body
         // let newNum = parseInt(quantity)
         // console.log(quantity)
 
@@ -14,7 +14,7 @@ module.exports = {
 
         console.log(req.body)
 
-        await db.orders.buy_order({symbol, quantity, bid_price, ask_price, order_type, id, action_type, asset_type, date})
+        await db.orders.buy_order({symbol, quantity, bid_price, ask_price, order_type, id, action_type, asset_type})
 
 
         res.status(200).send('Success')

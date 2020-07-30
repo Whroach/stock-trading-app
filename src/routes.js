@@ -7,6 +7,8 @@ import Profile from './components/Profile/Profile'
 import Orders from './components/Orders/Orders'
 import Quotes from './components/Quotes/Quotes'
 import Markets from './components/Markets/Markets'
+import Accounts from './components/Accounts/Accounts'
+import History from './components/History/History'
 
 
 export default (
@@ -18,5 +20,8 @@ export default (
         <Route path="/trade" component={Orders}/>
         <Route path="/quotes" component={Quotes} />
         <Route path="/markets" component={Markets} />
+        <Route path="/account" component={Accounts}/>
+        <Route path="/history" component={History}/>
+        
     </Switch>
 )

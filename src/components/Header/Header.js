@@ -44,7 +44,7 @@ function Header(props) {
     return (
         <div>
             <div className="header-container">
-                <Link to="/dashboard"><img style={{position: "relative", top: 1, height: 68}} src="logo.PNG"/></Link>
+                <Link to="/dashboard"><img style={{position: "relative", top: 1, height: 68}} src="logo.PNG" alt="logo"/></Link>
                 <div className="nav-container">
                     <Link to="/dashboard" ><button style={{height: 40, width: 100, position: "relative", top: 16, fontSize: 20}}>Home</button></Link>
                     <Link to="/markets"><button style={{height: 40, width: 100, position: "relative", top: 16, fontSize: 20}}>Markets</button></Link>

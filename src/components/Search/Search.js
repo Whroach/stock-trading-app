@@ -6,7 +6,7 @@ import {getProfile} from '../../ducks/reducers/profileReducer'
 
 
 function Search(props) {
-    const [companyProfile, setState] = useState([])
+    // const [companyProfile, setState] = useState([])
     const [symbol, setValue] = useState("")
     const history = useHistory()
     const location = useLocation()
@@ -16,10 +16,10 @@ function Search(props) {
         axios.get(`https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=bs90g87rh5re5dkf7q7g`)
             .then(response =>{
                 props.getProfile(response.data)
-                setState(response.data)
+                // setState(response.data)
                 setValue(" ")
 
-                if(location.pathname != "/profile" && location.pathname != "/trade"){
+                if(location.pathname !== "/profile" && location.pathname !== "/trade"){
                     history.push('/profile')
                 }
 

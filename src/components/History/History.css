@@ -1,25 +1,14 @@
-.dashboard-container{
-    overflow-x: hidden;
-    width: 100vw;
-
-}
-
-
-.heat-map-container{
+.history-container{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    overflow: scroll;
+    height: 30vh;
+    width: 15vw;
     position: relative;
-    top: 10%;
-
+    overflow-x: hidden;
+    /* overflow-y: hidden; */
 }
 
-#heat-map{
-    width: 20%;
-}
-
-.history{
+/* .h-container{
     background-image: url("https://us.123rf.com/450wm/gujarichleaw/gujarichleaw1903/gujarichleaw190300036/120481739-abstract-light-blue-black-gradient-color-background-vector-illustration-eps10.jpg?ver=6");
-    position: relative;
-    top: 50%;
-}
-
+} */

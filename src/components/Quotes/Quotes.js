@@ -12,7 +12,7 @@ function Quotes(props) {
     useEffect(() => {
         getQuote()
 
-      },[])
+      },[quotes])
     
 
     const getQuote = () =>{

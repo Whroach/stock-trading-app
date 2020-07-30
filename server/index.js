@@ -51,6 +51,7 @@ const express = require('express'),
 
     //Account endpoints
     app.post('/api/deposit/:id', acctCtrl.depositFunds )
+    app.get('/api/history/:id', acctCtrl.accountHistory)
 
 
 
