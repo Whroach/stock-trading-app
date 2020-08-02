@@ -6,15 +6,32 @@
 
 
 .heat-map-container{
-    display: flex;
+    /* display: flex;
     justify-content: center;
     position: relative;
-    top: 10%;
+    top: 10%; */
+    display: grid;
+    justify-content: center;
+    position: relative;
+    top: 2%;
+    height: 40%;
+    /* grid-template-columns: repeat(4,1fr);
+    grid-auto-rows: 100px; */
+    grid-template-columns: 200px 200px 200px 200px;
+
 
 }
 
-#heat-map{
-    width: 20%;
+
+.element-section{
+    display: flex;
+    justify-content: space-around;
+    background-color:green;
+    height: 100%;
+    border-radius: 12%;
+    /* border-style: solid */
+    border-style: ridge;
+    color: white;
 }
 
 .history{

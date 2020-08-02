@@ -2,12 +2,49 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import './Dashboard.css'
 import History from '../History/History'
+import axios from 'axios'
 
 class Dashboard extends Component {
+  constructor(props){
+    super(props)
+
+
+    this.state ={
+      dowIndex: []
+
+    }
+  };
+
+  // componentDidMount =()=>{
+  //   this.getDowQuotes()
+  // }
+
+
+  // getDowQuotes = () =>{
+  //   axios.get('/api/dow')
+  //   .then(res =>{
+  //     this.setState({dowIndex: res.data})
+  //   })
+  //   .catch(() => console.log('error in getDowQuotes'))
+  // }
+
 
 
   render() {
-    // console.log('hit dashboard')
+
+    const {dowIndex } = this.state
+
+    const mappedDow = dowIndex.map((element,index) => {
+      return <div key={index} className="dow-container">
+        <div className="element-section">
+            {element.ticker}
+            {element.open}
+        </div>
+      </div>
+    })
+ 
+
+
 
     return (
       <div className="dashboard-container">
@@ -22,7 +59,7 @@ class Dashboard extends Component {
             </div>
           </div>
           <div className="heat-map-container">
-            <img id="heat-map" src="https://user-images.githubusercontent.com/1509692/64646747-09b45080-d3ee-11e9-922c-269e4f654090.png" alt="testimg"/>
+            {mappedDow}
           </div>
         </div>
       </div>

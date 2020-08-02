@@ -14,28 +14,28 @@ function Profile(props) {
 
 
 
-    useEffect(() => {
-        getOneQuote()
-        getCompanyNews()
-        getCompanyData()
+    // useEffect(() => {
+    //     // getOneQuote()
+    //     getCompanyNews()
+    //     getCompanyData()
 
-      },[profile])
+    //   },[profile])
     
     // console.log(props.profileReducer.profile.ticker)
     // console.log(profile.ticker)
 
-    const getCompanyNews = () =>{
-      axios.get(`https://finnhub.io/api/v1/company-news?symbol=${profile.ticker}&from=2020-07-25&to=2020-07-26&token=bs90g87rh5re5dkf7q7g`)
-      .then(res =>{
-        // console.log(res.data[0].headline)
-        let mappedData = res.data.map((element) =>{
-          return element
-        })
-        setNews(mappedData)
-      })
-      .catch( () => console.log('error in getCompanyNews'))
+    // const getCompanyNews = () =>{
+    //   axios.get(`https://finnhub.io/api/v1/company-news?symbol=${profile.ticker}&from=2020-07-25&to=2020-07-26&token=bs90g87rh5re5dkf7q7g`)
+    //   .then(res =>{
+    //     // console.log(res.data[0].headline)
+    //     let mappedData = res.data.map((element) =>{
+    //       return element
+    //     })
+    //     setNews(mappedData)
+    //   })
+    //   .catch( () => console.log('error in getCompanyNews'))
       
-    }
+    // }
 
     const mappedNews = news.map((element, index) =>{
       return <div key={index}>
@@ -47,23 +47,23 @@ function Profile(props) {
     });
 
 
-    const getOneQuote = () =>{
-        axios.get(`/api/quote/${profile.ticker}`)
-          .then(res =>{
-            props.getStockQuotes(res.data)
-            setQuote(res.data)})
+    // const getOneQuote = () =>{
+    //     axios.get(`/api/quote/${profile.ticker}`)
+    //       .then(res =>{
+    //         props.getStockQuotes(res.data)
+    //         setQuote(res.data)})
 
-          .catch(() => console.log('Error in getOnequote'))
+    //       .catch(() => console.log('Error in getOnequote'))
 
-    };
+    // };
 
-    const getCompanyData = () =>{
-      axios.get(`/api/report/${profile.ticker}`)
-        .then(res =>{
-          setReport(res.data)
-        })
-        .catch(() => console.log('error in getCompanydata'))
-    }
+    // const getCompanyData = () =>{
+    //   axios.get(`/api/report/${profile.ticker}`)
+    //     .then(res =>{
+    //       setReport(res.data)
+    //     })
+    //     .catch(() => console.log('error in getCompanydata'))
+    // }
 
     function handleToggle(){
       setToggle(toggle === 'true' ? 'false' : 'true')

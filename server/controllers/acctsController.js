@@ -20,9 +20,9 @@ module.exports = {
 
             // let history = await db.query("SELECT DISTINCT(aa.timestamp), aa.symbol, aa.quantity, aa.action_type from accounts AS a JOIN account_assets AS aa ON a.account_id = aa.client_id WHERE a.account_id = $1", [`${id}`])
         
-            let history = await db.accounts.history({id})
+            let result = await db.accounts.history({id})
         
-            res.status(200).send(history)
+            res.status(200).send(result)
 
     }
 

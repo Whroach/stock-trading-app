@@ -26,7 +26,9 @@ function App(props) {
 
   return (
     <div style={{overflowX: "hidden"}}>
-      {props.location.pathname === "/" ? null : <Header/>}
+      <div className="header-app">
+        {props.location.pathname === "/" ? null : <Header/>}
+      </div>
       {routes}
       {props.location.pathname === "/" ? null : <Footer/>}
     </div>

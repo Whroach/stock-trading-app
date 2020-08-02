@@ -3,17 +3,26 @@ const express = require('express'),
     massive = require('massive'),
     {CONNECTION_STRING, SESSION_SECRET } = process.env,
     session = require('express-session'),
-    apiCtrl = require('./controllers/apiController'),
+    // apiCtrl = require('./controllers/apiController'),
     authCtrl = require('./controllers/authController'),
     mainCtrl = require('./controllers/mainController'),
-    acctCtrl = require('./controllers/acctsController')
-
+    acctCtrl = require('./controllers/acctsController'),
+    { graphqlHTTP } = require('express-graphql'),
+    schema = require('./schema'),
+    cors = require('cors');
 
 
     const PORT = 3005
     const app = express()
 
+    app.use(cors())
+
     app.use(express.json())
+
+    app.use('/graphql', graphqlHTTP({
+        schema,
+        graphiql: true
+    }))
 
 
     massive({
@@ -35,9 +44,10 @@ const express = require('express'),
 
 
     //API endpoints
-    app.get('/api/quotes', apiCtrl.getStockQuotes)
-    app.get('/api/quote/:symbol', apiCtrl.getSingleQuote)
-    app.get('/api/report/:symbol', apiCtrl.getCompanyReport)
+    // app.get('/api/quotes', apiCtrl.getStockQuotes)
+    // app.get('/api/quote/:symbol', apiCtrl.getSingleQuote)
+    // app.get('/api/report/:symbol', apiCtrl.getCompanyReport)
+    // app.get('/api/dow', apiCtrl.getDowQuotes)
     
     //Authentication endpoints
     app.get('/auth/session',authCtrl.getSession)

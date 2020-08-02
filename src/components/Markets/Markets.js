@@ -1,48 +1,22 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import Quotes from '../Quotes/Quotes'
-import './Market.css'
+import React, {useState} from 'react'
+import Equity from './Equity'
+import Crypto from './Crypto'
+import Forex from './Forex'
 
-export default class Markets extends Component {
-    constructor(props){
-        super(props)
+export default function Markets(props) {
 
-        this.state={
-            indices: [],
-            stocks:[],
-            forex: [],
-            crypto: []
-            
-        }
-
-        this.getIndices = this.getIndices.bind(this)
-    };
-
-    componentDidMount = () =>{
-        this.getIndices()
-    }
+    const [page, displayPage] = useState('equity')
 
 
-
-    getIndices(){
-        axios.get('/api/quotes')
-        .then(res =>{
-            this.setState({indices: res.data})
-        })
-        .catch(() => console.log('error in getIndices'))
-        
-    }
-
-
-
-
-    render() {
-        return (
-            <div className="body-m">
-                <div className="quotes-container-m">
-                <Quotes/>
-                </div>
+    return (
+        <div>
+            <button onClick={() => displayPage('equity')}>Equity</button>
+            <button onClick={() => displayPage('crypto')}>Crypto</button>
+            <button onClick={() => displayPage('forex')}>Forex</button>
+            <div>
+                {page === 'equity' ? <Equity/> : page === 'crypto' ? <Crypto/> :  <Forex /> }
             </div>
-        )
-    }
+
+        </div>
+    )
 }

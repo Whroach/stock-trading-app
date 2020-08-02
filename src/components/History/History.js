@@ -9,10 +9,10 @@ function History(props) {
 
     const [history, setHistory] = useState([])
 
-    useEffect(() => {
-        getAccountHistory()
+    // useEffect(() => {
+    //     getAccountHistory()
 
-      },[history])
+    //   },[history])
 
 
     const getAccountHistory = () =>{

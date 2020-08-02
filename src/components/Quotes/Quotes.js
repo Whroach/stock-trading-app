@@ -1,33 +1,37 @@
-import React, {useState, useEffect } from 'react'
+import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
 import {getStockQuotes} from '../../ducks/reducers/quotesReducer'
-import axios from 'axios'
 import './Quotes.css'
+
+
 
 
 function Quotes(props) {
 
     const [quotes, setQuote] = useState([])
 
-    useEffect(() => {
-        getQuote()
+        // useEffect(() => {
+        //     getIndicesQuotes()
+    
+        //   },[])
 
-      },[quotes])
+
+
     
 
-    const getQuote = () =>{
-        axios.get('/api/quotes')
-            .then(response =>{
-                let mappedQuotes = response.data.map((element) =>{
-                    return element
-                })
+    // const getIndicesQuotes = () =>{
+    //     axios.get('/api/quotes')
+    //         .then(response =>{
+    //             let mappedQuotes = response.data.map((element) =>{
+    //                 return element
+    //             })
 
-                setQuote(mappedQuotes)
-                props.getStockQuotes(mappedQuotes)
-            })
-            .catch(error => console.log(error))
+    //             setQuote(mappedQuotes)
+    //             // props.getStockQuotes(mappedQuotes)
+    //         })
+    //         .catch(error => console.log(error))
 
-    }
+    // }
 
    
     // const {askPrice, bidPrice, last, volume} = quotes
@@ -50,7 +54,15 @@ function Quotes(props) {
     return (
         <div className="quotes-container-q">
             <div className="indices-container">
-                {mappedQuotes}
+                <h1>What</h1>
+                <h2>IS</h2>
+                <h3>UP</h3>
+            </div>
+            <div>
+
+            </div>
+            <div>
+                <img src="https://images.wsj.net/im-16358?width=620&size=1.5"/>
             </div>
         </div>
 

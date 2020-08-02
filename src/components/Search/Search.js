@@ -12,20 +12,20 @@ function Search(props) {
     const location = useLocation()
     
 
-    const getInfo = ()=> {
-        axios.get(`https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=bs90g87rh5re5dkf7q7g`)
-            .then(response =>{
-                props.getProfile(response.data)
-                // setState(response.data)
-                setValue(" ")
+    // const getInfo = ()=> {
+    //     axios.get(`https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=bs90g87rh5re5dkf7q7g`)
+    //         .then(response =>{
+    //             props.getProfile(response.data)
+    //             // setState(response.data)
+    //             setValue("")
 
-                if(location.pathname !== "/profile" && location.pathname !== "/trade"){
-                    history.push('/profile')
-                }
+    //             if(location.pathname !== "/profile" && location.pathname !== "/trade"){
+    //                 history.push('/profile')
+    //             }
 
-            })
-            .catch(error => console.log(error))
-    }
+    //         })
+    //         .catch(error => console.log(error))
+    // }
 
 
     
@@ -40,7 +40,7 @@ function Search(props) {
     return (
         <div>
             <input type="text" name="name" onChange={onChangeHandler} value={symbol}/>
-            <button onClick={getInfo}>Search</button>
+            {/* <button onClick={getInfo}>Search</button> */}
             <div>
 
             </div>       
