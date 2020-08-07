@@ -1,5 +1,5 @@
-.body{
-    height: 150vh;
+.body-e{
+    height: 155vh;
     background-color: white;
     margin-left: 5%;
     margin-right: 5%;
@@ -27,7 +27,7 @@
     display: flex;
     flex-direction: column;
     overflow: scroll;
-    height: 20vh;
+    height: 30vh;
     width: 20vw;
     position: relative;
     overflow-x: hidden;
@@ -38,7 +38,7 @@
     display: flex;
     flex-direction: column;
     overflow: scroll;
-    height: 20vh;
+    height: 30vh;
     width: 20vw;
     position: relative;
     overflow-x: hidden;
@@ -49,7 +49,7 @@
     display: flex;
     flex-direction: column;
     overflow: scroll;
-    height: 53vh;
+    height: 42vh;
     width: 103vw;
     position: relative;
     right: 15%;
@@ -85,3 +85,16 @@
 .active-heading{
     border-bottom: ridge black ;
 }
+
+.index-box{
+    height: 100px;
+    width: 150px;
+    /* border-style: solid;
+    border-radius: square;
+    border-color:black;
+    border-width: thick; */
+}
+
+/* .container-list-e{
+    height: 50vh;
+} */

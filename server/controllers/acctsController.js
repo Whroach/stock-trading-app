@@ -49,7 +49,7 @@ module.exports = {
         const db = req.app.get('db'),
         {id } = req.params
 
-        let result = await db.accounts.get_positions({client_id: id})
+        let result = await db.accounts.get_cash(id)
 
         res.status(200).send(result)
     },
@@ -66,6 +66,18 @@ module.exports = {
 
         res.status(200).send(result)
 
+    },
+
+    getChartData: async(req,res)=>{
+        
+        const db = req.app.get('db'),
+        { id } = req.params
+
+        console.log(id)
+        
+        let result = await db.query("SELECT SUM(quantity) AS shares, symbol FROM account_assets WHERE client_id = $1 GROUP BY symbol", [`${id}`])
+
+        res.status(200).send(result)
 
 
     }

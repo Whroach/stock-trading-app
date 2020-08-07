@@ -16,6 +16,10 @@ const EQUITY_QUERY_COMBINE = gql`
       ticker
       last
     }
+    profile(ticker: $ticker){
+      name
+      description
+    }
 
   }
 
@@ -24,11 +28,11 @@ const EQUITY_QUERY_COMBINE = gql`
 
 function Profile(props) {
   const { ticker } = props.match.params
-  const [profile, setProfile] = useState([])
+  const [profileF, setProfile] = useState([])
   props.getStockQuote(ticker)
 
   useEffect(() =>{
-     axios.get(`api/profile/${ticker}`)
+     axios.get(`/api/profile/${ticker}`)
     .then(res => {
       setProfile(res.data)
     })
@@ -48,10 +52,10 @@ function Profile(props) {
           if(loading) return <h1>Loading....</h1>;
           if(error) console.log(error)
 
-          const {companyNews, equity } = data
+          const {companyNews, equity, profile } = data
 
         
-          return <DisplayProfile news={companyNews} bio={profile} equity={equity} />
+          return <DisplayProfile news={companyNews} bio={profileF} description={profile} equity={equity} />
 
 
 

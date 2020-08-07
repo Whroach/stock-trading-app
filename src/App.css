@@ -4,10 +4,20 @@ body {
     margin-top: 0;
 }
 .search-symbol{
-    background-color: white;
+    height: 10%;
+    width: 15%;
+    background: #0f0c29;
+    background: -webkit-linear-gradient(to right, #0f0c29, #302b63, #24243e);
     position: fixed;
     top: 40%;
     left:40%;
+}
+
+.search-a-container{
+    position: relative;
+    top: 30%;
+    display: flex;
+    flex-direction: column;
 }
 
 .orders-page{
@@ -17,5 +27,34 @@ body {
     position: fixed;
     top: 20%;
     left:28%;
+
+}
+
+.deposit-container {
+    background: #0f0c29;
+    background: -webkit-linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    position: fixed;
+    top: 8%;
+    left: 40%;
+
+
+}
+
+.deposit-form{
+    height: 20vh;
+    width: 20vw;
+    position: fixed;
+    top: 30%;
+    background-color:blue;
+    color: white;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+#wallet-id{
+    position: absolute;
+    right: 0%;
+    overflow-y: hidden;
+    overflow-x: hidden;
 
 }

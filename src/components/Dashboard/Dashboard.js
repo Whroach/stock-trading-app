@@ -7,12 +7,15 @@ import axios from 'axios'
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Accounts from '../Accounts/Accounts'
+import ChartDisplay from '../Chart/ChartDisplay'
+import { whatTimeIsIt } from './Timer'
 
 const EQUITY_QUERY =gql`
   query($ticker: String!){
     equity(ticker: $ticker){
       ticker
       last
+      volume
     }
   }
 `;
@@ -21,10 +24,15 @@ class Dashboard extends Component {
   constructor(props){
     super(props)
 
+    whatTimeIsIt((err, timestamp) => this.setState({ 
+      timestamp 
+    }));
+
     this.state ={
       holdings: [],
       tickers: [],
-      lastPrice: []
+      lastPrice: [],
+      timestamp: ''
 
     }
   };
@@ -76,7 +84,6 @@ class Dashboard extends Component {
  
 
 
-
     return (
       <Fragment>
         <Query query={EQUITY_QUERY} variables={{ticker: symbols}}>
@@ -85,23 +92,26 @@ class Dashboard extends Component {
             if (error) console.log(error);
 
 
-
           return (
             <div className="dashboard-container">
               <div style={{height: "84vh", width: "100vw", backgroundColor: "#1b2845", backgroundImage: "linear-gradient(315deg, #1b2845 0%, #274060 74%)"}}>
+                <h3 style={{top: "60%", letterSpacing: 0}} className="timer-io">Time is Money: Markets Close at 3:00PM CT</h3>
+                <p className="timer-io">{this.state.timestamp}</p>
                 <div style={{padding: "30px"}}>
                   <div className="dash-chart" style={{display: "flex", justifyContent: "space-evenly"}}>
-                    <div className="accounts-a" style={{position: "relative", top: "20%"}}>
+                    <div className="accounts-a"style={{position: "relative", top: "20%"}}>
                       <Accounts value={holdings}/>
                     </div>
-                    <img style={{height: 300, position: "relative"}}src="https://wallstreetonparade.com/wp-content/uploads/2020/03/Deutsche-Bank-Trading-Chart-From-February-14-through-March-5-2020-Versus-Wall-Street-Banks-and-U.S.-Insurers.jpg" alt="testimgimg"/>
+                    <div style={{height: "40vh", width: "40vw", position: "relative", right: "2%"}}>
+                      <ChartDisplay/>
+                    </div>
                     <div className="history">
                       <History />
                     </div>
                   </div>
                 </div>
                 <div className="watchlist">
-                  <Watchlist />
+                  <Watchlist value={data}/>
                 </div>
               </div>
             </div>

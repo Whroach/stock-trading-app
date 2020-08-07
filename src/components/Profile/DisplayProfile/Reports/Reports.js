@@ -1,25 +1,49 @@
-// import React,{useState} from 'react'
-// import axios from 'axios'
+import React,{useState, useEffect, Fragment} from 'react'
+import axios from 'axios'
+import { connect } from 'react-redux';
 
-// export default function Reports(props) {
-//     const [report, setReport] = useState([])
+function Reports(props) {
 
-//     const getReport = ()=>{
+  const  ticker  = props.stockQuote
+  const [report, setReport] = useState([])
 
-//         axios.get(`/api/report/${}`)
-//         .then(res => setReport(res.data))
-//         .catch(error => console.log(error))
+  useEffect(() =>{
+    getReport()
 
-//     }
+ }, [])
+
+  const getReport =()=>{
+    axios.get(`/api/report/${ticker}`)
+    .then(res => setReport(res.data))
+    .catch(error => console.log(error))
+  }
+
+  // console.log(report)
+
+
+  //  const mapped = report.map((element, index)=>{
+  //   const { balanceSheet } = element.statementData
+
+  //     balanceSheet.map((element,index)=>{
+  //     console.log(element)
+  //   })
+    
+  // })
 
 
 
 
+  return (
+    <div>
+      <div>
+      </div>
+      
+    </div>
+  )
+}
 
-//     return (
-//         <div>
-//             <h1>What good</h1>
-            
-//         </div>
-//     )
-// }
+
+
+const mappedStateToProps = state => state.quoteReducer
+
+export default connect(mappedStateToProps)(Reports)

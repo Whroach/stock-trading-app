@@ -1,6 +1,7 @@
 require('dotenv').config() 
 const express = require('express'),
     massive = require('massive'),
+    app = express(),
     {CONNECTION_STRING, SESSION_SECRET } = process.env,
     session = require('express-session'),
     authCtrl = require('./controllers/authController'),
@@ -9,11 +10,22 @@ const express = require('express'),
     apiCtrl = require('./controllers/apiController'),
     { graphqlHTTP } = require('express-graphql'),
     schema = require('./schema'),
-    cors = require('cors');
+    cors = require('cors'),
+    server = app.listen(3005),
+    io = require('socket.io').listen(server);
 
 
-    const PORT = 3005
-    const app = express()
+    io.on('connection', (client) => {
+        client.on('whatTimeIsIt', (interval) => {
+          console.log('client is subscribing to timer with interval ', interval);
+          setInterval(() => {
+            client.emit('timer', new Date());
+          }, interval);
+        });
+      });
+
+    app.use(cors());
+
     
     app.use(cors())
     app.use(express.json())
@@ -60,6 +72,5 @@ const express = require('express'),
     app.post('/api/watchlist/:id', acctCtrl.addToWatchlist)
     app.get('/api/positions/:id', acctCtrl.getPositions)
     app.put('/api/symbol/:id', acctCtrl.deleteSymbol)
+    app.get('/api/chart/:id', acctCtrl.getChartData)
  
-
-    app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

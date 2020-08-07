@@ -1,4 +1,6 @@
-const {finnhub_token} = process.env,
+const { printSourceLocation } = require('graphql');
+
+const {finnhub_token, tiingo_token} = process.env,
     axios = require('axios')
 
 module.exports={
@@ -26,8 +28,9 @@ module.exports={
     },
 
     getForexRates: async(req,res)=>{
-        
-      let rates = await axios.get(`https://finnhub.io/api/v1/forex/rates?base=USD&token=${finnhub_token}`)
+
+    
+      let rates = await axios.get(`https://api.tiingo.com/tiingo/fx/top?tickers=EURUSD,USDJPY,GBPUSD,USDCHF,AUDUSD,USDCAD,NZDUSD,GBPEUR,EURCHF,EURJPY&token=${tiingo_token}`)
         .then(res => res.data)
         .catch(error => console.log(error))
 
@@ -37,11 +40,12 @@ module.exports={
     getFinancialReport: async(req,res)=>{
         const { ticker } = req.params
 
-        let report = await axios.get(`https://finnhub.io/api/v1/stock/metric?symbol=${ticker}&metric=all&token=${finnhub_token}`)
+
+        let report = await axios.get(`https://api.tiingo.com/tiingo/fundamentals/${ticker}/statements?token=${tiingo_token}`)
         .then(res => res.data)
         .catch(error => console.log(error))
-
-
+        
+        
         res.status(200).send(report)
 
 

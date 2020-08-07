@@ -3,7 +3,10 @@ import {connect} from 'react-redux'
 
 
 function Accounts(props) {
-    const { first_name, cash_balance } = props.user
+    const { first_name } = props.user
+
+    const cash   = props.value.shift()
+
 
 
     return (
@@ -12,8 +15,7 @@ function Accounts(props) {
                 <p style={{fontSize:"30px"}}>Hi,{first_name}!</p>
             </div>
             <div>
-                <p>Total Holdings</p><p></p>
-                <p style={{position: "relative", top:"10%"}}>Total Cash Balance</p><p style={{color: "green", fontSize: "20px"}}>${cash_balance}</p>
+                <p style={{position: "relative", top:"10%"}}>Total Cash Balance</p><p style={{color: "green", fontSize: "20px"}}>${1234}</p>
             </div>
         </div>
     )

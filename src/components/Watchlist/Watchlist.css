@@ -2,8 +2,8 @@
     display: flex;
     flex-direction: column;
     overflow: scroll;
-    height: 31vh;
-    width: 14.45vw;
+    height: 28.5vh;
+    width: 14.37vw;
     position: relative;
     overflow-x: hidden;
 }

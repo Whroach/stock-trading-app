@@ -15,6 +15,9 @@ const EQUITIES_QUERY = gql`
       ticker
       last
       volume
+      bidPrice
+      askPrice
+      prevClose
       high
       low
     }
@@ -25,19 +28,12 @@ const EQUITIES_QUERY = gql`
 
 export default function Markets(props) {
 
-    // const _subscribeToNewLinks = async(subscribeToMore)=>{
-    //   subscribeToMore({document: EQUITIES_QUERY})
-
-    // }
 
     const {loading, error, data, subscribeToMore} = useQuery(EQUITIES_QUERY)
     const [equityList, setEquity] = useState([])
     const [page, displayPage] = useState('equity')
     if(loading) return <p>Loading....</p>
     if(error) console.log(error)
-
-    // this._subscribeToNewLinks(subscribeToMore)
-
 
 
     return (

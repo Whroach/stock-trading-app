@@ -8,6 +8,7 @@
     background-image: url("https://us.123rf.com/450wm/gujarichleaw/gujarichleaw1903/gujarichleaw190300036/120481739-abstract-light-blue-black-gradient-color-background-vector-illustration-eps10.jpg?ver=6");
     position: relative;
     top: 50%;
+    left: 4%;
 }
 
 .accounts-a{
@@ -15,7 +16,7 @@
     height: 20vh;
     width: 15%;
     color: white;
-    right: 10%;
+    right: 6.5%;
 }
 
 .watchlist{
@@ -26,5 +27,15 @@
     position: relative;
     bottom: 20%;
     left: 2%;
+
+}
+
+.timer-io{
+    font-size: 50px;
+    position: absolute;
+    top: 70%;
+    left: 25%;
+    color: white;
+    letter-spacing: 20px;
 
 }

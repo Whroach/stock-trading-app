@@ -12,33 +12,6 @@ import { logout } from '../../ducks/reducers/authReducer'
 
 function Header(props) {
 
-    const deposit = useFormInput('')
-    const [toggle, setToggle] = useState('false')
-
-    function useFormInput(initialValue){
-        const [amount, setAmount] = useState(initialValue);
-        const handleChange = event =>{
-            setAmount(event.target.value);
-        }
-        return {amount, onChange: handleChange}
-    };
-
-    function handleToggle(){
-        setToggle(toggle === 'true' ? 'false' : 'true')
-    };
-
-
-
-    const sendDeposit = () =>{
-        const { amount } = deposit
-        axios.post(`/api/deposit/${props.user.account_id}`, {deposit: parseInt(amount)})
-        .then( () => {
-            setToggle(toggle === 'false')
-
-        })
-        .catch(() => console.log('error in sendDeposit'))
-    }
-
 
     const logoutUser = () => {
         axios.get('/auth/logout')
@@ -59,27 +32,11 @@ function Header(props) {
                     <div style={{position: "relative", top: "25%"}}>
                         <Search/>
                     </div>
-                    <button id ="wallet-id"onClick={handleToggle} style={{height: 50, width: 130, position: "relative", top: 12, fontSize: 20, backgroundColor: "mediumblue", color: "white"}}>Wallet</button>
                     <div>
                         <Link to={'/'}><Button onClick={logoutUser} variant="outlined" color="secondary" style={{position: "absolulte", top: "25%", left: "150%" }}>Logout</Button></Link>
                     </div>
                 </div>
             </div>
-            {toggle === 'true' ? 
-                <div className = "deposit-container">
-                    <form className="deposit-form">
-                        <ul>
-                            <p>Deposit Amount</p><input {...deposit}/>
-                        </ul>
-                        <div className="button-container">
-                            <input type='submit' onClick={sendDeposit}/>
-                        </div>
-                    </form>
-                </div>  
-            :
-            null
-                
-            }
             </div>
     )
 }

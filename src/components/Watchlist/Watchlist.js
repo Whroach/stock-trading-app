@@ -9,7 +9,6 @@ function Watchlist(props) {
 
     useEffect(() =>{
         getWatchlist()
-
    
      }, [watchlist])
 
@@ -50,7 +49,6 @@ function Watchlist(props) {
              </div>
          </div>
      })
-
 
 
     return (

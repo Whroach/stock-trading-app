@@ -3,8 +3,6 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import './History.css'
 
-
-
 function History(props) {
 
     const [history, setHistory] = useState([])

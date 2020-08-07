@@ -29,7 +29,7 @@ const EquityType = new GraphQLObjectType({
   fields: () =>({
     ticker: { type: GraphQLNonNull(GraphQLString) },
     last: { type: GraphQLNonNull(GraphQLFloat)},
-    prevClose: { type: GraphQLNonNull(GraphQLFloat)},
+    prevClose: { type: GraphQLFloat},
     open: { type: GraphQLNonNull(GraphQLFloat)},
     high: { type: GraphQLNonNull(GraphQLFloat)},
     low: { type: GraphQLNonNull(GraphQLFloat)},
@@ -48,23 +48,17 @@ const EquityNewsType = new GraphQLObjectType({
   })
 });
 
-// const ProfileType = new GraphQLObjectType({
-//   name: 'Profile',
-//   fields: () =>({
-//     country: { type: GraphQLNonNull(GraphQLString)},
-//     currency: { type: GraphQLNonNull(GraphQLString)},
-//     name: { type: GraphQLNonNull(GraphQLString)},
-//     exchage: { type: GraphQLNonNull(GraphQLString)},
-//     finnhubIndustry: { type: GraphQLNonNull(GraphQLString)},
-//     ipo: { type: GraphQLNonNull(GraphQLString)},
-//     logo: { type: GraphQLNonNull(GraphQLString)},
-//     marketCapitalization: { type: GraphQLNonNull(GraphQLFloat)},
-//     phone: { type: GraphQLNonNull(GraphQLString)},
-//     shareOutstanding: { type: GraphQLNonNull(GraphQLFloat)},
-//     ticker: { type: GraphQLNonNull(GraphQLString)},
-//     weburl: { type: GraphQLNonNull(GraphQLString)}
-//   })
-// })
+
+
+const ProfileType = new GraphQLObjectType({
+  name: 'Profile',
+  fields: () =>({
+    ticker: { type: GraphQLNonNull(GraphQLString)},
+    name: { type: GraphQLNonNull(GraphQLString)},
+    exchangeCode: { type: GraphQLNonNull(GraphQLString)},
+    description: { type: GraphQLNonNull(GraphQLString)}
+  })
+})
 
 
 
@@ -157,13 +151,13 @@ const RootQuery = new GraphQLObjectType({
         })
 
         const negativeList = declineArray.sort((a,b)=>{
-          return b.last / b.prevClose - a.last / a.prevClose
+          return a.last / a.prevClose -b.last / b.prevClose
 
         })
 
 
 
-         let result = [...positiveList.slice(0,n), ...indexArray, ...negativeList.slice(0,n), ...activeList.slice(0,200)]
+         let result = [...indexArray,...positiveList.slice(0,n), ...negativeList.slice(0,n), ...activeList.slice(0,200)]
 
          return result
 
@@ -261,6 +255,25 @@ const RootQuery = new GraphQLObjectType({
     //     return array
     //   }
     // },
+
+    profile: {
+      type: new GraphQLList(ProfileType),
+      args: {
+        ticker: {type: GraphQLString}
+      },
+      resolve: async(parent, args)=>{
+
+        let array = []
+
+        await axios
+        .get(`https://api.tiingo.com/tiingo/daily/${args.ticker}?token=${tiingo_token}`)
+        .then(res => array.push(res.data))
+
+        return array
+
+
+      }
+    },
 
     testData: {
       type: new GraphQLList(TestType),

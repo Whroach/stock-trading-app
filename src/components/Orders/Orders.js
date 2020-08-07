@@ -6,6 +6,7 @@ import axios from 'axios'
 import './Orders.css'
 import CloseIcon from '@material-ui/icons/Close'
 import { useQuery } from 'react-apollo'
+import './Orders.css'
 
 const EQUITY_QUERY = gql`
   query($ticker: String!){
@@ -29,7 +30,7 @@ function Orders(props) {
         symbol: props.ticker.toString().toUpperCase(),
         quantity: useFormInput(''),
         bid_price: 0,
-        ask_price: 500,
+        ask_price: 0,
         volume: 0,
         id: auth.user.account_id,
         order_type: 'Market'
@@ -48,7 +49,7 @@ function Orders(props) {
     if(error) return `Error! ${error}`
 
     order.bid_price = data.equity[0].bidPrice
-    // order.ask_price = data.equity[0].askPrice
+    order.ask_price = data.equity[0].askPrice
     order.volume = data.equity[0].volume
 
 
@@ -98,26 +99,28 @@ function Orders(props) {
 
 
     return (
-        <div>
-            <div style={{position: "absolute", top: "3%",right: "3%",display: "flex", justifyContent: "flex-end"}}>
-                <CloseIcon onClick={() => props.toggle('false')}/>
-            </div>
-            <div className="orders-container">
-                <form className="form-container">
-                    <ul>
-                        <p>Symbol: {symbol}</p>
-                        <p>Quantity:</p><input type='text' placeholder='quantity' {...quantity}/>
-                        <p>Bid Price:{order.bid_price} </p>
-                        <p>Ask Price:{order.ask_price}</p>
-                        <p>Market Order</p>
-                    </ul>
-                </form>
-                {errorMessage &&
-                <h3 style={{color:"red"}}> {errorMessage} </h3> }
-                <div>
-                    <button onClick={sendBuyOrder}>Buy Order</button>
-                    <button onClick={sendSellOrder}>Sell Order</button>
+            <div className="order-body">
+                <div style={{position: "absolute", top: "3%",right: "3%",display: "flex", justifyContent: "flex-end"}}>
+                    <CloseIcon onClick={() => props.toggle('false')}/>
                 </div>
+                <div className="orders-container">
+                    <div>
+                        <form className="form-container">
+                            <ul>
+                                <p>Symbol: {symbol}</p>
+                                <p>Quantity:</p><input type='text' placeholder='quantity' {...quantity}/>
+                                <p>Bid Price: ${order.bid_price} </p>
+                                <p>Ask Price: ${order.ask_price}</p>
+                                <p>Market Order</p>
+                            </ul>
+                        </form>
+                        {errorMessage &&
+                        <h3 style={{color:"red"}}> {errorMessage} </h3> }
+                        <div>
+                            <button onClick={sendBuyOrder}>Buy Order</button>
+                            <button onClick={sendSellOrder}>Sell Order</button>
+                        </div>
+                    </div>
             </div>
         </div>
     )
