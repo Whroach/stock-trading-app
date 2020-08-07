@@ -9,15 +9,15 @@ function History(props) {
 
     const [history, setHistory] = useState([])
 
-    // useEffect(() => {
-    //     getAccountHistory()
+    useEffect(() => {
+        getAccountHistory()
 
-    //   },[history])
+      },[history])
 
 
     const getAccountHistory = () =>{
         const id = props.user.account_id
-        axios.get(`/api/history/${12}`)
+        axios.get(`/api/history/${id}`)
         .then(res => {
             setHistory(res.data)
         })

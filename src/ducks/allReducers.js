@@ -1,10 +1,10 @@
-import quotesReducer from '../ducks/reducers/quotesReducer'
+import quoteReducer from '../ducks/reducers/quoteReducer'
 import authReducer from '../ducks/reducers/authReducer'
 import profileReducer from './reducers/profileReducer'
 import {combineReducers} from 'redux'
 
 const allReducers = combineReducers({
-    quotesReducer, 
+    quoteReducer, 
     authReducer,
     profileReducer
 

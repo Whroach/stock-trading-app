@@ -3,10 +3,10 @@ const express = require('express'),
     massive = require('massive'),
     {CONNECTION_STRING, SESSION_SECRET } = process.env,
     session = require('express-session'),
-    // apiCtrl = require('./controllers/apiController'),
     authCtrl = require('./controllers/authController'),
-    mainCtrl = require('./controllers/mainController'),
+    orderCtrl = require('./controllers/ordersController'),
     acctCtrl = require('./controllers/acctsController'),
+    apiCtrl = require('./controllers/apiController'),
     { graphqlHTTP } = require('express-graphql'),
     schema = require('./schema'),
     cors = require('cors');
@@ -14,11 +14,9 @@ const express = require('express'),
 
     const PORT = 3005
     const app = express()
-
+    
     app.use(cors())
-
     app.use(express.json())
-
     app.use('/graphql', graphqlHTTP({
         schema,
         graphiql: true
@@ -41,28 +39,27 @@ const express = require('express'),
         secret: SESSION_SECRET,
         cookie: {maxAge: 1000 * 60 * 60 * 24 * 365} 
     }))
-
-
-    //API endpoints
-    // app.get('/api/quotes', apiCtrl.getStockQuotes)
-    // app.get('/api/quote/:symbol', apiCtrl.getSingleQuote)
-    // app.get('/api/report/:symbol', apiCtrl.getCompanyReport)
-    // app.get('/api/dow', apiCtrl.getDowQuotes)
     
+
+    //API endpoint
+    app.get('/api/profile/:ticker', apiCtrl.getProfile)
+    app.get('/api/rates', apiCtrl.getForexRates)
+    app.get('/api/report/:ticker', apiCtrl.getFinancialReport)
     //Authentication endpoints
     app.get('/auth/session',authCtrl.getSession)
     app.post('/auth/register', authCtrl.register)
     app.post('/auth/login', authCtrl.login)
-    app.delete('/auth/logout')
-
+    app.get('/auth/logout', authCtrl.logout)
     //Trade endpoints
-    app.post('/api/buy', mainCtrl.buyOrder)
-    app.put('/api/sell/:id', mainCtrl.sellOrder)
-
+    app.post('/api/buy', orderCtrl.buyOrder)
+    app.put('/api/sell/:id', orderCtrl.sellOrder)
     //Account endpoints
     app.post('/api/deposit/:id', acctCtrl.depositFunds )
     app.get('/api/history/:id', acctCtrl.accountHistory)
-
-
+    app.get('/api/watchlist/:id', acctCtrl.getWatchlist)
+    app.post('/api/watchlist/:id', acctCtrl.addToWatchlist)
+    app.get('/api/positions/:id', acctCtrl.getPositions)
+    app.put('/api/symbol/:id', acctCtrl.deleteSymbol)
+ 
 
     app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

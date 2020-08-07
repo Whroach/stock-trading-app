@@ -9,6 +9,7 @@ import Quotes from './components/Quotes/Quotes'
 import Markets from './components/Markets/Markets'
 import Accounts from './components/Accounts/Accounts'
 import History from './components/History/History'
+import ChartDisplay from '../src/components/Chart/ChartDisplay'
 
 
 export default (
@@ -16,12 +17,13 @@ export default (
         <Route exact path="/" component={Authentication} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/search" component={Search}/>
-        <Route path="/profile" component={Profile}/>
+        <Route path="/profile/:ticker" component={Profile}/>
         <Route path="/trade" component={Orders}/>
-        <Route path="/quotes" component={Quotes} />
+        {/* <Route path="/quotes" component={Quotes} /> */}
         <Route path="/markets" component={Markets} />
         <Route path="/account" component={Accounts}/>
         <Route path="/history" component={History}/>
+        <Route path="/chart" component={ChartDisplay} />
         
     </Switch>
 )

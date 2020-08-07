@@ -8,6 +8,7 @@ const initialState = {
 
 const GET_USER = 'GET_USER'
 const HANDLE_DEPOSITS = 'HANDLE_DEPOSITS'
+const LOGOUT_USER = 'LOGOUT_USER'
 
 
 
@@ -30,6 +31,13 @@ export function depositFunds(value){
     }
 }
 
+export function logout(){
+    return {
+        type: LOGOUT_USER,
+        payload: {}
+    }
+
+}
 
 
 
@@ -42,6 +50,8 @@ export default function authReducer(state = initialState, action){
             return {...state, user: payload};
         case HANDLE_DEPOSITS: 
             return {...state, user: payload};
+        case LOGOUT_USER:
+            return {...state,user:payload}
         
         default: 
             return state

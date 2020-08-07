@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from 'react'
-import { connect } from 'react-redux'
-import {getStockQuotes} from '../../ducks/reducers/quotesReducer'
-import './Quotes.css'
+// import React, {useState, useEffect} from 'react'
+// import { connect } from 'react-redux'
+// import {getStockQuotes} from '../../ducks/reducers/quotesReducer'
+// import './Quotes.css'
 
 
 
 
-function Quotes(props) {
+// function Quotes(props) {
 
-    const [quotes, setQuote] = useState([])
+    // const [quotes, setQuote] = useState([])
 
         // useEffect(() => {
         //     getIndicesQuotes()
@@ -37,34 +37,34 @@ function Quotes(props) {
     // const {askPrice, bidPrice, last, volume} = quotes
 
 
-    const mappedQuotes = quotes.map((element, index) =>{
-        return <div key={index}>
-                    <div>
-                        <h1>{element.ticker}</h1>
-                        <p style={{color: "green"}}>{element.last}</p>
-                        <p style={{color: "red"}}>{element.prevClose / element.last}</p>
-                    </div>
-        </div>
-    })
+    // const mappedQuotes = quotes.map((element, index) =>{
+    //     return <div key={index}>
+    //                 <div>
+    //                     <h1>{element.ticker}</h1>
+    //                     <p style={{color: "green"}}>{element.last}</p>
+    //                     <p style={{color: "red"}}>{element.prevClose / element.last}</p>
+    //                 </div>
+    //     </div>
+    // })
 
 
 
 
 
-    return (
-        <div className="quotes-container-q">
-            <div className="indices-container">
-                <h1>What</h1>
-                <h2>IS</h2>
-                <h3>UP</h3>
-            </div>
-            <div>
+    // return (
+    //     <div className="quotes-container-q">
+    //         <div className="indices-container">
+    //             <h1>What</h1>
+    //             <h2>IS</h2>
+    //             <h3>UP</h3>
+    //         </div>
+    //         <div>
 
-            </div>
-            <div>
-                <img src="https://images.wsj.net/im-16358?width=620&size=1.5"/>
-            </div>
-        </div>
+    //         </div>
+    //         <div>
+    //             <img src="https://images.wsj.net/im-16358?width=620&size=1.5"/>
+    //         </div>
+    //     </div>
 
 
 
@@ -78,10 +78,10 @@ function Quotes(props) {
         //         <p>Low:</p><h2>{volume}</h2> */}
         //     </ul>
         // </div>
-    )
-}
+//     )
+// }
 
 
-const mappedStateToProps = state => state.quotesReducer
+// const mappedStateToProps = state => state.quotesReducer
 
-export default connect(mappedStateToProps, {getStockQuotes})(Quotes)
+// export default connect(mappedStateToProps, {getStockQuotes})(Quotes)

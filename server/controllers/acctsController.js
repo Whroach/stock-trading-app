@@ -5,7 +5,6 @@ module.exports = {
             { deposit } = req.body,
             { id } = req.params
 
-            console.log(date)
         
         let result = await db.accounts.deposits({deposit, id})
 
@@ -23,6 +22,51 @@ module.exports = {
             let result = await db.accounts.history({id})
         
             res.status(200).send(result)
+
+    },
+
+    addToWatchlist: async(req,res) =>{
+        const db = req.app.get('db'),
+            { id } = req.params,
+             { symbol }  = req.body
+
+            let result = await db.accounts.add_watchlist({symbol, id})
+
+            res.status(200).send(result)
+
+    },
+
+    getWatchlist: async(req,res)=>{
+        const db = req.app.get('db'),
+            { id } = req.params
+
+            let result = await db.query("SELECT * FROM users_watchlist WHERE client_id = $1", [`${id}`])
+
+            res.status(200).send(result)
+    },
+
+    getPositions: async(req,res)=>{
+        const db = req.app.get('db'),
+        {id } = req.params
+
+        let result = await db.accounts.get_positions({client_id: id})
+
+        res.status(200).send(result)
+    },
+
+    deleteSymbol: async(req,res) =>{
+        const db = req.app.get('db'),
+        { id } = req.params,
+        { symbol } = req.body
+        
+
+  
+
+        let result = await db.accounts.delete_symbol({id, symbol})
+
+        res.status(200).send(result)
+
+
 
     }
 

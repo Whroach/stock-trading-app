@@ -1,38 +1,8 @@
 .dashboard-container{
     overflow-x: hidden;
     width: 100vw;
-
 }
 
-
-.heat-map-container{
-    /* display: flex;
-    justify-content: center;
-    position: relative;
-    top: 10%; */
-    display: grid;
-    justify-content: center;
-    position: relative;
-    top: 2%;
-    height: 40%;
-    /* grid-template-columns: repeat(4,1fr);
-    grid-auto-rows: 100px; */
-    grid-template-columns: 200px 200px 200px 200px;
-
-
-}
-
-
-.element-section{
-    display: flex;
-    justify-content: space-around;
-    background-color:green;
-    height: 100%;
-    border-radius: 12%;
-    /* border-style: solid */
-    border-style: ridge;
-    color: white;
-}
 
 .history{
     background-image: url("https://us.123rf.com/450wm/gujarichleaw/gujarichleaw1903/gujarichleaw190300036/120481739-abstract-light-blue-black-gradient-color-background-vector-illustration-eps10.jpg?ver=6");
@@ -40,3 +10,21 @@
     top: 50%;
 }
 
+.accounts-a{
+    background-image: url("https://us.123rf.com/450wm/gujarichleaw/gujarichleaw1903/gujarichleaw190300036/120481739-abstract-light-blue-black-gradient-color-background-vector-illustration-eps10.jpg?ver=6");
+    height: 20vh;
+    width: 15%;
+    color: white;
+    right: 10%;
+}
+
+.watchlist{
+    background-image: url("https://us.123rf.com/450wm/gujarichleaw/gujarichleaw1903/gujarichleaw190300036/120481739-abstract-light-blue-black-gradient-color-background-vector-illustration-eps10.jpg?ver=6");
+    height: 40vh;
+    width: 14.5%;
+    color: white;
+    position: relative;
+    bottom: 20%;
+    left: 2%;
+
+}

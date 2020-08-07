@@ -1,0 +1,9 @@
+.watchlist-container{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    height: 31vh;
+    width: 14.45vw;
+    position: relative;
+    overflow-x: hidden;
+}

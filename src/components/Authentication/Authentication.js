@@ -27,14 +27,11 @@ class Authentication extends Component {
         if(this.props.user.username){
             this.props.history.push('/dashboard')
         }
-
-
-
     }
 
     createNewAccount(){
         const {username, password, firstName, lastName, account, age} = this.state
-        axios.post('/auth/register', {username, password, first_name: firstName, last_name: lastName, account_type: account, age:age})
+        axios.post('/auth/register', {username, password, first_name: firstName.toUpperCase(), last_name: lastName, account_type: account, age:age})
         .then(response =>{
             this.props.getUser(response.data)
             this.props.history.push('/dashboard')
@@ -42,8 +39,6 @@ class Authentication extends Component {
         .catch(() => console.log('error with createNewAccount function'))
         
     }
-
-
 
 
 
@@ -79,9 +74,11 @@ class Authentication extends Component {
         // console.log(this.props)
 
         return (
-            <div>
-                <div>
-                    <form>
+            <div className="auth-container">
+                <div className="img-a"></div>
+                <h1 style={{position: "absolute", top: "5%", left: "26%", color: "white", fontFamily:"cursive", fontSize: "50px"}}>Ready to Invest For Your Future?</h1>
+                <div className="secondary">
+                    <form className="form-container-a">
                         {this.state.viewRegister
                         ?
                         <ul>
@@ -109,7 +106,6 @@ class Authentication extends Component {
                         }
                     </form>
                 </div>
-                
             </div>
         )
     }

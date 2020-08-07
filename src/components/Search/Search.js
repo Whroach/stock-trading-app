@@ -1,53 +1,28 @@
-import React, {useState} from 'react'
-import {useHistory, useLocation} from 'react-router-dom'
-import axios from 'axios'
-import {connect} from 'react-redux'
-import {getProfile} from '../../ducks/reducers/profileReducer'
+import React, {useState, useHistory} from 'react'
+import { Link } from 'react-router-dom'
 
 
-function Search(props) {
-    // const [companyProfile, setState] = useState([])
-    const [symbol, setValue] = useState("")
-    const history = useHistory()
-    const location = useLocation()
-    
-
-    // const getInfo = ()=> {
-    //     axios.get(`https://finnhub.io/api/v1/stock/profile2?symbol=${symbol}&token=bs90g87rh5re5dkf7q7g`)
-    //         .then(response =>{
-    //             props.getProfile(response.data)
-    //             // setState(response.data)
-    //             setValue("")
-
-    //             if(location.pathname !== "/profile" && location.pathname !== "/trade"){
-    //                 history.push('/profile')
-    //             }
-
-    //         })
-    //         .catch(error => console.log(error))
-    // }
 
 
-    
-    const onChangeHandler = event => {
-        setValue(event.target.value);
-        if(props.onChange) props.onChange(symbol)
-      };
 
-    
+export default function Search(props) {
+    const [symbol, setSymbol] = useState('')
 
 
     return (
+        <>
         <div>
-            <input type="text" name="name" onChange={onChangeHandler} value={symbol}/>
-            {/* <button onClick={getInfo}>Search</button> */}
+            <form>
+                <input
+                onChange={ e => setSymbol(e.target.value)}
+                type="text"
+                placeholder="Which stock do you want to look up"
+                />
+            </form>
+            <Link to={`/profile/${symbol}`}><button>Submit</button></Link>
+            </div>
             <div>
-
-            </div>       
         </div>
+        </>
     )
 }
-
-const mappedStateToProps = state => state.profileReducer
-
-export default connect(mappedStateToProps,{getProfile})(Search)

@@ -1,32 +1,58 @@
-import React, {useState} from 'react'
+import React, {useState, Fragment} from 'react'
 import {connect} from 'react-redux'
+import gql from 'graphql-tag';
+import { Query} from 'react-apollo'
 import axios from 'axios'
+import './Orders.css'
+import CloseIcon from '@material-ui/icons/Close'
+import { useQuery } from 'react-apollo'
+
+const EQUITY_QUERY = gql`
+  query($ticker: String!){
+    equity(ticker: $ticker){
+      ticker
+      last
+      bidPrice
+      askPrice
+      volume
+    }
+
+  }
+
+`;
+
 
 function Orders(props) {
     const {quotes, auth } = props
 
     const order = {
-        symbol: quotes.stockQuotes.ticker,
+        symbol: props.ticker.toString().toUpperCase(),
         quantity: useFormInput(''),
-        bid_price: quotes.stockQuotes.bidPrice,
-        ask_price: quotes.stockQuotes.askPrice,
+        bid_price: 0,
+        ask_price: 500,
+        volume: 0,
         id: auth.user.account_id,
-        // bid_price: quotes.stockQuotes.high,
-        // ask_price: quotes.stockQuotes.low,
-        order_type: 'Market',
-        action_type: 'Buy',
-        asset_type: 'Equity',
-        
-
+        order_type: 'Market'
     }
-    const {symbol, quantity, bid_price, ask_price, id, order_type, action_type, asset_type} = order
+    const {symbol, quantity, bid_price, ask_price, id} = order
+
+    const [errorMessage, setError] = useState('')
+
+
+    const {loading, error, data} = useQuery(EQUITY_QUERY, {
+        variables: { ticker: symbol }
+
+    });
+
+    if(loading) return null;
+    if(error) return `Error! ${error}`
+
+    order.bid_price = data.equity[0].bidPrice
+    // order.ask_price = data.equity[0].askPrice
+    order.volume = data.equity[0].volume
+
+
     
-
-
-
-    // console.log(props)
-
-
     function useFormInput (initialValue) {
         const [value, setValue] = useState(initialValue);
         const handleChange = event => {
@@ -37,45 +63,70 @@ function Orders(props) {
         return { value, onChange: handleChange };
     };
 
-
     function sendBuyOrder(){
-        // const {symbol, quantity, bid_price, ask_price, id} = order
+        const {symbol, bid_price, ask_price, id} = order
         const { value } = order.quantity
+
+        if(auth.user.cash_balance >= value * ask_price){
+
+            axios.post('/api/buy', {symbol, quantity: parseInt(value), bid_price: parseInt(bid_price), ask_price: parseInt(ask_price), id})
+            .then(() =>{
+                console.log('Successs!!!')
+            })
+            .catch(() => { setError('Unable to process order, try again');
+            })
+        }
+        else{
+            setError('Insufficient amount of funds. Please reduce share amount or deposit more money')
+        }
+    }
+
+    function sendSellOrder(){
+        // const {symbol, quantity, bid_price, ask_price, id, asset_type, order_type,} = order
+        const {symbol, id, bid_price, ask_price} = order
+        const { value } = order.quantity
+
         
-      axios.post('/api/buy', {symbol, quantity: parseInt(value), bid_price: parseInt(bid_price), ask_price: parseInt(ask_price), id, order_type, action_type, asset_type})
-        .then(() =>{
-            console.log('Successs!!!')
-            
+        axios.put(`/api/sell/${id}`, {symbol, quantity: value, bid_price: parseInt(bid_price), ask_price: parseInt(ask_price)})
+        .then( () => console.log('succcesss'))
+        .catch(() => { setError('Unable to process order, try again');
         })
-        .catch(() => console.log('error with sendOrder'))
 
     }
+
+    
 
 
     return (
         <div>
-            <form>
-                <ul>
-                    {/* <p>Symbol:</p><input type='text' placeholder='symbol' {...symbol}/> */}
-                    <p>Symbol:</p>{quotes.stockQuotes.ticker}
-                    <p>Quantity:</p><input type='text' placeholder='quantity' {...quantity}/>
-                    <p>Bid Price:</p>{quotes.stockQuotes.bidPrice}
-                    <p>Ask Price:</p>{quotes.stockQuotes.askPrice}
-                    {/* <input type='submit' /> */}
-                </ul>
-            </form>
-            <div>
-                <button onClick={sendBuyOrder}>Buy Order</button>
-                <button>Sell Order</button>
+            <div style={{position: "absolute", top: "3%",right: "3%",display: "flex", justifyContent: "flex-end"}}>
+                <CloseIcon onClick={() => props.toggle('false')}/>
+            </div>
+            <div className="orders-container">
+                <form className="form-container">
+                    <ul>
+                        <p>Symbol: {symbol}</p>
+                        <p>Quantity:</p><input type='text' placeholder='quantity' {...quantity}/>
+                        <p>Bid Price:{order.bid_price} </p>
+                        <p>Ask Price:{order.ask_price}</p>
+                        <p>Market Order</p>
+                    </ul>
+                </form>
+                {errorMessage &&
+                <h3 style={{color:"red"}}> {errorMessage} </h3> }
+                <div>
+                    <button onClick={sendBuyOrder}>Buy Order</button>
+                    <button onClick={sendSellOrder}>Sell Order</button>
+                </div>
             </div>
         </div>
-
     )
+  
 }
 
 const mapStateToProps = state => {
     return {
-        quotes: state.quotesReducer,
+        quotes: state.quoteReducer,
         auth: state.authReducer
 
     }

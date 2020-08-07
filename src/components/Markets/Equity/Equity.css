@@ -1,0 +1,87 @@
+.body{
+    height: 150vh;
+    background-color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#img-container{
+    display: flex;
+    justify-content: center;
+    /* filter: blur(3px);
+    -webkit-filter: blur(3px); */
+
+}
+
+#img-b{
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+
+    
+}
+
+
+.gainers-container{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    height: 20vh;
+    width: 20vw;
+    position: relative;
+    overflow-x: hidden;
+
+}
+
+.losers-container{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    height: 20vh;
+    width: 20vw;
+    position: relative;
+    overflow-x: hidden;
+
+}
+
+.active-container{
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    height: 53vh;
+    width: 103vw;
+    position: relative;
+    right: 15%;
+    overflow-x: hidden;
+
+}
+
+#symbol-e{
+    position: relative;
+    right: 6%;
+}
+
+#last-e{
+    position: relative;
+    right: 9%
+}
+
+#high-e{
+    position: relative;
+    right: 12%
+}
+
+#low-e{
+    position: relative;
+    right: 15%
+}
+
+#vol-e{
+    position: relative;
+    right: 17.5%
+}
+
+.active-heading{
+    border-bottom: ridge black ;
+}
