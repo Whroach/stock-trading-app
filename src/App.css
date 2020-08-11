@@ -30,31 +30,38 @@ body {
 
 }
 
-.deposit-container {
+#wallet-id{
+    position: absolute;
+    right: 0%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+}
+
+.deposit-container-a {
+    position: absolute;
+    z-index: 1;
     background: #0f0c29;
     background: -webkit-linear-gradient(to right, #0f0c29, #302b63, #24243e);
-    position: fixed;
     top: 8%;
-    left: 40%;
+    left: 72%;
 
 
 }
 
-.deposit-form{
+.deposit-form-a{
     height: 20vh;
     width: 20vw;
-    position: fixed;
-    top: 30%;
+    /* position: fixed; */
     background-color:blue;
     color: white;
     overflow-y: hidden;
     overflow-x: hidden;
 }
 
-#wallet-id{
-    position: absolute;
-    right: 0%;
-    overflow-y: hidden;
-    overflow-x: hidden;
+
+.form-input-a{
+    width: 20vw;
+    bottom: 0;
 
 }

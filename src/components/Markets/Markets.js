@@ -1,10 +1,6 @@
 import React, {useState, Fragment} from 'react'
 import Equity from './Equity/Equity'
-import Crypto from './Crypto/Crypto'
-import Forex from './Forex/Forex'
 import './Markets.css'
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Button from '@material-ui/core/Button';
 import gql from 'graphql-tag'
 import { useQuery } from 'react-apollo'
 
@@ -39,15 +35,8 @@ export default function Markets(props) {
     return (
         <Fragment>
             <div className="body-m" >
-                <div className="buttons-container">
-                <ButtonGroup color="primary" aria-label="outlined primary button group" style={{width: "100vw"}}>
-                    <Button style={{width: "33.33%", color:"white", fontWeight: "bold"}} className='buttoms-m' onClick={() => displayPage('equity')}>Equity</Button>
-                    <Button  style={{width: "33.33%", color:"white", fontWeight: "bold"}} className='buttoms-m'onClick={() => displayPage('crypto')}>Crypto</Button>
-                    <Button style={{width: "33.33%", color:"white", fontWeight: "bold"}} className='buttoms-m' onClick={() => displayPage('forex')}>Forex</Button>
-                </ButtonGroup>
-                </div>
                 <div>
-                    {page === 'equity' ? <Equity value={data}/> : page === 'crypto' ? <Crypto/> :  <Forex /> }
+                  <Equity value={data}/>
                 </div>
             </div>
         </Fragment>

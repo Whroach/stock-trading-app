@@ -24,38 +24,55 @@ class Dashboard extends Component {
   constructor(props){
     super(props)
 
-    whatTimeIsIt((err, timestamp) => this.setState({ 
-      timestamp 
-    }));
-
     this.state ={
-      holdings: [],
+      cash: '',
       tickers: [],
       lastPrice: [],
-      timestamp: ''
+      timestamp: '',
+      watchlist: []
 
     }
+
+    // whatTimeIsIt((err, timestamp) => this.setState({ 
+    //   timestamp 
+    // }));
+
+    this.getBalance = this.getBalance.bind(this)
+
   };
 
-  componentDidMount =()=>{
-    this.getPositions()
+  componentDidMount (){
+    this.getBalance();
+    this.getWatchlist();
+
   }
 
-  getPositions = () =>{
-    const {account_id} = this.props.authReducer.user
-      axios.get(`/api/positions/${account_id}`)
-    .then(res => 
-      this.setState({holdings: res.data, tickers: res.data})
-    )
+
+  getBalance (){
+    const id = this.props.authReducer.user.account_id
+
+    axios.get(`/api/balance/${id}`)
+    .then(res => {
+      this.setState({cash: res.data})
+    })
     .catch(error => console.log(error))
 
   }
 
+  getWatchlist = ()=>{
+     const id = this.props.authReducer.user.account_id
+
+     axios.get(`/api/watchlist/${id}`)
+     .then(res =>
+         this.setState({watchlist: res.data}))
+     .catch(error => console.log(error))
+ }
+
+
+
 
   render() {
-    const { holdings, tickers, lastPrice } = this.state
-
-    console.log(holdings)
+    const { cash, tickers, watchlist } = this.state
 
     const uniqTickers = tickers.filter((value, index, self) => {
       return self.findIndex(t => t.symbol === value.symbol) === index;
@@ -67,29 +84,13 @@ class Dashboard extends Component {
 
     let symbols = mappedTickers.toString()
 
-    const mappedHoldings = holdings.map((element,index) => {
 
-      return <div key={index}>
-        <div>
-            {element.symbol}
-        </div>
-        <div>
-          {element.quantity}
-        </div>
-        <div>
-          {element.ask_price}
-        </div>
-      </div>
-    })
- 
-
-
-    return (
-      <Fragment>
-        <Query query={EQUITY_QUERY} variables={{ticker: symbols}}>
-        {({ loading, error, data }) => {
-            if (loading) return <h4>Loading...</h4>;
-            if (error) console.log(error);
+    // return (
+    //   <Fragment>
+    //     <Query query={EQUITY_QUERY} variables={{ticker: symbols}}>
+    //     {({ loading, error, data }) => {
+    //         if (loading) return <h4>Loading...</h4>;
+    //         if (error) console.log(error);
 
 
           return (
@@ -100,7 +101,7 @@ class Dashboard extends Component {
                 <div style={{padding: "30px"}}>
                   <div className="dash-chart" style={{display: "flex", justifyContent: "space-evenly"}}>
                     <div className="accounts-a"style={{position: "relative", top: "20%"}}>
-                      <Accounts value={holdings}/>
+                      <Accounts cash={cash}/>
                     </div>
                     <div style={{height: "40vh", width: "40vw", position: "relative", right: "2%"}}>
                       <ChartDisplay/>
@@ -111,16 +112,16 @@ class Dashboard extends Component {
                   </div>
                 </div>
                 <div className="watchlist">
-                  <Watchlist value={data}/>
+                  <Watchlist list={watchlist} getWatchFn={this.getWatchlist}/>
                 </div>
               </div>
             </div>
             )}}
-           </Query>
-      </Fragment>
-    )
-  }
-}
+    //         </Query>
+    //   </Fragment> 
+    // )
+//   }
+// }
 
 
 

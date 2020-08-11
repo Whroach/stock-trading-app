@@ -1,0 +1,32 @@
+.buttons-container-r{
+    display: flex;
+    justify-content: center;
+    height: 5%;
+    width: 100vw;
+
+}
+
+
+.buttons-r{
+    margin: 0;
+    width: 100%;
+    font-size: 20px;
+    color: white;
+} 
+
+
+.list-r{
+
+display: flex;
+flex-direction: column;
+overflow: scroll;
+height: 90vh;
+width: 100vw;
+position: relative;
+top:20px;
+overflow-x: hidden;
+
+
+}
+
+

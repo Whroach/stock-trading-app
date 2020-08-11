@@ -34,7 +34,7 @@ CREATE TABLE order_history (
   action_type VARCHAR(50),
   order_type VARCHAR(50),
   asset_type VARCHAR(200),
-   timestamp timestamp default current_timestamp,
+  timestamp timestamp default current_timestamp,
   transaction_id INT,
   client_id INT references accounts(account_id)
 )
@@ -51,6 +51,7 @@ CREATE TABLE account_balance(
 
 CREATE TABLE users_watchlist(
   watchlist_id SERIAL PRIMARY KEY,
+  watchlist_name VARCHAR(200),
   symbol VARCHAR(200),
   client_id INT references accounts(account_id)
 

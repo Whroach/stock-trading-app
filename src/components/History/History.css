@@ -12,3 +12,62 @@
 /* .h-container{
     background-image: url("https://us.123rf.com/450wm/gujarichleaw/gujarichleaw1903/gujarichleaw190300036/120481739-abstract-light-blue-black-gradient-color-background-vector-illustration-eps10.jpg?ver=6");
 } */
+
+.history-d-body{
+    height: 83.7vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    background-color: lightgrey;
+}
+
+.content-container{
+    margin-top: 5%;
+    background-color: white;
+    height: 65vh;
+    width: 80vw;
+}
+
+.column-names{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 15px;
+    border-top: solid black 2px;
+    border-bottom: solid black 2px;
+}
+
+.history-rows{
+    overflow: scroll;
+    background-color: pink;
+    height: 51vh;
+    width: 80vw;
+    overflow-x: hidden;
+    /* padding-left: 30px; */
+    /* align-items: center; */
+}
+
+/* #symbolxQ{
+    position: relative;
+    left: 25px;
+} */
+
+#timestamp-h{
+    width: 80vw;
+    background-color: lawngreen;
+    
+}
+
+.content-container-sh{
+    background-color: gold;
+    width: 90vw;
+    padding: 0.5%;
+    display: inline-flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    position: relative;
+}
+
+#desc{
+    position: relative;
+    left: 50px;
+}

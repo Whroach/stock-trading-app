@@ -10,3 +10,16 @@
     top: 20%;
     left: 35%;
 }
+
+
+.button-containter-o{
+    height: 5.25vh;
+    display: flex;
+    position: relative;
+    top: 11vh;
+    right: 35%;
+}
+
+.buttons-o{
+    width: 22.3vw;
+}

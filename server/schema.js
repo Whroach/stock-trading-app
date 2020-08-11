@@ -1,6 +1,5 @@
 const { finnhub_token, tiingo_token } = process.env
 const axios = require('axios');
-const { dummyDataArray } = require('./dummydata')
 
 const {
   GraphQLObjectType,
@@ -12,16 +11,6 @@ const {
   GraphQLFloat,
 } = require('graphql');
 
-const TestType = new GraphQLObjectType({
-  name: 'TestData',
-  fields: ()=>({
-    symbol: { type: GraphQLNonNull(GraphQLString) },
-    last: { type: GraphQLNonNull(GraphQLFloat)},
-    prev: { type: GraphQLNonNull(GraphQLFloat)},
-    v: {type: GraphQLNonNull(GraphQLInt)}
-
-  })
-})
 
 
 const EquityType = new GraphQLObjectType({
@@ -273,18 +262,7 @@ const RootQuery = new GraphQLObjectType({
 
 
       }
-    },
-
-    testData: {
-      type: new GraphQLList(TestType),
-      resolve: (parent,args)=>{
-
-        return dummyDataArray
-
-      }
     }
-
-
 
 //end
 }});

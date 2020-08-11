@@ -1,12 +1,12 @@
 import React, {useState, Fragment} from 'react'
 import {connect} from 'react-redux'
 import gql from 'graphql-tag';
-import { Query} from 'react-apollo'
 import axios from 'axios'
 import './Orders.css'
 import CloseIcon from '@material-ui/icons/Close'
 import { useQuery } from 'react-apollo'
 import './Orders.css'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const EQUITY_QUERY = gql`
   query($ticker: String!){
@@ -46,7 +46,7 @@ function Orders(props) {
     });
 
     if(loading) return null;
-    if(error) return `Error! ${error}`
+    if(error) return console.log(error)
 
     order.bid_price = data.equity[0].bidPrice
     order.ask_price = data.equity[0].askPrice
@@ -100,8 +100,9 @@ function Orders(props) {
 
     return (
             <div className="order-body">
-                <div style={{position: "absolute", top: "3%",right: "3%",display: "flex", justifyContent: "flex-end"}}>
-                    <CloseIcon onClick={() => props.toggle('false')}/>
+                <div style={{width:"78vw", position:"relative", top:"3%",right:"37%",display: "flex", justifyContent: "space-around"}}>
+                    <ArrowBackIcon style={{color:"white"}} onClick={()=>props.toggle('search')}/>
+                    <CloseIcon style={{color: "white"}}onClick={() => props.toggle('false')}/>
                 </div>
                 <div className="orders-container">
                     <div>
@@ -116,9 +117,9 @@ function Orders(props) {
                         </form>
                         {errorMessage &&
                         <h3 style={{color:"red"}}> {errorMessage} </h3> }
-                        <div>
-                            <button onClick={sendBuyOrder}>Buy Order</button>
-                            <button onClick={sendSellOrder}>Sell Order</button>
+                        <div className="button-containter-o">
+                            <button className="buttons-o" style={{backgroundColor: "green", color:"white"}}onClick={sendBuyOrder}>Buy</button>
+                            <button  className="buttons-o" style={{backgroundColor: "red", color:"white"}} onClick={sendSellOrder}>Sell</button>
                         </div>
                     </div>
             </div>

@@ -14,6 +14,7 @@ module.exports = {
         */
 
         await db.orders.buy_order({symbol, quantity, bid_price, ask_price, order_type, id, action_type, asset_type})
+        await db.orders.record_buy({symbol, quantity, bid_price, ask_price, order_type, id, action_type, asset_type})
 
 
         res.status(200).send('Success')
@@ -34,14 +35,19 @@ module.exports = {
         const findPosition = await db.orders.find_position({id, symbol, quantity})
         
         if(findPosition[0]){
-            findPosition.map((element) => {
+            findPosition.map( async(element) => {
                 // console.log(element.quantity)
                 if(element.quantity <= 0 ){
                     console.log('hit bad')
                     return res.status(400).send('Unable to process your request as the position may not exist in your holdings.')
                 }
+                else if(element.quantity < quantity ){
+                    return res.status(400).send('Please reduce quantity amount')
+
+                }
                 else{
-                    db.query("WITH order_history AS ( UPDATE account_assets SET quantity = quantity - $1 WHERE client_id = $2 AND symbol = $3 RETURNING symbol, quantity, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id) INSERT INTO order_history(symbol, quantity, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id) SELECT symbol, quantity, $4, $5, $6, $7, asset_type, timestamp, transaction_id,client_id FROM order_history", [`${quantity}`,`${id}`, `${symbol}`, `${bid_price}`, `${ask_price}`, `SELL`, `MARKET`])
+                    // await db.query("WITH order_history AS ( UPDATE account_assets SET quantity = quantity - $1 WHERE client_id = $2 AND symbol = $3 RETURNING symbol, $4, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id) INSERT INTO order_history(symbol, quantity, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id) SELECT symbol, quantity, $5, $6, $7, $8, asset_type, timestamp, transaction_id,client_id FROM order_history", [`${quantity}`,`${id}`, `${symbol}`, `${quantity}`,`${bid_price}`, `${ask_price}`, `SELL`, `MARKET`])
+                    await db.orders.reduce_position({symbol, quantity, id, bid_price, ask_price})
                     res.sendStatus(200)
 
                 }

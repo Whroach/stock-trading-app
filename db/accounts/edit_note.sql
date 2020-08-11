@@ -1,0 +1,1 @@
+UPDATE order_history SET description = ${note} WHERE order_history_id  = ${id}

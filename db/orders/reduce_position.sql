@@ -7,6 +7,7 @@ RETURNING symbol, quantity, bid_price, ask_price, action_type, order_type, asset
 
 
 INSERT INTO order_history(symbol, quantity, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id)
-SELECT symbol, quantity, ${bid_price}, ${ask_price}, 'SELL', order_type, asset_type, timestamp, transaction_id, client_id FROM order_history
+SELECT symbol, ${quantity}, ${bid_price}, ${ask_price}, 'SELL', 'Market', asset_type, timestamp, transaction_id, client_id FROM order_history
+
 
 

@@ -19,18 +19,20 @@ const state = {
 class ChartDisplay extends Component {
   constructor(props){
     super(props)
-    this.state={
-      dbData: []
-    }
   }
 
 
   componentDidMount = () =>{
-
+    const { labels , datasets } = state
     const id = this.props.user.account_id
 
     axios.get(`/api/chart/${id}`)
-    .then(res => this.setState({dbData: res.data}))
+    .then(res => {
+      res.data.forEach(element =>{
+        labels.push(element.symbol)
+        datasets[0].data.push(element.shares)
+      })
+    })
     .catch(error => console.log(error))
 
   }
@@ -41,15 +43,16 @@ class ChartDisplay extends Component {
 
       //symbol and shares
 
-      const { labels , datasets } = state
-      const { dbData } = this.state
+      // const { labels , datasets } = state
+      // const { dbData } = this.state
 
 
-      dbData.forEach(element=>{
-        labels.push(element.symbol)
-        datasets[0].data.push(element.shares)
+      // dbData.forEach(element=>{
+      //   labels.push(element.symbol)
+      //   datasets[0].data.push(element.shares)
         
-      })
+      // })
+
 
         return (
           <div>

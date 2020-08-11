@@ -113,11 +113,11 @@ export default function Equity(props) {
     return (
 
       <div  className="body-e">
-        <div id="img-container">
+        {/* <div id="img-container">
           <img id="img-b"style={{height: "15vh" ,width: "90vw"}}src="https://biltmorecap.com/wp-content/uploads/2017/05/Equity.jpg"/>
         </div>
-          <h1 style={{fontWeight: "bold",color:"white", position: "relative", left: "45%", bottom: "8%"}}>Equity Market</h1>
-          <div style={{position: "relative", top:"-5%",height: "20vh" ,width: "90vw", display: "flex", justifyContent: "space-evenly"}}>
+          <h1 style={{fontWeight: "bold",color:"white", position: "relative", left: "45%", bottom: "8%"}}>Equity Market</h1> */}
+          <div style={{position: "relative", top:"5%",height: "30vh" ,width: "90vw", display: "flex", justifyContent: "space-evenly"}}>
             {mappedIndex}
           </div>
           <div style={{height: "50vh", display: "flex", justifyContent: "space-evenly"}}>

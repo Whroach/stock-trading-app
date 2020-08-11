@@ -15,8 +15,7 @@ const LOGOUT_USER = 'LOGOUT_USER'
 //action function
 
 export function getUser(account){
-    console.log(account)
-
+    
     return{
         type: GET_USER,
         payload: account

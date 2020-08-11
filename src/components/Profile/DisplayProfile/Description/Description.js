@@ -1,50 +1,36 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 
 export default function Description(props) {
 
     const data = props.profileF.pop()
-    // const num = data.marketCapitalization
-
-    // console.log(num)
-
-
-    // console.log(data.shareOutstanding)
-
-
-    // country: "US"
-    // currency: "USD"
-    // exchange: "NASDAQ NMS - GLOBAL MARKET"
-    // finnhubIndustry: "Automobiles"
-    // ipo: "2010-06-29"
-    // logo: "https://static.finnhub.io/logo/2dd96524-80c9-11ea-aaac-00000000092a.png"
-    // marketCapitalization: 277119.9
-    // name: "Tesla Inc"
-    // phone: "16506815000"
-    // shareOutstanding: 186.361726
-    // ticker: "TSLA"
-    // weburl: "https://www.tesla.com/"
+    const newObj = {...data}
 
 
     let mappedCompetitiors = props.profileF.map((element,index) =>{
         return <div key={index}>
-            <p>{element}</p>
+            <Link to={`/profile/${element}`}><p>{element}</p></Link>
         </div>
     })
-
-
-
 
 
     return (
         <div>
             <div style={{margin: "50px", fontSize:"20px", lineHeight: "1.6"}}>{props.info[0].description}</div>
-            <div>
-            </div>
-            <div>
-                <h2>Main Competitors</h2>
-                {mappedCompetitiors}
+            <div style={{display: "flex", justifyContent:"space-evenly"}}>
+                <div>
+                    <h2>Quick Facts</h2>
+                    <p>{newObj.finnhubIndustry}</p>
+                    <p>{newObj.exchange}</p>
+                    <p>IPO: {newObj.ipo}</p>
+                    <p>{newObj.shareOutstanding}</p>
+                    <p>${newObj.marketCapitalization}B</p>
+                </div>
+                <div>
+                    <h2>Main Competitors</h2>
+                    {mappedCompetitiors}
+                </div>
             </div>
         </div>
     )

@@ -44,9 +44,9 @@ module.exports={
         let report = await axios.get(`https://api.tiingo.com/tiingo/fundamentals/${ticker}/statements?token=${tiingo_token}`)
         .then(res => res.data)
         .catch(error => console.log(error))
+
         
-        
-        res.status(200).send(report)
+        res.status(200).send(report[0].statementData)
 
 
 

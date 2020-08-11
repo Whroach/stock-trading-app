@@ -44,7 +44,9 @@ function handleToggle(){
 
 const sendDeposit = () =>{
   const { amount } = deposit
-  axios.post(`/api/deposit/${props.user.account_id}`, {deposit: parseInt(amount)})
+
+
+  axios.post(`/api/deposit/${12}`, {deposit: parseInt(amount)})
   .then( () => {
       setToggle(toggle === 'false')
 
@@ -59,19 +61,21 @@ const sendDeposit = () =>{
       <div className="header-app">
         {props.location.pathname === "/" ? null : <Header/>}
         {props.location.pathname ==="/" ? null : 
-        <div style={{position:"relative",right:"14.5%", top:"-10px"}}><button id ="wallet-id"onClick={handleToggle} style={{height: 50, width: 130, position: "absolute", bottom: 0, fontSize: 20, backgroundColor: "mediumblue", color: "white"}}>Wallet</button></div>}
-        {toggleW === 'true' ? 
-          <div style={{position: "absolute"}}className = "deposit-container">
-              <form className="deposit-form">
+        <div style={{position:"relative",right:"14.5%", top:"-10px"}}><button id ="wallet-id"onClick={handleToggle} style={{height: 50, width: 130, position: "absolute", bottom: 0, fontSize: 20, backgroundColor: "mediumblue", color: "white"}}>Wallet</button></div>}        
+      </div>
+      <div>
+      {toggleW === 'true' ? 
+          <div className = "deposit-container-a">
+              <form className="deposit-form-a">
                   <ul>
                       <p style={{fontSize: "20px"}}>Deposit Amount</p><input placeholder="USD Amount" {...deposit}/>
                   </ul>
-                  <div style={{positon:"relative", bottom: 0, width: "20vw"}}>
-                      <input style={{width:"20vw", position:"absolute", bottom:0}} type='submit' onClick={sendDeposit}/>
+                  <div style={{bottom: 0, width: "20vw"}}>
+                      <input className="form-input-a" type='submit' onClick={sendDeposit}/>
                   </div>
               </form>
           </div>  
-          :null}        
+          :null}
       </div>
       {routes}
       {props.location.pathname === "/" ? null :
@@ -85,7 +89,7 @@ const sendDeposit = () =>{
         <div className="search-symbol">
           <div className="search-a-container">
             <input onChange={e => setSymbol(e.target.value)} type="text" placeholder="symbol"/>
-            <button onClick={() => setToggle('order')}>Submit</button>
+            <button onClick={() => setToggle('order')}>Search</button>
           </div>
         </div>
        : 

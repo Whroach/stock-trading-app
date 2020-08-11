@@ -38,11 +38,6 @@ export default function DisplayProfile(props) {
     })
 
 
-
-    // console.log(copy2.logo, copy2.marketCapitalization)
-    
-
-    
     
     return (
     <div style={{height: "150vh"}}>
