@@ -67,8 +67,8 @@ const sendDeposit = () =>{
       {toggleW === 'true' ? 
           <div className = "deposit-container-a">
               <form className="deposit-form-a">
-                  <ul>
-                      <p style={{fontSize: "20px"}}>Deposit Amount</p><input placeholder="USD Amount" {...deposit}/>
+                  <ul className="input-a">
+                      <p style={{fontSize: "20px"}}>Deposit Amount</p><input placeholder="USD" {...deposit}/>
                   </ul>
                   <div style={{bottom: 0, width: "20vw"}}>
                       <input className="form-input-a" type='submit' onClick={sendDeposit}/>
@@ -89,7 +89,7 @@ const sendDeposit = () =>{
         <div className="search-symbol">
           <div className="search-a-container">
             <input onChange={e => setSymbol(e.target.value)} type="text" placeholder="symbol"/>
-            <button onClick={() => setToggle('order')}>Search</button>
+            <button onClick={() => setToggle('order')}>Deposit</button>
           </div>
         </div>
        : 

@@ -1,14 +1,13 @@
 import React from 'react'
 import './Watchlist.css'
-
+import { Link } from 'react-router-dom'
+ 
 export default function DisplayWatchlist(props) {
 
     return (
         <div className="display-w-container">
             <div className="content-w">
-                <p>{props.list.symbol}</p>
-                <p>$200</p>
-                <p>5%</p>
+                <Link style={{textDecoration: "none"}} to={`/profile/${props.list.symbol}`}><p className="watch-symbol">{props.list.symbol.toUpperCase()}</p></Link>
             </div>
         </div>
     )

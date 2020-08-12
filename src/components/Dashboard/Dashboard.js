@@ -29,22 +29,25 @@ class Dashboard extends Component {
       tickers: [],
       lastPrice: [],
       timestamp: '',
-      watchlist: []
+      watchlist: [],
+      positions:[],
+      history:[]
 
     }
 
-    // whatTimeIsIt((err, timestamp) => this.setState({ 
-    //   timestamp 
-    // }));
 
     this.getBalance = this.getBalance.bind(this)
 
   };
 
   componentDidMount (){
+    whatTimeIsIt((err, timestamp) => this.setState({ 
+      timestamp 
+    }));
+
     this.getBalance();
     this.getWatchlist();
-
+    // this.getAccountHistory();
   }
 
 
@@ -68,21 +71,31 @@ class Dashboard extends Component {
      .catch(error => console.log(error))
  }
 
+//  getAccountHistory = () =>{
+//   const id = this.props.authReducer.user.account_id
+//   axios.get(`/api/history/${id}`)
+//   .then(res => {
+//     this.setState({history: res.data})
+//   })
+//   .catch(() => console.log('error in getAccountHistory'))
+
+// }
+
 
 
 
   render() {
-    const { cash, tickers, watchlist } = this.state
+    const { cash, watchlist } = this.state
 
-    const uniqTickers = tickers.filter((value, index, self) => {
-      return self.findIndex(t => t.symbol === value.symbol) === index;
-    })
+    // const uniqTickers = tickers.filter((value, index, self) => {
+    //   return self.findIndex(t => t.symbol === value.symbol) === index;
+    // })
 
-    const mappedTickers = uniqTickers.map(element =>{
-      return element.symbol
-    })
+    // const mappedTickers = uniqTickers.map(element =>{
+    //   return element.symbol
+    // })
 
-    let symbols = mappedTickers.toString()
+    // let symbols = mappedTickers.toString()
 
 
     // return (
@@ -96,18 +109,17 @@ class Dashboard extends Component {
           return (
             <div className="dashboard-container">
               <div style={{height: "84vh", width: "100vw", backgroundColor: "#1b2845", backgroundImage: "linear-gradient(315deg, #1b2845 0%, #274060 74%)"}}>
-                <h3 style={{top: "60%", letterSpacing: 0}} className="timer-io">Time is Money: Markets Close at 3:00PM CT</h3>
-                <p className="timer-io">{this.state.timestamp}</p>
+                <p className="timer-io">{this.state.timestamp.slice(10)}</p>
                 <div style={{padding: "30px"}}>
-                  <div className="dash-chart" style={{display: "flex", justifyContent: "space-evenly"}}>
+                  <div style={{display: "flex", justifyContent: "space-evenly"}}>
                     <div className="accounts-a"style={{position: "relative", top: "20%"}}>
                       <Accounts cash={cash}/>
                     </div>
                     <div style={{height: "40vh", width: "40vw", position: "relative", right: "2%"}}>
-                      <ChartDisplay/>
+                      <ChartDisplay />
                     </div>
                     <div className="history">
-                      <History />
+                      <History id={this.props.authReducer.user.account_id}/>
                     </div>
                   </div>
                 </div>

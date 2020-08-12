@@ -1,63 +1,70 @@
 import React, {Component} from 'react';
-import axios from 'axios'
 import {Bar} from 'react-chartjs-2';
 import {connect} from 'react-redux'
+import axios from 'axios'
 
-const state = {
-  labels: [],
-  datasets: [
-    {
-      label: 'Shares',
-      backgroundColor: 'rgba(140, 20, 252, 1)',
-      borderColor: 'rgba(0,0,0,1)',
-      borderWidth: 2,
-      data: []
-    }
-  ]
-}
+
 
 class ChartDisplay extends Component {
   constructor(props){
     super(props)
+
+    this.state = {
+      labels: [],
+      datasets: [
+        {
+          label: 'Shares',
+          backgroundColor: 'rgba(140, 20, 252, 1)',
+          borderColor: 'rgba(0,0,0,1)',
+          borderWidth: 2,
+          data: []
+        }
+      ]
+    }
+
+  };
+
+  componentDidMount =()=>{
+    this.getPositions()
+
   }
 
-
-  componentDidMount = () =>{
-    const { labels , datasets } = state
+  getPositions = () =>{
     const id = this.props.user.account_id
-
+    
+    const { labels,datasets } = this.state
+    let newLabels = [...labels];
+    let newDatasets = [...datasets]
+    
     axios.get(`/api/chart/${id}`)
     .then(res => {
-      res.data.forEach(element =>{
-        labels.push(element.symbol)
-        datasets[0].data.push(element.shares)
+
+      res.data.forEach((element,index,array)=>{
+        if(array.indexOf(element) === index ){
+          newLabels.push(element.symbol)
+          newDatasets[0].data.push(element.shares)
+        }
+      })
+      this.setState({
+        labels: newLabels,
+        datasets: newDatasets
       })
     })
     .catch(error => console.log(error))
-
-  }
+  
+  
+  
+   }
 
 
 
     render() {
 
-      //symbol and shares
-
-      // const { labels , datasets } = state
-      // const { dbData } = this.state
-
-
-      // dbData.forEach(element=>{
-      //   labels.push(element.symbol)
-      //   datasets[0].data.push(element.shares)
-        
-      // })
-
 
         return (
           <div>
           <Bar
-            data={state}
+            data={this.state}
             options={{
               title:{
                 display:true,

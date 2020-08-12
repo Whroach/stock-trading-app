@@ -9,6 +9,7 @@ const {
   GraphQLSchema,
   GraphQLNonNull,
   GraphQLFloat,
+  PossibleTypeExtensionsRule,
 } = require('graphql');
 
 
@@ -106,40 +107,70 @@ const RootQuery = new GraphQLObjectType({
         await axios.get(`wss://api.tiingo.com/iex?token=${tiingo_token}`)
         .then(res => newArray = [...res.data])
 
-        // && newArray[i].ticker =="dia" && newArray[i].ticker =="spy"
+        // var today = new Date();
+
+        let date = '2020-08'
+
 
         for(i = 0; i < newArray.length; i++){
+
           if(newArray[i].ticker === "QQQ" || newArray[i].ticker === "SPY" || newArray[i].ticker === "DIA"){
               indexArray.push(newArray[i])
-          };
+          }
 
-          if(newArray[i].last > newArray[i].prevClose  && newArray[i].last > 5.00 && newArray[i].volume > 500000 && newArray[i] !== null){
+          if(newArray[i].last > newArray[i].prevClose && newArray[i].prevClose > .50 && newArray[i].volume > 500000 && newArray[i].lastSaleTimestamp.slice(0,7) === date){
             gainArray.push(newArray[i])
+
           }
           
-          if(newArray[i].last < newArray[i].prevClose  && newArray[i].last > 5.00 && newArray[i].volume > 500000 && newArray[i] !== null){
+          if(newArray[i].last < newArray[i].prevClose && newArray[i].last > 5.00 && newArray[i].volume > 1000000 && newArray[i] !== null && newArray[i].lastSaleTimestamp.slice(0,7) === date){
             declineArray.push(newArray[i])
           };
 
-          if(newArray[i].volume > 10000000 && newArray[i].last > 10.00){
+          if(newArray[i].volume > 10000000 && newArray[i].last > 1 && newArray[i].lastSaleTimestamp.slice(0,7) === date){
             activeArray.push(newArray[i])
 
           }
 
         };
 
+
+        var newGain = gainArray.map(function(el) {
+          var newObj = Object.assign({}, el);
+
+          newObj.percentChange = 100 * Math.abs((el.last - el.prevClose) / el.prevClose)
+      
+          return newObj;
+        
+        })
+
+        
+
+        var newDecline = declineArray.map(function(el) {
+          var newObj = Object.assign({}, el);
+          newObj.percentChange = 100 * Math.abs((el.last - el.prevClose) / el.prevClose)
+      
+          return newObj;
+        
+        })
+        
+        const positiveList = newGain.sort(function(a,b){
+          return b.percentChange - a.percentChange
+        })
+
+
+
+
         const activeList = activeArray.sort((a,b)=>{
-          return b.last / b.prevClose - a.last / a.prevClose
+          return b.volume - a.volume
 
         })
 
+        console.log(activeList.splice(0,5))
 
-        const positiveList = gainArray.sort((a,b)=>{
-          return b.last / b.prevClose - a.last / a.prevClose
 
-        })
 
-        const negativeList = declineArray.sort((a,b)=>{
+        const negativeList = newDecline.sort((a,b)=>{
           return a.last / a.prevClose -b.last / b.prevClose
 
         })

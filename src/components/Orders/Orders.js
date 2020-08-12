@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import gql from 'graphql-tag';
 import axios from 'axios'
@@ -24,7 +24,7 @@ const EQUITY_QUERY = gql`
 
 
 function Orders(props) {
-    const {quotes, auth } = props
+    const { auth } = props
 
     const order = {
         symbol: props.ticker.toString().toUpperCase(),
@@ -35,7 +35,7 @@ function Orders(props) {
         id: auth.user.account_id,
         order_type: 'Market'
     }
-    const {symbol, quantity, bid_price, ask_price, id} = order
+    const {symbol, quantity} = order
 
     const [errorMessage, setError] = useState('')
 

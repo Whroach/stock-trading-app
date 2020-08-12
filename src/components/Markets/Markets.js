@@ -1,4 +1,4 @@
-import React, {useState, Fragment} from 'react'
+import React, { Fragment} from 'react'
 import Equity from './Equity/Equity'
 import './Markets.css'
 import gql from 'graphql-tag'
@@ -26,8 +26,8 @@ export default function Markets(props) {
 
 
     const {loading, error, data, subscribeToMore} = useQuery(EQUITIES_QUERY)
-    const [equityList, setEquity] = useState([])
-    const [page, displayPage] = useState('equity')
+    // const [equityList, setEquity] = useState([])
+    // const [page, displayPage] = useState('equity')
     if(loading) return <p>Loading....</p>
     if(error) console.log(error)
 

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {withRouter, useHistory} from 'react-router-dom'
+import {withRouter, useHistory, Link} from 'react-router-dom'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -40,7 +40,7 @@ function Note(props) {
     return (
         <div style={{height: "83.7vh", width: "100vw", display: "flex", justifyContent: "center", backgroundColor:"lightgrey"}}>
             <div style={{height: "30vh", width: "40vw", backgroundColor:"white", display:"flex", flexDirection:"column", position:"relative", top:"25%"}}>
-                <ArrowBackIcon style={{color:"black"}}/>
+                <Link to={`/history/${client_id}`}><ArrowBackIcon style={{color:"black"}}/></Link>
                 <h2 style={{display: "flex", justifyContent:"center"}}>Trade Notes</h2>
                 <div style={{height: "64%", backgroundColor:"red"}}>
                     <textarea onChange={e => setNote(e.target.value)} style={{height: "97%", width:"99.4%", textAlign:"start-top"}} placeholder={item.length >= 1 ? item[0] : 'Add notes here!'} />

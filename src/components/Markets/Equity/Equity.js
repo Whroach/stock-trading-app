@@ -6,24 +6,17 @@ import { Link } from 'react-router-dom'
 
 export default function Equity(props) {
   const  { equities }  = props.value
+  console.log(equities)
 
     const index = equities.splice(0,3)
     const gainers = equities.splice(0,100)
     const losers = equities.slice(0,100)
     const active = equities.slice(100,243)
 
+
     
 
     const mappedActive = active.map((element,index) =>{
-      let ask;
-      let bid;
-
-      if(element.bidPrice != null || element.askPrice != null){
-        bid = element.bidPrice
-        ask = element.askPrice
-
-     }
-
 
       return <div key={index} >
           <ol style={{display: "flex", justifyContent:"space-evenly"}}>
@@ -101,7 +94,7 @@ export default function Equity(props) {
       let percentChange = (difference / element.prevClose * 100)
 
       return <div key={index} >
-        <div class="index-box">
+        <div className="index-box">
         <Link to={`/profile/${element.ticker}`}><p style={{fontSize: "50px", margin:"0"}}>{element.ticker}</p></Link>
         <p style={{fontSize:"20px"}}>${element.last.toFixed(2)}</p><p>{percentChange.toFixed(2)}%</p>
         </div>

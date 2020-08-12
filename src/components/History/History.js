@@ -1,22 +1,22 @@
 import React, {useState, useEffect} from 'react'
-import axios from 'axios'
-import { connect } from 'react-redux'
 import './History.css'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { Link } from 'react-router-dom'
+import axios from 'axios'
  
 function History(props) {
-
     const [history, setHistory] = useState([])
+
 
     useEffect(() => {
         getAccountHistory()
+
 
       },[])
 
 
     const getAccountHistory = () =>{
-        const id = props.user.account_id
+        const id = props.id
         axios.get(`/api/history/${id}`)
         .then(res => {
             setHistory(res.data)
@@ -47,7 +47,7 @@ function History(props) {
                 <div >
                     <div style={{display:"flex", justifyContent:"space-evenly"}}>
                         <p style={{position: "relative", right:"20px",color: "white", fontWeight: "bold"}}>Recent Activity</p>
-                        <Link to={`/history/${props.user.account_id}`}><div style={{display: "flex", justifyContent:"space-evenly", position: "relative",left:"20px"}}>
+                        <Link to={`/history/${props.id}`}><div style={{display: "flex", justifyContent:"space-evenly", position: "relative",left:"20px"}}>
                             <p style={{color: "white"}}>More</p><ArrowForwardIcon style={{position:"relative", left:"10px",top:"12px", color:"white"}}/>
                         </div></Link>
                     </div>
@@ -61,6 +61,4 @@ function History(props) {
     )
 }
 
-const mappedStateToProps = state => state.authReducer
-
-export default connect(mappedStateToProps)(History)
+export default History

@@ -7,4 +7,4 @@
 
 SELECT DISTINCT(aa.timestamp), aa.symbol, aa.quantity, aa.action_type from accounts AS a
 JOIN account_assets AS aa ON a.account_id = aa.client_id
-WHERE a.account_id = ${id}
+WHERE a.account_id = ${id} AND aa.quantity >= 1

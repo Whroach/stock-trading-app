@@ -1,4 +1,4 @@
-import React, {useState, useHistory} from 'react'
+import React, {useState} from 'react'
 import { Link } from 'react-router-dom'
 import './Search.css'
 
@@ -15,6 +15,7 @@ export default function Search(props) {
         <div>
             <form>
                 <input
+                value={symbol}
                 onChange={ e => setSymbol(e.target.value)}
                 type="text"
                 placeholder="symbol lookup"

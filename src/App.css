@@ -62,6 +62,18 @@ body {
 
 .form-input-a{
     width: 20vw;
-    bottom: 0;
+    position: absolute;
+    top: 90%;
+    color: white;
+    background-color: green;
 
+}
+
+.input-a{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    left: 15%;
 }

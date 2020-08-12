@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 
 
@@ -11,7 +11,7 @@ function Accounts(props) {
                 <p style={{margin: "0",padding: "0",fontSize:"30px"}}>Hi,{first_name}!</p>
             </div>
             <div style={{marignTop: 0}}>
-                <p style={{position: "relative", top:"10%"}}>Total Cash Balance:</p><p style={{color: "green", fontSize: "20px"}}>${props.cash}</p>
+                <p style={{position: "relative", top:"10%", left: "25%"}}>Total Cash Balance:</p><p style={{position: "relative", left: "25%",color: "green", fontSize: "20px"}}>${props.cash}</p>
             </div>
         </div>
     )
