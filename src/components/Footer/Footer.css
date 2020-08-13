@@ -1,7 +1,8 @@
 .footer-container{
     background-image: url("https://cdn.hipwallpaper.com/i/0/24/13Fcmq.jpg");
-    height: 8.3vh;
+    height: 6vh;
     width: 100vw;
     overflow-x: hidden;
+    padding-left: 15%;
 
 }

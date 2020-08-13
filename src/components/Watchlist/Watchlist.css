@@ -16,10 +16,25 @@
 .content-w{
     display: flex;
     justify-content: space-around;
+    border-bottom: 2px solid black;
+    align-content: center;
 }
 
 .watch-symbol{
     color: #FFFFFF;
     font-size: 20px;
+
+}
+
+#button-dw-container{
+    position: relative;
+    left: 22%;
+    /* padding: 1%; */
+    color: black;
+
+}
+
+#button-dw{
+    background-color: red;
 
 }

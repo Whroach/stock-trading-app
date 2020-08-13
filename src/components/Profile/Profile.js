@@ -29,20 +29,26 @@ const EQUITY_QUERY_COMBINE = gql`
 function Profile(props) {
   const { ticker } = props.match.params
   const [profileF, setProfile] = useState([])
-  props.getStockQuote(ticker)
+  const [report, setReport] = useState([])
 
   useEffect(() =>{
+    props.getStockQuote(ticker)
+
      axios.get(`/api/profile/${ticker}`)
     .then(res => {
       setProfile(res.data)
     })
     .catch(error => console.log(error))
 
+    getReport()
+
   }, [])
 
-  // let test = profile.pop()
-
-  // console.log(test)
+  const getReport =()=>{
+    axios.get(`/api/report/${ticker}`)
+    .then(res => setReport(res.data))
+    .catch(error => console.log(error))
+  };
 
 
   return (
@@ -55,7 +61,7 @@ function Profile(props) {
           const {companyNews, equity, profile } = data
 
         
-          return <DisplayProfile news={companyNews} bio={profileF} description={profile} equity={equity} />
+          return <DisplayProfile report={report} news={companyNews} bio={profileF} description={profile} equity={equity} />
 
 
 

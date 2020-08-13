@@ -71,7 +71,7 @@ const express = require('express'),
     app.get('/api/watchlist/:id', acctCtrl.getWatchlist)
     app.post('/api/watchlist/:id', acctCtrl.addToWatchlist)
     app.get('/api/balance/:id', acctCtrl.getBalance)
-    app.put('/api/symbol/:id', acctCtrl.deleteSymbol)
+    app.delete('/api/symbol/:id', acctCtrl.deleteSymbol)
     app.get('/api/chart/:id', acctCtrl.getChartData)
     app.get('/api/historylist/:id', acctCtrl.getHistoryList)
     app.get('/api/note/:id', acctCtrl.getActivity)

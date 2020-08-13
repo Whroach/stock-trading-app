@@ -19,7 +19,7 @@ module.exports = {
 
             // let history = await db.query("SELECT DISTINCT(aa.timestamp), aa.symbol, aa.quantity, aa.action_type from accounts AS a JOIN account_assets AS aa ON a.account_id = aa.client_id WHERE a.account_id = $1", [`${id}`])
         
-            let result = await db.accounts.history({id})
+            let result = await db.accounts.history(id)
         
             res.status(200).send(result)
 
@@ -57,14 +57,11 @@ module.exports = {
 
     deleteSymbol: async(req,res) =>{
         const db = req.app.get('db'),
-        { id } = req.params,
-        { symbol } = req.body
+        { id } = req.params;
+
+        console.log(id)
         
-
-  
-
-        let result = await db.accounts.delete_symbol({id, symbol})
-
+        let result = await db.accounts.delete_symbol(id)
 
         res.status(200).send(result)
 
@@ -75,7 +72,7 @@ module.exports = {
         const db = req.app.get('db'),
         { id } = req.params
 
-        let result = await db.query("SELECT SUM(quantity) AS shares, symbol FROM account_assets WHERE client_id = $1 GROUP BY symbol", [`${id}`])
+        let result = await db.query("SELECT SUM(quantity) AS shares, symbol FROM account_assets WHERE client_id = $1 AND quantity >= 1 GROUP BY symbol", [`${id}`])
 
         res.status(200).send(result)
 

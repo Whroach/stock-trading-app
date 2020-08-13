@@ -71,7 +71,7 @@ const sendDeposit = () =>{
                       <p style={{fontSize: "20px"}}>Deposit Amount</p><input placeholder="USD" {...deposit}/>
                   </ul>
                   <div style={{bottom: 0, width: "20vw"}}>
-                      <input className="form-input-a" type='submit' onClick={sendDeposit}/>
+                      <input className="form-input-a" type='Deposit' onClick={sendDeposit}/>
                   </div>
               </form>
           </div>  
@@ -89,7 +89,7 @@ const sendDeposit = () =>{
         <div className="search-symbol">
           <div className="search-a-container">
             <input onChange={e => setSymbol(e.target.value)} type="text" placeholder="symbol"/>
-            <button onClick={() => setToggle('order')}>Deposit</button>
+            <button onClick={() => setToggle('order')}>Search</button>
           </div>
         </div>
        : 

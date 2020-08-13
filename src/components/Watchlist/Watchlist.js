@@ -23,14 +23,12 @@ function Watchlist(props) {
      }
 
 
-    //  const removeSymbol = (value) =>{
-    //      const id = props.user.account_id
-    //      const symbol = value
+     const removeSymbol = (symbol) =>{
 
-    //      axios.put(`/api/symbol/${id}`, {symbol: symbol})
-    //      .then(()=> props.getWatchFn())
-    //      .catch(() => console.log('we got an error'))
-    //  }
+         axios.delete(`/api/symbol/${symbol}`)
+         .then(()=> props.getWatchFn())
+         .catch(() => console.log('we got an error'))
+     }
 
 
 
@@ -50,11 +48,9 @@ function Watchlist(props) {
                 <div className="watchlist-container">
                     <div>
                         {props.list.map((element, index) =>(
-                            <DisplayWatchlist list={element} key={index}/>
+                            <DisplayWatchlist list={element} key={index} removeSymbolFn={removeSymbol}/>
                         ))}
                     <div>
-                        {/* <button onClick={() => removeSymbol(element.symbol)}></button> */}
-
                     </div>
                     </div>
                 </div>

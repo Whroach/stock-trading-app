@@ -1,11 +1,10 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component} from 'react'
 import { connect } from 'react-redux'
 import './Dashboard.css'
 import History from '../History/History'
 import Watchlist from '../Watchlist/Watchlist'
 import axios from 'axios'
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
 import Accounts from '../Accounts/Accounts'
 import ChartDisplay from '../Chart/ChartDisplay'
 import { whatTimeIsIt } from './Timer'
@@ -41,14 +40,16 @@ class Dashboard extends Component {
   };
 
   componentDidMount (){
-    whatTimeIsIt((err, timestamp) => this.setState({ 
-      timestamp 
-    }));
+
+    whatTimeIsIt((err, timestamp) => 
+    this.setState({ timestamp }));
+
 
     this.getBalance();
     this.getWatchlist();
     // this.getAccountHistory();
   }
+
 
 
   getBalance (){
@@ -87,28 +88,10 @@ class Dashboard extends Component {
   render() {
     const { cash, watchlist } = this.state
 
-    // const uniqTickers = tickers.filter((value, index, self) => {
-    //   return self.findIndex(t => t.symbol === value.symbol) === index;
-    // })
-
-    // const mappedTickers = uniqTickers.map(element =>{
-    //   return element.symbol
-    // })
-
-    // let symbols = mappedTickers.toString()
-
-
-    // return (
-    //   <Fragment>
-    //     <Query query={EQUITY_QUERY} variables={{ticker: symbols}}>
-    //     {({ loading, error, data }) => {
-    //         if (loading) return <h4>Loading...</h4>;
-    //         if (error) console.log(error);
-
 
           return (
             <div className="dashboard-container">
-              <div style={{height: "84vh", width: "100vw", backgroundColor: "#1b2845", backgroundImage: "linear-gradient(315deg, #1b2845 0%, #274060 74%)"}}>
+              <div style={{height: "86vh", width: "100vw", backgroundColor: "#1b2845", backgroundImage: "linear-gradient(315deg, #1b2845 0%, #274060 74%)"}}>
                 <p className="timer-io">{this.state.timestamp.slice(10)}</p>
                 <div style={{padding: "30px"}}>
                   <div style={{display: "flex", justifyContent: "space-evenly"}}>
@@ -129,11 +112,6 @@ class Dashboard extends Component {
               </div>
             </div>
             )}}
-    //         </Query>
-    //   </Fragment> 
-    // )
-//   }
-// }
 
 
 
@@ -141,5 +119,3 @@ const mappedStateToProps = state => state
 
 export default connect(mappedStateToProps)(Dashboard)
 
-
-// background: "#0f0c29", background: "-webkit-linear-gradient(to right, #0f0c29, #302b63, #24243e)", background: "linear-gradient(to right, #0f0c29, #302b63, #24243e)"

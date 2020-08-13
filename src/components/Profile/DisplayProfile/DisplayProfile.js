@@ -72,7 +72,7 @@ export default function DisplayProfile(props) {
                     // </div>
                 : 
                 <div>
-                    <Reports/>
+                    <Reports report={props.report}/>
                 </div>
 
                 }

@@ -1,28 +1,15 @@
-import React,{useState, useEffect} from 'react'
-import axios from 'axios'
-import { connect } from 'react-redux';
+import React,{useState} from 'react'
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Button from '@material-ui/core/Button';
 import './Reports.css'
 
 function Reports(props) {
 
-  const  ticker  = props.stockQuote
-  const [report, setReport] = useState([])
   const [page, displayPage] = useState('balance')
 
-  useEffect(() =>{
-    getReport()
 
- }, [])
 
-  const getReport =()=>{
-    axios.get(`/api/report/${ticker}`)
-    .then(res => setReport(res.data))
-    .catch(error => console.log(error))
-  }
-
-  const { incomeStatement, balanceSheet, cashFlow } = report
+  const { incomeStatement, balanceSheet, cashFlow } = props.report
 
   const incomeObj = {...incomeStatement}
   const balanceObj ={...balanceSheet}
@@ -80,7 +67,4 @@ function Reports(props) {
 }
 
 
-
-const mappedStateToProps = state => state.quoteReducer
-
-export default connect(mappedStateToProps)(Reports)
+export default Reports
