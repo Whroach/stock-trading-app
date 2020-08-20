@@ -27,7 +27,7 @@ const express = require('express'),
 
     app.use(cors());
     app.use(express.json())
-    app.use( express.static( `${__dirname}/../build` ) );
+    
     
     app.use('/graphql', graphqlHTTP({
         schema,
@@ -53,9 +53,6 @@ const express = require('express'),
         cookie: {maxAge: 1000 * 60 * 60 * 24 * 365} 
     }))
     
-    app.get('*', (req,res)=>{
-      res.sendFile(path.join(__dirname, '../build/index.html'))
-    })
 
     //API endpoint
     app.get('/api/profile/:ticker', apiCtrl.getProfile)
@@ -81,3 +78,8 @@ const express = require('express'),
     app.get('/api/note/:id', acctCtrl.getActivity)
     app.put('/api/note/:id', acctCtrl.editActivity)
  
+    app.use( express.static( `${__dirname}/../build` ) );
+
+    app.get('*', (req,res)=>{
+      res.sendFile(path.join(__dirname, '../build/index.html'))
+    })
