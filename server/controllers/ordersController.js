@@ -32,76 +32,25 @@ module.exports = {
 
 
 
+
         const findPosition = await db.orders.find_position({id, symbol, quantity})
+
+        console.log(findPosition)
+
         
-        if(findPosition[0]){
-            findPosition.map( async(element) => {
+            findPosition.forEach( async(element) => {
                 // console.log(element.quantity)
-                if(element.quantity <= 0 ){
+                if(element.quantity <= 0 || element.quantity < quantity){
                     console.log('hit bad')
                     return res.status(400).send('Unable to process your request as the position may not exist in your holdings.')
-                }
-                else if(element.quantity < quantity ){
-                    return res.status(400).send('Please reduce quantity amount')
-
                 }
                 else{
                     // await db.query("WITH order_history AS ( UPDATE account_assets SET quantity = quantity - $1 WHERE client_id = $2 AND symbol = $3 RETURNING symbol, $4, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id) INSERT INTO order_history(symbol, quantity, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id) SELECT symbol, quantity, $5, $6, $7, $8, asset_type, timestamp, transaction_id,client_id FROM order_history", [`${quantity}`,`${id}`, `${symbol}`, `${quantity}`,`${bid_price}`, `${ask_price}`, `SELL`, `MARKET`])
                     await db.orders.reduce_position({symbol, quantity, id, bid_price, ask_price})
-                    res.sendStatus(200)
-
-                }
-            })
-        }
-        else{
-            res.status(400).send('Bad Request')
-        };
-
-        // if(element.quantity > 0){
-        //     db.query("WITH order_history AS ( UPDATE account_assets SET quantity = quantity - $1 WHERE client_id = $2 AND symbol = $3 RETURNING symbol, quantity, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id) INSERT INTO order_history(symbol, quantity, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id) SELECT * FROM order_history", [`${quantity}`,`${id}`, `${symbol}`])
-
-        // }
-
-
-        // await db.orders.sell_order({quantity, id, symbol})
-
-        // res.sendStatus(200)
-
-
-        //FIFO method
-
-        // let t_id = findPosition[0].transaction_id
-        // // console.log(t_id)
-        // const savedArray = findPosition.map(obj => ({...obj}));
-
-
-        // if(findPosition[0].quantity === quantity){
-        //   await db.orders.sell_order({t_id, c_id, quantity})
-
-        // }
-
-
-        // function count(findPosition){
-        //   findPosition.filter((value) => {
-        //     while(value.quantity > 0 && number > 0) {
-
-        //     value.quantity--;
-        //     number--;
-        //     }})
-        //   };
-          
+                    return res.sendStatus(200)
+            }})
         
-        
-        // findPosition.forEach(function(item) {
-        //   var ItemIndex = savedArray.findIndex(e => e.quantity <= item.quantity);
-        
-        //   findPosition.splice(ItemIndex, 0)
-        
-        // })
-        
-        // await db.orders.reduce_position({quantity, t_id})
-
-    },
+        },
 
 
 

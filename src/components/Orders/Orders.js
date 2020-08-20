@@ -7,6 +7,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import { useQuery } from 'react-apollo'
 import './Orders.css'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {withRouter, useHistory} from 'react-router-dom'
 
 const EQUITY_QUERY = gql`
   query($ticker: String!){
@@ -25,6 +26,8 @@ const EQUITY_QUERY = gql`
 
 function Orders(props) {
     const { auth } = props
+    const history = useHistory()
+
 
     const order = {
         symbol: props.ticker.toString().toUpperCase(),
@@ -72,7 +75,8 @@ function Orders(props) {
 
             axios.post('/api/buy', {symbol, quantity: parseInt(value), bid_price: parseInt(bid_price), ask_price: parseInt(ask_price), id})
             .then(() =>{
-                console.log('Successs!!!')
+                props.toggle('false')
+                props.history.push('/confirmation')
             })
             .catch(() => { setError('Unable to process order, try again');
             })
@@ -89,7 +93,11 @@ function Orders(props) {
 
         
         axios.put(`/api/sell/${id}`, {symbol, quantity: value, bid_price: parseInt(bid_price), ask_price: parseInt(ask_price)})
-        .then( () => console.log('succcesss'))
+        .then( () => {
+            props.toggle('false')
+            props.history.push('/confirmation')
+
+        })
         .catch(() => { setError('Unable to process order, try again');
         })
 
@@ -136,7 +144,7 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Orders)
+export default withRouter(connect(mapStateToProps)(Orders))
 
 
 

@@ -30,10 +30,10 @@ class Dashboard extends Component {
       timestamp: '',
       watchlist: [],
       positions:[],
-      history:[]
+      history:[],
+      count: 0
 
     }
-
 
     this.getBalance = this.getBalance.bind(this)
 
@@ -57,7 +57,10 @@ class Dashboard extends Component {
 
     axios.get(`/api/balance/${id}`)
     .then(res => {
-      this.setState({cash: res.data})
+      if(res.data && res.data.length !== this.state.cash){
+        this.setState({cash: res.data})
+
+      }
     })
     .catch(error => console.log(error))
 
@@ -67,8 +70,10 @@ class Dashboard extends Component {
      const id = this.props.authReducer.user.account_id
 
      axios.get(`/api/watchlist/${id}`)
-     .then(res =>
-         this.setState({watchlist: res.data}))
+     .then(res =>{
+      if(res.data && res.data.length !== this.state.watchlist){
+        this.setState({watchlist: res.data})
+     }})
      .catch(error => console.log(error))
  }
 
@@ -98,7 +103,7 @@ class Dashboard extends Component {
                     <div className="accounts-a"style={{position: "relative", top: "20%"}}>
                       <Accounts cash={cash}/>
                     </div>
-                    <div style={{height: "40vh", width: "40vw", position: "relative", right: "2%"}}>
+                    <div style={{height: "40vh", width: "40vw", position: "relative", left: "1%"}}>
                       <ChartDisplay />
                     </div>
                     <div className="history">
@@ -107,7 +112,7 @@ class Dashboard extends Component {
                   </div>
                 </div>
                 <div className="watchlist">
-                  <Watchlist list={watchlist} getWatchFn={this.getWatchlist}/>
+                  <Watchlist list={watchlist} getWatchFn={this.getWatchlist} />
                 </div>
               </div>
             </div>

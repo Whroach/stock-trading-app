@@ -8,8 +8,7 @@ const {
   GraphQLList,
   GraphQLSchema,
   GraphQLNonNull,
-  GraphQLFloat,
-  PossibleTypeExtensionsRule,
+  GraphQLFloat
 } = require('graphql');
 
 

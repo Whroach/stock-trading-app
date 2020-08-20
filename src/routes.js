@@ -6,6 +6,7 @@ import Profile from './components/Profile/Profile'
 import Markets from './components/Markets/Markets'
 import ShowHistory from './components/History/ShowHistory'
 import Post from './components/History/Note'
+import Confirmation from './components/Confirmation/Confirmation'
 
 
 
@@ -17,5 +18,6 @@ export default (
         <Route path="/markets" component={Markets} />
         <Route path="/history/:id" component={ShowHistory}/>
         <Route path="/post/:id" component={Post}/>
+        <Route path="/confirmation" component={Confirmation} />
     </Switch>
 )

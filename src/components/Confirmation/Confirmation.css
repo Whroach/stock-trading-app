@@ -1,0 +1,19 @@
+.confirm-container-c{
+    height: 100vh;
+    width: 100vw;
+    background-color: green;
+    
+}
+
+.content-container-c{
+    font-size: 25px;
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    color: white;
+    background-color: green;
+    display: block;
+    justify-content: center;
+
+
+}

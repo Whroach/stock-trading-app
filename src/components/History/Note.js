@@ -38,7 +38,7 @@ function Note(props) {
 
 
     return (
-        <div style={{height: "83.7vh", width: "100vw", display: "flex", justifyContent: "center", backgroundColor:"lightgrey"}}>
+        <div style={{height: "86vh", width: "100vw", display: "flex", justifyContent: "center", backgroundColor:"lightgrey"}}>
             <div style={{height: "30vh", width: "40vw", backgroundColor:"white", display:"flex", flexDirection:"column", position:"relative", top:"25%"}}>
                 <Link to={`/history/${client_id}`}><ArrowBackIcon style={{color:"black"}}/></Link>
                 <h2 style={{display: "flex", justifyContent:"center"}}>Trade Notes</h2>

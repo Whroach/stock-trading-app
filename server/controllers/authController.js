@@ -20,13 +20,13 @@ module.exports = {
         req.session.user = newUser[0];
         res.status(201).send(req.session.user);
 
-        // console.log(req.session)
 
     },
 
     login: async(req, res) => {
         const { username, password } = req.body,
             db = req.app.get('db')
+
 
         const foundUser = await db.auth.check_user(username)
         let user = foundUser[0]

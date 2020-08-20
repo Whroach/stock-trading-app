@@ -4,34 +4,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux'
 import store from './ducks/store'
-import { HashRouter } from "react-router-dom";
+import { HashRouter, BrowserRouter } from "react-router-dom";
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import { split } from 'apollo-link'
-import {WebSocketLink} from 'apollo-link-ws'
-import {getMainDefinition} from 'apollo-utilities'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter
 
-
-// const wsLink = new WebSocketLink({
-//   uri: `ws://localhost:3005`,
-//   options: {
-//     reconnect: true,
-//   }
-// })
-
-// const link = split(
-//   ({ query }) => {
-//     const { kind, operation } = getMainDefinition(query)
-//     return kind === 'OperationDefinition' && operation === 'subscription'
-//   },
-//   wsLink
-// )
-
-// const client = new ApolloClient({
-//   link,
-//   cache: new InMemoryCache()
-// })
 
 
 const client = new ApolloClient({

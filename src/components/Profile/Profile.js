@@ -36,7 +36,9 @@ function Profile(props) {
 
      axios.get(`/api/profile/${ticker}`)
     .then(res => {
-      setProfile(res.data)
+      if(res.data && res.data.length !== profileF.length){
+        setProfile(res.data)
+      }
     })
     .catch(error => console.log(error))
 
@@ -46,7 +48,11 @@ function Profile(props) {
 
   const getReport =()=>{
     axios.get(`/api/report/${ticker}`)
-    .then(res => setReport(res.data))
+    .then(res => {
+      if(res.data && res.data.length !== report.length){
+        setReport(res.data)
+      }
+    })
     .catch(error => console.log(error))
   };
 

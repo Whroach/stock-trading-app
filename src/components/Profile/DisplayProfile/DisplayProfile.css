@@ -3,7 +3,8 @@
     width: 100vw;
     display: flex;
     justify-content: space-between;
-    background-color: orange;
+    background-color: lightslategray;
+    color: white;
 
 
 }
@@ -31,7 +32,7 @@
     display: flex;
     justify-content: center;
     position: relative;
-    left: 2%;
+    left: 5%;
 }
 
 
