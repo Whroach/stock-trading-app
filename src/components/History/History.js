@@ -19,7 +19,10 @@ function History(props) {
         const id = props.id
         axios.get(`/api/history/${id}`)
         .then(res => {
-            setHistory(res.data)
+            if(res.data && res.data.length !== history.length){
+                setHistory(res.data)
+            }
+
         })
         .catch(() => console.log('error in getAccountHistory'))
 

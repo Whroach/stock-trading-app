@@ -21,11 +21,9 @@ const EQUITIES_QUERY = gql`
 `;
 
 
-
 export default function Markets(props) {
 
-
-    const {loading, error, data, subscribeToMore} = useQuery(EQUITIES_QUERY)
+    const {loading, error, data} = useQuery(EQUITIES_QUERY)
     // const [equityList, setEquity] = useState([])
     // const [page, displayPage] = useState('equity')
     if(loading) return <p>Loading....</p>

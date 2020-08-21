@@ -28,10 +28,10 @@ module.exports = {
             db = req.app.get('db')
 
 
-        const foundUser = await db.auth.check_user(username)
-        let user = foundUser[0]
+
+        let foundUser = await db.auth.check_user({username})
  
-        if (!user) {
+        if (!foundUser) {
           return res.status(401).send('Username cannot be found, please try again or register a new account');
         }
         const isAuthenticated = bcrypt.compareSync(password, foundUser[0].password);

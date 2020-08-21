@@ -44,7 +44,8 @@ function handleToggle(){
 const sendDeposit = () =>{
   const { amount } = deposit
 
-  axios.post(`/api/deposit/${12}`, {deposit: parseInt(amount)})
+
+  axios.post(`/api/deposit/${props.authReducer.user.account_id}`, {deposit: parseInt(amount)})
   .then( () => {
       setForm(form === 'false')
 
@@ -101,4 +102,6 @@ const sendDeposit = () =>{
   );
 }
 
-export default withRouter(connect(null,{getUser})(App));
+const mappedStateToProps = state => state
+
+export default withRouter(connect(mappedStateToProps,{getUser})(App));

@@ -7,7 +7,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import { useQuery } from 'react-apollo'
 import './Orders.css'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {withRouter, useHistory} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 const EQUITY_QUERY = gql`
   query($ticker: String!){
@@ -26,7 +26,6 @@ const EQUITY_QUERY = gql`
 
 function Orders(props) {
     const { auth } = props
-    const history = useHistory()
 
 
     const order = {

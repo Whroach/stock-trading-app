@@ -10,11 +10,9 @@ import { ApolloProvider } from 'react-apollo';
 const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter
 
 
-
 const client = new ApolloClient({
-  uri: '/graphql'
+  uri: 'http://localhost:3005/graphql'
 });
-
 
 
 ReactDOM.render(

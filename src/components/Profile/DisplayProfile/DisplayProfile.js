@@ -10,20 +10,6 @@ export default function DisplayProfile(props) {
     const [toggle, setToggle] = useState('description')
 
     
-    // function handleToggle(){
-    //     setToggle(toggle === 'true' ? 'false' : 'true')
-    // };
-
-
-//     const objProfile = bio.pop()
-
-//     console.log(objProfile)
-
-
-// console.log(bio)
-
-
-
 
     let mapNews = news.map((element, index) => {
         return <div key={index} className="list-container" >

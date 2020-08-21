@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom'
 
 export default function Equity(props) {
   const  { equities }  = props.value
-  console.log(equities)
 
     const index = equities.splice(0,3)
     const gainers = equities.splice(0,100)
     const losers = equities.slice(0,100)
     const active = equities.slice(100,243)
+
 
 
     

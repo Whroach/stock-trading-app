@@ -66,12 +66,7 @@ function Profile(props) {
 
           const {companyNews, equity, profile } = data
 
-        
           return <DisplayProfile report={report} news={companyNews} bio={profileF} description={profile} equity={equity} />
-
-
-
-        // return <DisplayProfile  equity={equity}  news={companyNews} />
 
         }}
       </Query>

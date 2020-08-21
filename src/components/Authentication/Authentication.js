@@ -96,14 +96,14 @@ class Authentication extends Component {
                         :
                         <ul className="input-fields">
                             <p>Username:</p><input value={this.state.username} name='username' onChange={(element) => this.handleInput(element)}></input>
-                            <p>Password:</p><input value={this.state.password} name='password' onChange={(element) => this.handleInput(element)}></input>
+                            <p>Password:</p><input value={this.state.password} name='password' type='password' onChange={(element) => this.handleInput(element)}></input>
                             <div className="button-containers-a">
                                 <button className="button" onClick={this.toggleView}>Register</button>
                                 <button className="button"  onClick={this.loginUser}>Login</button>
                             </div>
                         </ul>
 
-                        }
+                         } 
                     </form>
                 </div>
             </div>

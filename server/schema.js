@@ -101,7 +101,7 @@ const RootQuery = new GraphQLObjectType({
         let declineArray = []
         let indexArray = []
         let activeArray = []
-        let n = 100
+        const n = 100
 
         await axios.get(`wss://api.tiingo.com/iex?token=${tiingo_token}`)
         .then(res => newArray = [...res.data])
@@ -165,8 +165,6 @@ const RootQuery = new GraphQLObjectType({
 
         })
 
-        console.log(activeList.splice(0,5))
-
 
 
         const negativeList = newDecline.sort((a,b)=>{
@@ -175,10 +173,10 @@ const RootQuery = new GraphQLObjectType({
         })
 
 
+        let result = [...indexArray,...positiveList.slice(0,n), ...negativeList.slice(0,n), ...activeList.slice(0,200)]
 
-         let result = [...indexArray,...positiveList.slice(0,n), ...negativeList.slice(0,n), ...activeList.slice(0,200)]
 
-         return result
+        return result
 
 
 
