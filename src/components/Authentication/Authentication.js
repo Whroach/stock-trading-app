@@ -79,7 +79,7 @@ class Authentication extends Component {
                 <h1 style={{position: "absolute", top: "5%", left: "26%", color: "white", fontFamily:"cursive", fontSize: "50px"}}>Ready to Invest For Your Future?</h1>
                 <div className="secondary">
                     <form className="form-container-a">
-                        {this.state.viewRegister
+                        {/* {this.state.viewRegister
                         ?
                         <ul>
                             <p>Username:</p><input value={this.state.username} name='username' onChange={(element) => this.handleInput(element)}></input>
@@ -93,17 +93,17 @@ class Authentication extends Component {
                                 <button onClick={this.toggleView}>Login</button>
                             </div>
                         </ul>
-                        :
+                        : */}
                         <ul className="input-fields">
                             <p>Username:</p><input value={this.state.username} name='username' onChange={(element) => this.handleInput(element)}></input>
                             <p>Password:</p><input value={this.state.password} name='password' type='password' onChange={(element) => this.handleInput(element)}></input>
                             <div className="button-containers-a">
-                                <button className="button" onClick={this.toggleView}>Register</button>
+                                {/* <button className="button" onClick={this.toggleView}>Register</button> */}
                                 <button className="button"  onClick={this.loginUser}>Login</button>
                             </div>
                         </ul>
 
-                         } 
+                         {/* }  */}
                     </form>
                 </div>
             </div>
