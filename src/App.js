@@ -45,7 +45,6 @@ function handleToggle(){
 const sendDeposit = () =>{
   const { amount } = deposit
 
-
   axios.post(`/api/deposit/${props.authReducer.user.account_id}`, {deposit: parseInt(amount)})
   .then( () => {
       setForm(form === 'false')
