@@ -2,8 +2,12 @@ import React from 'react'
 import './Confirmation.css'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
+import { connect } from 'react-redux'
 
-export default function ClearDeposit(props) {
+
+function Cleardeposit(props) {
+
+
     return (
         <div className="confirm-container-c">
             <div className="content-container-c">
@@ -13,3 +17,7 @@ export default function ClearDeposit(props) {
         </div>
     )
 }
+
+const mappedStateToProps = state => state
+
+export default connect(mappedStateToProps)(Cleardeposit)

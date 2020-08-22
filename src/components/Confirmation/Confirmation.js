@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 
 function Confirmation(props) {
 
-
     return (
         <div className="confirm-container-c">
             <div className="content-container-c">

@@ -41,13 +41,11 @@ class Dashboard extends Component {
 
   componentDidMount (){
 
-    whatTimeIsIt((err, timestamp) => 
-    this.setState({ timestamp }));
-
+    // whatTimeIsIt((err, timestamp) => 
+    // this.setState({ timestamp }));
 
     this.getBalance();
     this.getWatchlist();
-    // this.getAccountHistory();
   }
 
 
@@ -57,7 +55,7 @@ class Dashboard extends Component {
 
     axios.get(`/api/balance/${id}`)
     .then(res => {
-      if(res.data && res.data.length !== this.state.cash.length){
+      if(res.data && res.data !== this.state.cash){
         this.setState({cash: res.data})
 
       }
@@ -97,7 +95,7 @@ class Dashboard extends Component {
           return (
             <div className="dashboard-container">
               <div style={{height: "86vh", width: "100vw", backgroundColor: "#1b2845", backgroundImage: "linear-gradient(315deg, #1b2845 0%, #274060 74%)"}}>
-                <p className="timer-io">{this.state.timestamp.slice(10)}</p>
+                {/* <p className="timer-io">{this.state.timestamp.slice(10)}</p> */}
                 <div style={{padding: "30px"}}>
                   <div style={{display: "flex", justifyContent: "space-evenly"}}>
                     <div className="accounts-a"style={{position: "relative", top: "20%"}}>

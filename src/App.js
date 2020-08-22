@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import './App.css';
 import routes from "./routes";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import Header from './components/Header/Header'
 import {connect} from 'react-redux'
 import {getUser} from './ducks/reducers/authReducer'
@@ -41,15 +41,12 @@ function handleToggle(){
 };
 
 
-
 const sendDeposit = () =>{
   const { amount } = deposit
 
   axios.post(`/api/deposit/${props.authReducer.user.account_id}`, {deposit: parseInt(amount)})
   .then( () => {
-      setForm(form === 'false')
-      props.history.push('/deposit')
-
+    console.log('success!')
   })
   .catch(() => console.log('error in sendDeposit'))
 }
@@ -71,7 +68,7 @@ const sendDeposit = () =>{
                       <p style={{fontSize: "20px"}}>Deposit Amount</p><input placeholder="USD" {...deposit}/>
                   </ul>
                   <div style={{bottom: 0, width: "20vw"}}>
-                      <input className="form-input-a" type="submit" onClick={sendDeposit}/>
+                    <Link to={'/deposit'}><button className="form-input-a" onClick={sendDeposit && handleToggle}>Test</button></Link>
                   </div>
               </form>
           </div>  
