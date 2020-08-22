@@ -5,32 +5,32 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
  
 function History(props) {
-    const [history, setHistory] = useState([])
+    // const [history, setHistory] = useState([])
 
 
-    useEffect(() => {
-        getAccountHistory()
+    // useEffect(() => {
+    //     getAccountHistory()
 
 
-      },[])
+    //   },[])
 
 
-    const getAccountHistory = () =>{
-        const id = props.id
-        axios.get(`/api/history/${id}`)
-        .then(res => {
-            if(res.data && res.data.length !== history.length){
-                setHistory(res.data)
-            }
+    // const getAccountHistory = () =>{
+    //     const id = props.id
+    //     axios.get(`/api/history/${id}`)
+    //     .then(res => {
+    //         if(res.data && res.data.length !== history.length){
+    //             setHistory(res.data)
+    //         }
 
-        })
-        .catch(() => console.log('error in getAccountHistory'))
+    //     })
+    //     .catch(() => console.log('error in getAccountHistory'))
 
-    }
+    // }
 
-    history.reverse()
+    // history.reverse()
 
-    const mappedHistory = history.map((element,index) => {
+    const mappedHistory = props.history.map((element,index) => {
         return <div key={index} >
             <div style={{position: "relative", marginTop: 20}}>
                 <div style={{display: "flex", justifyContent: "space-around", color: "white", borderBottom: "solid white 1px"}}>

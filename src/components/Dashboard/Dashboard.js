@@ -37,6 +37,7 @@ class Dashboard extends Component {
 
     this.getBalance = this.getBalance.bind(this)
     this.getWatchlist = this.getWatchlist.bind(this)
+    this.getAccountHistory = this.getAccountHistory.bind(this)
 
   };
 
@@ -46,6 +47,7 @@ class Dashboard extends Component {
 
     this.getBalance();
     this.getWatchlist();
+    this.getAccountHistory()
   }
 
   componentDidUpdate(){
@@ -80,21 +82,23 @@ class Dashboard extends Component {
      .catch(error => console.log(error))
  }
 
-//  getAccountHistory = () =>{
-//   const id = this.props.authReducer.user.account_id
-//   axios.get(`/api/history/${id}`)
-//   .then(res => {
-//     this.setState({history: res.data})
-//   })
-//   .catch(() => console.log('error in getAccountHistory'))
+ getAccountHistory = () =>{
+  const id = this.props.authReducer.user.account_id
+  axios.get(`/api/history/${id}`)
+  .then(res => {
+    if(res.data && res.data.length !== this.state.history.length){
+      this.setState({history: res.data})
+    }
+  })
+  .catch(() => console.log('error in getAccountHistory'))
 
-// }
+}
 
 
 
 
   render() {
-    const { cash, watchlist } = this.state
+    const { cash, watchlist, history } = this.state
 
 
           return (
@@ -110,7 +114,7 @@ class Dashboard extends Component {
                       <ChartDisplay />
                     </div>
                     <div className="history">
-                      <History id={this.props.authReducer.user.account_id}/>
+                      <History id={this.props.authReducer.user.account_id} history={history}/>
                     </div>
                   </div>
                 </div>
