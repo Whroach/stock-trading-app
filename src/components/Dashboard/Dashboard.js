@@ -53,6 +53,7 @@ class Dashboard extends Component {
   componentDidUpdate(){
     this.getBalance();
     this.getWatchlist();
+    this.getAccountHistory()
   }
 
 
