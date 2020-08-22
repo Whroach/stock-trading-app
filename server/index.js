@@ -11,19 +11,20 @@ const express = require('express'),
     apiCtrl = require('./controllers/apiController'),
     { graphqlHTTP } = require('express-graphql'),
     schema = require('./schema'),
-    cors = require('cors'),
-    server = app.listen(3005),
-    io = require('socket.io').listen(server);
+    cors = require('cors');
+    // server = app.listen(3005),
+    // io = require('socket.io').listen(server);
 
+    app.listen(3005)
 
-    io.on('connection', (client) => {
-        client.on('whatTimeIsIt', (interval) => {
-          console.log('client is subscribing to timer with interval ', interval);
-          setInterval(() => {
-            client.emit('timer', new Date());
-          }, interval);
-        });
-      });
+    // io.on('connection', (client) => {
+    //     client.on('whatTimeIsIt', (interval) => {
+    //       console.log('client is subscribing to timer with interval ', interval);
+    //       setInterval(() => {
+    //         client.emit('timer', new Date());
+    //       }, interval);
+    //     });
+    //   });
 
     app.use(cors());
     app.use(express.json())

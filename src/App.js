@@ -43,10 +43,10 @@ function handleToggle(){
 
 const sendDeposit = () =>{
   const { amount } = deposit
-
+  
   axios.post(`/api/deposit/${props.authReducer.user.account_id}`, {deposit: parseInt(amount)})
   .then( () => {
-    console.log('success!')
+    setForm('false')
   })
   .catch(() => console.log('error in sendDeposit'))
 }
@@ -68,7 +68,7 @@ const sendDeposit = () =>{
                       <p style={{fontSize: "20px"}}>Deposit Amount</p><input placeholder="USD" {...deposit}/>
                   </ul>
                   <div style={{bottom: 0, width: "20vw"}}>
-                    <Link to={'/deposit'}><button className="form-input-a" onClick={sendDeposit && handleToggle}>Test</button></Link>
+                    <Link to={'/deposit'}><button className="form-input-a" onClick={sendDeposit}>Deposit</button></Link>
                   </div>
               </form>
           </div>  

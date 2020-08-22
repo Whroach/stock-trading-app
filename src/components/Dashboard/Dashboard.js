@@ -4,20 +4,20 @@ import './Dashboard.css'
 import History from '../History/History'
 import Watchlist from '../Watchlist/Watchlist'
 import axios from 'axios'
-import gql from 'graphql-tag';
+// import gql from 'graphql-tag';
 import Accounts from '../Accounts/Accounts'
 import ChartDisplay from '../Chart/ChartDisplay'
-import { whatTimeIsIt } from './Timer'
+// import { whatTimeIsIt } from './Timer'
 
-const EQUITY_QUERY =gql`
-  query($ticker: String!){
-    equity(ticker: $ticker){
-      ticker
-      last
-      volume
-    }
-  }
-`;
+// const EQUITY_QUERY =gql`
+//   query($ticker: String!){
+//     equity(ticker: $ticker){
+//       ticker
+//       last
+//       volume
+//     }
+//   }
+// `;
 
 class Dashboard extends Component {
   constructor(props){
@@ -40,7 +40,6 @@ class Dashboard extends Component {
   };
 
   componentDidMount (){
-
     // whatTimeIsIt((err, timestamp) => 
     // this.setState({ timestamp }));
 
@@ -55,7 +54,7 @@ class Dashboard extends Component {
 
     axios.get(`/api/balance/${id}`)
     .then(res => {
-      if(res.data && res.data !== this.state.cash){
+      if(res.data && res.data.length !== this.state.cash.length){
         this.setState({cash: res.data})
 
       }
