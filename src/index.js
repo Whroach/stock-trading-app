@@ -11,7 +11,7 @@ const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRout
 
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3005/graphql'
+  uri: '/graphql'
 });
 
 
