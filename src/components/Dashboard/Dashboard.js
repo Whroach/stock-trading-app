@@ -31,13 +31,15 @@ class Dashboard extends Component {
       watchlist: [],
       positions:[],
       history:[],
-      count: 0
+      count: 0,
+      chartData: []
 
     }
 
     this.getBalance = this.getBalance.bind(this)
     this.getWatchlist = this.getWatchlist.bind(this)
     this.getAccountHistory = this.getAccountHistory.bind(this)
+    this.getPositions = this.getPositions.bind(this)
 
   };
 
@@ -48,12 +50,14 @@ class Dashboard extends Component {
     this.getBalance();
     this.getWatchlist();
     this.getAccountHistory()
+    this.getPositions()
   }
 
   componentDidUpdate(){
     this.getBalance();
     this.getWatchlist();
     this.getAccountHistory()
+    this.getPositions()
   }
 
 
@@ -95,12 +99,25 @@ class Dashboard extends Component {
 
 }
 
+getPositions = () =>{
+  const id = this.props.authReducer.user.account_id
+  
+  axios.get(`/api/chart/${id}`)
+  .then(res => {
+    if(res.data && res.data.length !== this.state.chartData.length){
+      this.setState({chartData: res.data})
+    }
+
+  })
+  .catch(error => console.log(error))
+
+
+ }
 
 
 
   render() {
-    const { cash, watchlist, history } = this.state
-
+    const { cash, watchlist, history, chartData } = this.state
 
           return (
             <div className="dashboard-container">
@@ -112,7 +129,7 @@ class Dashboard extends Component {
                       <Accounts cash={cash}/>
                     </div>
                     <div style={{height: "40vh", width: "40vw", position: "relative", left: "1%"}}>
-                      <ChartDisplay />
+                      <ChartDisplay chart={chartData}/>
                     </div>
                     <div className="history">
                       <History id={this.props.authReducer.user.account_id} history={history}/>

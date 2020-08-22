@@ -24,22 +24,15 @@ class ChartDisplay extends Component {
 
   };
 
-  componentDidMount =()=>{
-    this.getPositions()
 
-  }
-
-  getPositions = () =>{
-    const id = this.props.user.account_id
-    
-    const { labels,datasets } = this.state
-    let newLabels = [...labels];
-    let newDatasets = [...datasets]
-    
-    axios.get(`/api/chart/${id}`)
-    .then(res => {
-
-      res.data.forEach((element,index,array)=>{
+  componentDidUpdate = (prevProps, prevState) =>{
+    if (this.props.chart !== prevProps.chart) {
+      const { labels,datasets } = this.state
+      let newLabels = [...labels];
+      let newDatasets = [...datasets]
+  
+  
+      this.props.chart.forEach((element,index,array)=>{
         if(array.indexOf(element) === index ){
           newLabels.push(element.symbol)
           newDatasets[0].data.push(element.shares)
@@ -49,17 +42,56 @@ class ChartDisplay extends Component {
         labels: newLabels,
         datasets: newDatasets
       })
-    })
-    .catch(error => console.log(error))
+
+    }
+
+  }
+
+  // getPositions = () =>{
+  //   const id = this.props.user.account_id
+    
+  //   const { labels,datasets } = this.state
+  //   let newLabels = [...labels];
+  //   let newDatasets = [...datasets]
+    
+  //   axios.get(`/api/chart/${id}`)
+  //   .then(res => {
+
+  //     res.data.forEach((element,index,array)=>{
+  //       if(array.indexOf(element) === index ){
+  //         newLabels.push(element.symbol)
+  //         newDatasets[0].data.push(element.shares)
+  //       }
+  //     })
+  //     this.setState({
+  //       labels: newLabels,
+  //       datasets: newDatasets
+  //     })
+  //   })
+  //   .catch(error => console.log(error))
   
   
-  
-   }
+  //  }
 
 
 
     render() {
 
+      // this.props.chart.forEach((element,index,array)=>{
+      //   if(array.indexOf(element) === index ){
+      //     newLabels.push(element.symbol)
+      //     newDatasets[0].data.push(element.shares)
+      //   }
+      // })
+      // this.setState({
+      //   labels: newLabels,
+      //   datasets: newDatasets
+      // })
+
+      // const { labels,datasets } = this.state
+      // let newLabels = [...labels];
+      // let newDatasets = [...datasets]
+    
 
         return (
           <div>
