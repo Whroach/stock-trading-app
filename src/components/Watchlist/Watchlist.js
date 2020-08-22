@@ -15,10 +15,10 @@ function Watchlist(props) {
 
          axios.post(`/api/watchlist/${id}`, {symbol})
          .then(() =>{
-            props.getWatchFn()
             addSymbol('');
+            props.getWatchFn()
 
-         } )
+         })
          .catch(error => console.log(error))
      }
 

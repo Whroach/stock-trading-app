@@ -77,8 +77,8 @@ const sendDeposit = () =>{
       {routes}
       {props.location.pathname === "/" || props.location.pathname ==="/confirmation" || props.location.pathname==="/deposit" ? null :
       <div style={{position: "fixed", bottom: "10%", right: "5%"}}>
-        <Fab color="primary" aria-label="add" onClick={toggle === 'false' ? () => setToggle('search') : toggle === 'search' || toggle ==='order' ? () => setToggle('false') : null}>
-            <p>Trade</p>
+        <Fab color="primary" style={{maxWidth: '100px', maxHeight: '100px', minWidth: '100px', minHeight: '100px'}}  aria-label="add" onClick={toggle === 'false' ? () => setToggle('search') : toggle === 'search' || toggle ==='order' ? () => setToggle('false') : null}>
+            <p >Trade</p>
         </Fab>
       </div>
       }

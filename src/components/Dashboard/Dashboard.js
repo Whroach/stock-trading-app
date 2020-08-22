@@ -68,7 +68,7 @@ class Dashboard extends Component {
 
      axios.get(`/api/watchlist/${id}`)
      .then(res =>{
-      if(res.data && res.data.length !== this.state.watchlist){
+      if(res.data && res.data.length !== this.state.watchlist.length){
         this.setState({watchlist: res.data})
      }})
      .catch(error => console.log(error))
