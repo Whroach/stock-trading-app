@@ -57,7 +57,7 @@ class Dashboard extends Component {
 
     axios.get(`/api/balance/${id}`)
     .then(res => {
-      if(res.data && res.data.length !== this.state.cash){
+      if(res.data && res.data.length !== this.state.cash.length){
         this.setState({cash: res.data})
 
       }

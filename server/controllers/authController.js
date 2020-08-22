@@ -30,6 +30,7 @@ module.exports = {
 
 
         let foundUser = await db.auth.check_user({username})
+
  
         if (!foundUser) {
           return res.status(401).send('Username cannot be found, please try again or register a new account');
@@ -62,10 +63,8 @@ module.exports = {
       },
       logout: (req, res) => {
 
-
         req.session.destroy();
         res.sendStatus(200);
-
         
     }
 

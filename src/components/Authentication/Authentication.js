@@ -24,9 +24,9 @@ class Authentication extends Component {
     };
 
     componentDidMount = () =>{
-        if(this.props.user.username){
-            this.props.history.push('/dashboard')
-        }
+        // if(this.props.user.username){
+        //     this.props.history.push('/dashboard')
+        // }
     }
 
     createNewAccount(){

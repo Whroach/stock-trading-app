@@ -16,6 +16,7 @@ function App(props) {
   const [toggle, setToggle] = useState('false')
   const deposit = useFormInput('')
   const [form, setForm] = useState('false')
+
   
   useEffect(() => {
 
@@ -48,6 +49,7 @@ const sendDeposit = () =>{
   axios.post(`/api/deposit/${props.authReducer.user.account_id}`, {deposit: parseInt(amount)})
   .then( () => {
       setForm(form === 'false')
+      props.history.push('/deposit')
 
   })
   .catch(() => console.log('error in sendDeposit'))
@@ -58,7 +60,7 @@ const sendDeposit = () =>{
   return (
     <div style={{overflowX: "hidden"}}>
       <div className="header-app">
-        {props.location.pathname === "/" || props.location.pathname ==="/confirmation" ? null : <Header/>}
+        {props.location.pathname === "/" || props.location.pathname ==="/confirmation" || props.location.pathname==="/deposit" ? null : <Header/>}
         {props.location.pathname ==="/" ? null : 
         <div style={{position:"relative",right:"14.5%", top:"-10px"}}><button id ="wallet-id"onClick={handleToggle} style={{height: 50, width: 130, position: "absolute", bottom: 0, fontSize: 20, backgroundColor: "mediumblue", color: "white"}}>Wallet</button></div>}        
       </div>
@@ -77,7 +79,7 @@ const sendDeposit = () =>{
           :null}
       </div>
       {routes}
-      {props.location.pathname === "/" || props.location.pathname ==="/confirmation" ? null :
+      {props.location.pathname === "/" || props.location.pathname ==="/confirmation" || props.location.pathname==="/deposit" ? null :
       <div style={{position: "fixed", bottom: "10%", right: "5%"}}>
         <Fab color="primary" aria-label="add" onClick={toggle === 'false' ? () => setToggle('search') : toggle === 'search' || toggle ==='order' ? () => setToggle('false') : null}>
             <p>Trade</p>
@@ -96,7 +98,7 @@ const sendDeposit = () =>{
         <Orders ticker={symbol} toggle={setToggle}/> 
       </div> 
       }
-      {props.location.pathname === "/" || props.location.pathname ==="/confirmation" ? null : <Footer/>}
+      {props.location.pathname === "/" || props.location.pathname ==="/confirmation" || props.location.pathname==="/deposit" ? null : <Footer/>}
     </div>
 
   );

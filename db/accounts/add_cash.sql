@@ -1,0 +1,1 @@
+UPDATE account_balance SET cash_balance = cash_balance + $1 WHERE customer_id = $2

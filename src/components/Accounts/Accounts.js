@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
+import NumberFormat from 'react-number-format';
 
 function Accounts(props) {
     const { first_name } = props.user
@@ -11,7 +11,7 @@ function Accounts(props) {
     <p style={{margin: "0",padding: "0",fontSize:"30px"}}>Hi,{first_name}!</p>
             </div>
             <div style={{marignTop: 0}}>
-                <p style={{position: "relative", top:"10%", left: "25%"}}>Total Cash Balance:</p><p style={{position: "relative", left: "25%",color: "green", fontSize: "20px"}}>${props.cash}</p>
+                <p style={{position: "relative", top:"10%", left: "25%"}}>Total Cash Balance:</p><NumberFormat value={props.cash} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div><p style={{position: "relative", left: "25%",color: "green", fontSize: "20px"}} >{value}</p></div>} />
             </div>
         </div>
     )
