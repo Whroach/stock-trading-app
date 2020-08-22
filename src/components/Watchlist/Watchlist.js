@@ -17,7 +17,6 @@ function Watchlist(props) {
          .then(() =>{
             addSymbol('');
             props.getWatchFn()
-
          })
          .catch(error => console.log(error))
      }

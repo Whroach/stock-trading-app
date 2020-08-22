@@ -40,7 +40,7 @@ module.exports = {
         const db = req.app.get('db'),
             { id } = req.params
 
-            let result = await db.query("SELECT * FROM users_watchlist WHERE client_id = $1", [`${id}`])
+            let result = await db.query("SELECT * FROM users_watchlist WHERE client_id = $1 ORDER BY watchlist_id DESC", [`${id}`])
 
             res.status(200).send(result)
     },

@@ -36,6 +36,7 @@ class Dashboard extends Component {
     }
 
     this.getBalance = this.getBalance.bind(this)
+    this.getWatchlist = this.getWatchlist.bind(this)
 
   };
 
@@ -43,6 +44,11 @@ class Dashboard extends Component {
     // whatTimeIsIt((err, timestamp) => 
     // this.setState({ timestamp }));
 
+    this.getBalance();
+    this.getWatchlist();
+  }
+
+  componentDidUpdate(){
     this.getBalance();
     this.getWatchlist();
   }
