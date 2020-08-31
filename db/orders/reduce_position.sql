@@ -2,7 +2,6 @@
  the position from account_assets and archiving it in order_history.*/
 
 WITH order_history AS ( UPDATE account_assets SET quantity = quantity - ${quantity} WHERE client_id = ${id} AND symbol = ${symbol}
-
 RETURNING symbol, quantity, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id)
 
 

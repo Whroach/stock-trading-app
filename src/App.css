@@ -30,13 +30,6 @@ body {
 
 }
 
-#wallet-id{
-    position: absolute;
-    right: 0%;
-    overflow-y: hidden;
-    overflow-x: hidden;
-
-}
 
 .deposit-container-a {
     position: absolute;
@@ -77,3 +70,8 @@ body {
     position: relative;
     left: 15%;
 }
+
+.header-app{
+    margin-bottom: 3.9%;
+}
+

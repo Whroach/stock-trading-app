@@ -32,6 +32,7 @@ function Header(props) {
                     <div style={{position: "relative", top: "25%"}}>
                         <Search/>
                     </div>
+                        <button id="wallet-btn" onClick={props.walletFn}>Wallet</button>
                     <div>
                         <Link to={'/'}><Button onClick={logoutUser} variant="outlined" color="secondary" style={{position: "absolulte", top: "25%", left: "150%" }}>Logout</Button></Link>
                     </div>

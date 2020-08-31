@@ -18,24 +18,12 @@ export default function Equity(props) {
 
     const mappedActive = active.map((element,index) =>{
 
-      return <div key={index} >
-          <ol style={{display: "flex", justifyContent:"space-evenly"}}>
-            <div>
-            <Link to={`/profile/${element.ticker}`}>{element.ticker}</Link>
-            </div>
-            <div>
-            ${element.last}
-            </div>
-            <div>
-              {element.high}
-            </div>
-            <div>
-              {element.low}
-            </div>
-            <div>
-              {element.volume}
-            </div>
-          </ol>
+      return <div key={index} className="active-container-list">
+        <Link to={`/profile/${element.ticker}`}><p className="active-p">{element.ticker}</p></Link>
+        <p className="active-p">${element.last}</p>
+        <p className="active-p">{element.high}</p>
+        <p className="active-p">{element.low}</p>
+        <p className="active-p">{element.volume}</p>
       </div>
     })
 
@@ -113,27 +101,37 @@ export default function Equity(props) {
           <div style={{position: "relative", top:"5%",height: "30vh" ,width: "90vw", display: "flex", justifyContent: "space-evenly"}}>
             {mappedIndex}
           </div>
-          <div style={{height: "50vh", display: "flex", justifyContent: "space-evenly"}}>
+          <div style={{height: "50vh", display: "flex", justifyContent: "space-evenly", marginTop:"10%", marginBottom:"10%"}}>
             <div className="container-list-e">
-                <h2 style={{position:"relative", left:"40%", width: "50%"}}>Top Performers</h2>
+                <h2 style={{display:"flex", justifyContent:"center"}}>Top Performers</h2>
+                <div style={{display: "flex", justifyContent:"space-evenly", position:"relative", left: "20px"}}>
+                  <p>Symbol</p>
+                  <p>Last</p>
+                  <p>Percent Change %</p>
+                </div>
               <div className="gainers-container">
                 {mappedGainers}
               </div>
             </div>
             <div>
-              <h2 style={{position:"relative", left:"40%", width: "50%"}}>Top Decliners</h2>
+              <h2 style={{display:"flex", justifyContent:"center"}}>Top Decliners</h2>
+              <div style={{display: "flex", justifyContent:"space-evenly", position:"relative", left: "20px"}}>
+                  <p>Symbol</p>
+                  <p>Last</p>
+                  <p>Percent Change %</p>
+                </div>
               <div className="losers-container">
                 {mappedLosers}
             </div>
             </div>
           </div>
           <h1 style={{display: "flex", justifyContent: "center", fontWeight: "bold"}}>Most Active</h1>
-          <div className="active-heading" style={{width: "100vw"}}>
-            <div style={{width: "100vw",display: "flex", justifyContent: "space-around"}}>
+          <div className="active-heading" >
+            <div style={{display: "flex", justifyContent: "space-around", paddingRight: "1%", borderBottom: "2px solid black"}}>
               <p id="symbol-e">Symbol</p>
               <p id="last-e">Last</p>
-              <p id="high-e">High</p>
-              <p id="low-e">Low</p>
+              <p id="high-e">52 Week High</p>
+              <p id="low-e">52 Week Low</p>
               <p id="vol-e">Volume</p> 
             </div>
           </div>

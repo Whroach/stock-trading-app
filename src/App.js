@@ -55,11 +55,10 @@ const sendDeposit = () =>{
 
   return (
     <div style={{overflowX: "hidden"}}>
+      {props.location.pathname === "/" || props.location.pathname ==="/confirmation" || props.location.pathname==="/deposit" ? null :
       <div className="header-app">
-        {props.location.pathname === "/" || props.location.pathname ==="/confirmation" || props.location.pathname==="/deposit" ? null : <Header/>}
-        {props.location.pathname ==="/" ? null : 
-        <div style={{position:"relative",right:"14.5%", top:"-10px"}}><button id ="wallet-id"onClick={handleToggle} style={{height: 50, width: 130, position: "absolute", bottom: 0, fontSize: 20, backgroundColor: "mediumblue", color: "white"}}>Wallet</button></div>}        
-      </div>
+        <Header walletFn={handleToggle} />  
+      </div>}
       <div>
       {form === 'true' ? 
           <div className = "deposit-container-a">

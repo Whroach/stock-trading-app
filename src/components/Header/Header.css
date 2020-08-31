@@ -4,6 +4,8 @@
     background-image: url("https://cdn.hipwallpaper.com/i/0/24/13Fcmq.jpg");
     width: 100vw;
     height: 8vh;
+    position: fixed;
+    z-index: 1;
     
 
 }
@@ -19,6 +21,16 @@
     width: 20%;
     background: #0f0c29;
     background: -webkit-linear-gradient(to right, #0f0c29, #302b63, #24243e);
+}
+
+
+#wallet-btn{
+    margin: 10px 0px;
+    width: 8vw;
+    font-size: 25px;
+    color: white;
+    background-color: rgb(5, 18, 143)
+
 }
 
 

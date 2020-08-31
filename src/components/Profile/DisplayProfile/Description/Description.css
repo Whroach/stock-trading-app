@@ -1,0 +1,8 @@
+.d-container{
+    border-style: solid;
+    border-radius: square;
+    border-color:black;
+    border-width: thin;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px;
+    padding: 1% 3% 0 3%;
+}

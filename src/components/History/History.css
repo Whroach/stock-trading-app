@@ -38,12 +38,9 @@
 
 .history-rows{
     overflow: scroll;
-    background-color: pink;
     height: 51vh;
     width: 80vw;
     overflow-x: hidden;
-    /* padding-left: 30px; */
-    /* align-items: center; */
 }
 
 /* #symbolxQ{
@@ -53,21 +50,27 @@
 
 #timestamp-h{
     width: 80vw;
-    background-color: lawngreen;
     
 }
 
 .content-container-sh{
     background-color: white;
-    width: 90vw;
+    width: 78vw;
     padding: 0.5%;
     display: inline-flex;
     justify-content: space-evenly;
-    align-items: baseline;
+    text-align: justify;
     position: relative;
 }
 
 #desc{
+    word-wrap: break-word;
     position: relative;
     left: 50px;
+    height: 20vh;
+}
+
+#p-desc{
+    word-wrap: break-word;
+
 }

@@ -1,8 +1,9 @@
 .body-e{
-    height: 160vh;
+    height: 175vh;
     background-color: white;
     margin-left: 5%;
     margin-right: 5%;
+    margin-top: 3%;
 }
 
 #img-container{
@@ -31,6 +32,11 @@
     width: 20vw;
     position: relative;
     overflow-x: hidden;
+    border-style: solid;
+    border-radius: square;
+    border-color:black;
+    border-width: thin;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px;
 
 }
 
@@ -42,59 +48,45 @@
     width: 20vw;
     position: relative;
     overflow-x: hidden;
+    border-style: solid;
+    border-radius: square;
+    border-color:black;
+    border-width: thin;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px;
 
 }
+
 
 .active-container{
     display: flex;
     flex-direction: column;
     overflow: scroll;
     height: 42vh;
-    width: 103vw;
+    width: 90vw;
     position: relative;
-    right: 15%;
+    /* right: 10%; */
     overflow-x: hidden;
 
 }
 
-#symbol-e{
-    position: relative;
-    right: 6%;
+.active-container-list{
+    display: flex;
+    justify-content: space-around;
+
 }
 
-#last-e{
-    position: relative;
-    right: 9%
-}
-
-#high-e{
-    position: relative;
-    right: 12%
-}
-
-#low-e{
-    position: relative;
-    right: 15%
-}
-
-#vol-e{
-    position: relative;
-    right: 17.5%
-}
-
-.active-heading{
-    border-bottom: ridge black ;
-}
 
 .index-box{
-    height: 100px;
+    height: 150px;
     width: 150px;
-    /* border-style: solid;
+    padding: 20px;
+    padding-left: 60px;
+    border-style: solid;
     border-radius: square;
     border-color:black;
-    border-width: thick; */
+    border-width: thin;
+    box-shadow: 1px 1px 1px 1px;
+
 }
 
-/* .container-list-e{
-    height: 50vh;
-} */
+

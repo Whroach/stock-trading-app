@@ -25,13 +25,13 @@ export default function ShowHistory(props) {
             <div className="content-container-sh">
                     <p>{element.timestamp.slice(0,10)}</p>
                     <p>{element.action_type}</p>
-                    <p id="symbolxQ">{element.symbol}x{element.quantity}s</p>
-                    <div id="desc">
-                        <p>{element.description}</p>
+                    <p id="symbolxQ">{element.symbol} x {element.quantity}s</p>
+                    {/* <div id="desc">
+                        <p id="p-desc">{element.description}</p>
                     </div>
                     <div>
                         <Link to={`/post/${element.history_id}`}><button>Edit</button></Link>
-                    </div>
+                    </div> */}
             </div>
         </div>
     })
@@ -50,7 +50,6 @@ export default function ShowHistory(props) {
                     <p>Date</p>
                     <p>Type</p>
                     <p>Details</p>
-                    <p>Description</p>
                 </div>
                 <div className="history-rows">
                     {mappedList}
