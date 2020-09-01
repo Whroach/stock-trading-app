@@ -108,10 +108,10 @@ const RootQuery = new GraphQLObjectType({
 
         // var today = new Date();
 
-        let date = '2020-08'
+        let date = '2020-0'
 
 
-        for(i = 0; i < newArray.length; i++){
+        for(var i = 0; i < newArray.length; i++){
 
           if(newArray[i].ticker === "QQQ" || newArray[i].ticker === "SPY" || newArray[i].ticker === "DIA"){
               indexArray.push(newArray[i])
@@ -134,6 +134,7 @@ const RootQuery = new GraphQLObjectType({
         };
 
 
+
         var newGain = gainArray.map(function(el) {
           var newObj = Object.assign({}, el);
 
@@ -152,10 +153,12 @@ const RootQuery = new GraphQLObjectType({
           return newObj;
         
         })
+
         
         const positiveList = newGain.sort(function(a,b){
           return b.percentChange - a.percentChange
         })
+
 
 
 
@@ -171,6 +174,7 @@ const RootQuery = new GraphQLObjectType({
           return a.last / a.prevClose -b.last / b.prevClose
 
         })
+
 
 
         let result = [...indexArray,...positiveList.slice(0,n), ...negativeList.slice(0,n), ...activeList.slice(0,200)]

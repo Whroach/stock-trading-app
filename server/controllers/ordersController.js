@@ -49,7 +49,8 @@ module.exports = {
                 }
                 else{
                     // await db.query("WITH order_history AS ( UPDATE account_assets SET quantity = quantity - $1 WHERE client_id = $2 AND symbol = $3 RETURNING symbol, $4, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id) INSERT INTO order_history(symbol, quantity, bid_price, ask_price, action_type, order_type, asset_type, timestamp, transaction_id, client_id) SELECT symbol, quantity, $5, $6, $7, $8, asset_type, timestamp, transaction_id,client_id FROM order_history", [`${quantity}`,`${id}`, `${symbol}`, `${quantity}`,`${bid_price}`, `${ask_price}`, `SELL`, `MARKET`])
-                    await db.orders.reduce_position({symbol, quantity, id, bid_price, ask_price})
+                    await db.orders.reduce_position({symbol, quantity, id})
+                    await db.orders.insert_sell({symbol, quantity, id, bid_price, ask_price})
 
                     let total = quantity * bid_price
                     await db.accounts.add_cash(total, id)
