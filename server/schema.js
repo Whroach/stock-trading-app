@@ -51,43 +51,6 @@ const ProfileType = new GraphQLObjectType({
 
 
 
-const CryptoType = new GraphQLObjectType({
-  name: 'CryptoMarket',
-  fields: () => ({
-    ticker: {type: GraphQLNonNull(GraphQLString)},
-    baseCurrency: {type:GraphQLNonNull(GraphQLString)},
-    quoteCurrency: {type: GraphQLNonNull(GraphQLString)},
-    topOfBookData: {type: new GraphQLObjectType({
-      name: 'data',
-      fields: ()=>({
-        askSize: {type: GraphQLFloat},
-        askPrice: {type:GraphQLFloat}
-      })
-    })}
-  })
-});
-
-
-
-const CryptoPriceType = new GraphQLObjectType({
-  name: 'CryptoPrice',
-  fields: () => ({
-    // lastPrice: {type: GraphQLNonNull(GraphQLFloat)},
-    volume: {type: GraphQLFloat},
-    askPrice: {type:GraphQLFloat}
-
-  })
-})
-
-const ForexType = new GraphQLObjectType({
-  name: 'ForexData',
-  fields: ()=>({
-    base: {type: GraphQLString},
-    quote: {type: GraphQLList}
-  })
-})
-
-
 
 // Root Query
 const RootQuery = new GraphQLObjectType({
@@ -96,22 +59,20 @@ const RootQuery = new GraphQLObjectType({
     equities: {
       type: new GraphQLList(EquityType),
       resolve: async(parent, args) => {
-        let newArray = []
-        let gainArray = []
-        let declineArray = []
-        let indexArray = []
-        let activeArray = []
-        const n = 100
 
-        await axios.get(`wss://api.tiingo.com/iex?token=${tiingo_token}`)
-        .then(res => newArray = [...res.data])
+        let finalData = await axios.get(`https://api.tiingo.com/iex?token=${tiingo_token}`)
+        .then(res => {
+          let newArray = [...res.data]
+          let gainArray = []
+          let declineArray = []
+          let indexArray = []
+          let activeArray = []
+          const n = 100
 
-        // var today = new Date();
-
-        let date = '2020-0'
+          const date = '2020-09'
 
 
-        for(var i = 0; i < newArray.length; i++){
+          for(var i = 0; i < newArray.length; i++){
 
           if(newArray[i].ticker === "QQQ" || newArray[i].ticker === "SPY" || newArray[i].ticker === "DIA"){
               indexArray.push(newArray[i])
@@ -122,7 +83,7 @@ const RootQuery = new GraphQLObjectType({
 
           }
           
-          if(newArray[i].last < newArray[i].prevClose && newArray[i].last > 5.00 && newArray[i].volume > 1000000 && newArray[i] !== null && newArray[i].lastSaleTimestamp.slice(0,7) === date){
+          if(newArray[i].last < newArray[i].prevClose && newArray[i].last > .50 && newArray[i].volume > 500000 && newArray[i].lastSaleTimestamp.slice(0,7) === date){
             declineArray.push(newArray[i])
           };
 
@@ -133,9 +94,9 @@ const RootQuery = new GraphQLObjectType({
 
         };
 
+        //syrs
 
-
-        var newGain = gainArray.map(function(el) {
+        const newGain = gainArray.map(function(el) {
           var newObj = Object.assign({}, el);
 
           newObj.percentChange = 100 * Math.abs((el.last - el.prevClose) / el.prevClose)
@@ -143,10 +104,9 @@ const RootQuery = new GraphQLObjectType({
           return newObj;
         
         })
-
         
 
-        var newDecline = declineArray.map(function(el) {
+        const newDecline = declineArray.map(function(el) {
           var newObj = Object.assign({}, el);
           newObj.percentChange = 100 * Math.abs((el.last - el.prevClose) / el.prevClose)
       
@@ -159,30 +119,27 @@ const RootQuery = new GraphQLObjectType({
           return b.percentChange - a.percentChange
         })
 
-
-
-
-
         const activeList = activeArray.sort((a,b)=>{
           return b.volume - a.volume
 
         })
 
 
-
         const negativeList = newDecline.sort((a,b)=>{
-          return a.last / a.prevClose -b.last / b.prevClose
+          return a.last / a.prevClose - b.last / b.prevClose 
 
         })
 
 
-
-        let result = [...indexArray,...positiveList.slice(0,n), ...negativeList.slice(0,n), ...activeList.slice(0,200)]
-
+        const result = [...indexArray,...positiveList.slice(0,n), ...negativeList.slice(0,n), ...activeList.slice(0,200)]
 
         return result
 
+        })
+        .catch(error => console.log(error))
 
+
+        return finalData
 
       }
     },
@@ -197,6 +154,7 @@ const RootQuery = new GraphQLObjectType({
         await axios
         .get(`https://api.tiingo.com/iex/?tickers=${args.ticker}&token=${tiingo_token}`)
         .then(res => stockArray = [...res.data])
+        .catch(error => console.log(error))
 
         return stockArray
       }
@@ -212,70 +170,12 @@ const RootQuery = new GraphQLObjectType({
         await axios
         .get(`https://finnhub.io/api/v1/company-news?symbol=${args.ticker}&from=2020-08-01&to=2020-08-02&token=${finnhub_token}`)
         .then(res => array = [...res.data])
+        .catch(error => console.log(error))
 
         return array
       }
     },
 
-    crypto:{
-      type: new GraphQLList(CryptoType),
-      resolve: async(parent, args) =>{
-        let topPairs = []
-        let array = []
-        let filter = []
-
-        await axios
-        .get(`https://api.tiingo.com/tiingo/crypto?token=${tiingo_token}`)
-        .then(res => array = [...res.data])
-
-
-        // for(i = 0; i < array.length; i++){
-        //   if(array[i].ticker === "ethbtc" || array[i].ticker === "ltcbtc" || array[i].ticker === "xrpbtc"){
-        //       topPairs.push(array[i])
-        //   };
-
-          // if(array[i]){
-          //   gainArray.push(array[i])
-          // }
-          
-          // if(array[i].last > array[i].prevClose  && array[i].last > 5.00 && array[i].volume > 500000 && array[i] !== null){
-          //   declineArray.push(array[i])
-          // };
-
-        // };
-
-
-        return array
-
-      }
-    },
-
-    cryptoPrice: {
-      type: new GraphQLList(CryptoPriceType),
-      resolve: async(parent, args) =>{
-        let array = []
-
-        await axios
-        .get(`https://api.tiingo.com/tiingo/crypto?&token=${tiingo_token}`)
-        .then(res => array = [...res.data])
-        
-        return array
-      }
-    },
-
-
-    // forex: {
-    //   type: new GraphQLList(ForexType),
-    //   resolve: async(parent, args)=>{
-    //     let array = []
-
-    //     await axios
-    //     .get(`https://finnhub.io/api/v1/forex/rates?base=USD&token=${finnhub_token}`)
-    //     .then(res => console.log(res.data))
-
-    //     return array
-    //   }
-    // },
 
     profile: {
       type: new GraphQLList(ProfileType),
@@ -289,6 +189,7 @@ const RootQuery = new GraphQLObjectType({
         await axios
         .get(`https://api.tiingo.com/tiingo/daily/${args.ticker}?token=${tiingo_token}`)
         .then(res => array.push(res.data))
+        .catch(error => console.log(error))
 
         return array
 

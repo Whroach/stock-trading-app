@@ -80,9 +80,6 @@ function Orders(props) {
             .catch(() => { setError('Unable to process order, try again');
             })
         }
-        else{
-            setError('Insufficient amount of funds. Please reduce share amount or deposit more money')
-        }
     }
 
     function sendSellOrder(){
@@ -115,19 +112,28 @@ function Orders(props) {
                     <div>
                         <form className="form-container">
                             <ul>
-                                <p>Symbol: {symbol}</p>
-                                <p>Quantity:</p><input type='text' placeholder='quantity' {...quantity}/>
-                                <p>Bid Price: ${order.bid_price} </p>
-                                <p>Ask Price: ${order.ask_price}</p>
-                                <p>Market Order</p>
+                                <div id="upper-section">
+                                    <div id="symbol-o">
+                                        <p style={{fontSize: "20px", borderBottom: "solid 2px white"}}>Symbol</p>
+                                        <p style={{fontSize: "30px", fontWeight: "bold"}}>{symbol}</p>
+                                    </div>
+                                    <div>
+                                        <p style={{fontSize: "20px", borderBottom: "solid 2px white" }}>Quantity</p><input type='text' placeholder='quantity' {...quantity}/>
+                                    </div>
+                                </div>
+                                <div id="lower-section">
+                                    <p id="bid" >Bid Price<p style={{fontSize: "25px"}}>${order.bid_price}</p></p>
+                                    <p id="ask" >Ask Price<p style={{fontSize: "25px"}}>${order.ask_price}</p></p>
+                                    <p id="order-type" >Order Type<p style={{fontSize: "25px", color: "white", fontWeight: "bold"}}>Market Order</p></p>
+                                </div>
                             </ul>
                         </form>
                         {errorMessage &&
                         <h3 style={{color:"red"}}> {errorMessage} </h3> }
-                        <div className="button-containter-o">
-                            <button className="buttons-o" style={{backgroundColor: "green", color:"white"}}onClick={sendBuyOrder}>Buy</button>
-                            <button  className="buttons-o" style={{backgroundColor: "red", color:"white"}} onClick={sendSellOrder}>Sell</button>
-                        </div>
+                    </div>
+                    <div className="button-containter-o">
+                            <button className="buttons-o" disabled={order.ask_price === 0} style={{backgroundColor: "green", color:"white"}} onClick={!order.quantity ? null : sendBuyOrder}>Buy</button>
+                            <button  className="buttons-o"  disabled={order.bid_price === 0} style={{backgroundColor: "red", color:"white"}} onClick={!order.quantity ? null : sendSellOrder}>Sell</button>
                     </div>
             </div>
         </div>

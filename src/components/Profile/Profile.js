@@ -61,7 +61,7 @@ function Profile(props) {
     <Fragment>
       <Query query={EQUITY_QUERY_COMBINE} variables={{ ticker }}>
         {({ loading, error, data }) =>{
-          if(loading) return <h1>Loading....</h1>;
+          if(loading) return  <div style={{height: "100vh", width: "100vw"}}><p>Loading....</p></div>
           if(error) console.log(error)
 
           const {companyNews, equity, profile } = data

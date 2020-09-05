@@ -2,24 +2,83 @@
     height: 100%;
     background: #0f0c29;
     background: -webkit-linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    border: solid black 3px;
+    box-shadow: initial;
+    /* box-shadow: 1px 1px 1px 1px; */
 }
 
 .orders-container{
     color: white;
     position: absolute;
-    top: 20%;
-    left: 35%;
+    top: 10%;
 }
 
+#upper-section{
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 30px;
+}
+
+#upper-section input{
+    font-size: 15px;
+    height: 30px;
+    border: solid grey 2px;
+}
 
 .button-containter-o{
     height: 5.25vh;
     display: flex;
     position: relative;
-    top: 11vh;
-    right: 35%;
 }
 
 .buttons-o{
-    width: 22.3vw;
+    /* width: 22.3vw; */
+    font-size: 20px;
+    width: 22.41vw;
+
+}
+
+.form-container{
+    margin-bottom: 1%;
+}
+
+.form-container p{
+    font-size: 20px;
+}
+
+
+#lower-section{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-evenly; 
+}
+
+#ask{
+    margin-left: 5%;
+    margin-right: 5%;
+    font-size: 20px;
+    border: 3px solid black;
+    padding: 5%;
+
+}
+
+#bid{
+    font-size: 20px;
+    border: 3px solid black;
+    padding: 5%;
+
+
+}
+
+#order-type{
+    font-size: 20px;
+    border: 3px solid black;
+    padding: 5%;
+
+
+}
+
+
+#symbol-o p{
+    margin-left: 25px;
 }

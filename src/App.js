@@ -85,7 +85,7 @@ const sendDeposit = () =>{
         <div className="search-symbol">
           <div className="search-a-container">
             <input onChange={e => setSymbol(e.target.value)} type="text" placeholder="symbol"/>
-            <button style={{backgroundColor:"green", color:"white"}} onClick={() => setToggle('order')}>Search</button>
+            <button disabled={symbol.length === 0} style={{backgroundColor:"green", color:"white"}} onClick={() => setToggle('order')}>Search</button>
           </div>
         </div>
        : 

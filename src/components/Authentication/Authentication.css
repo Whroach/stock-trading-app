@@ -48,14 +48,16 @@
     justify-content: space-around;
     position: relative;
     top: 40%;
-    right: 45.5%;
+    right: 48%;
 }
 
 .button{
     height: 5vh;
     width: 100%;
     color: white;
-    background-color: black;
+    background-color: green;
+    font-size: 20px;
+    font-weight: bold;
 
 }
 
@@ -63,4 +65,13 @@
 .input-fields{
     position: relative;
     right: 5%;
+}
+
+.input-fields p {
+    font-size: 30px;
+}
+
+.input-fields input{
+    font-size: 20px;
+    height: 8%;
 }
