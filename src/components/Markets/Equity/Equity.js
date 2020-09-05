@@ -18,13 +18,13 @@ export default function Equity(props) {
 
     const mappedActive = active.map((element,index) =>{
 
-      return <div key={index} className="active-container-list">
+      return (<div key={index} className="active-container-list">
         <Link to={`/profile/${element.ticker}`}><p className="active-p">{element.ticker}</p></Link>
         <p className="active-p">${element.last}</p>
         <p className="active-p">{element.high}</p>
         <p className="active-p">{element.low}</p>
         <p className="active-p">{element.volume}</p>
-      </div>
+      </div>)
     })
 
 
@@ -42,7 +42,7 @@ export default function Equity(props) {
 
       }
 
-      return <div key={index} style={{width: "20vw", backgroundColor: "white"}}>
+      return (<div key={index} style={{width: "20vw", backgroundColor: "white"}}>
         <div style={{display: "flex", justifyContent: "space-evenly"}}>
           <div>
           <Link to={`/profile/${element.ticker}`}><p>{element.ticker}</p></Link>
@@ -50,7 +50,7 @@ export default function Equity(props) {
             <p style={{color:"green"}}>{element.last}</p>
             <p style={{color:"green"}}>+{finalChange.toFixed(2)}%</p>
         </div>
-      </div>
+      </div>)
     })
 
     const mappedLosers = losers.map((element, index) =>{
@@ -63,7 +63,7 @@ export default function Equity(props) {
          finalChange = (difference / element.prevClose * 100)
 
       }
-      return <div key={index} style={{width: "20vw", backgroundColor: "white"}}>
+      return (<div key={index} style={{width: "20vw", backgroundColor: "white"}}>
         <div style={{display: "flex", justifyContent: "space-evenly"}}>
           <div>
           <Link to={`/profile/${element.ticker}`}><p>{element.ticker}</p></Link>
@@ -71,7 +71,7 @@ export default function Equity(props) {
             <p style={{color:"red"}}>{element.last}</p>
             <p style={{color:"red"}}>-{finalChange.toFixed(2)}%</p>
         </div>
-      </div>
+      </div>)
     })
 
     const mappedIndex = index.map((element,index)=>{
@@ -81,12 +81,12 @@ export default function Equity(props) {
       let difference = element.last - element.prevClose
       let percentChange = (difference / element.prevClose * 100)
 
-      return <div key={index} >
+      return (<div key={index} >
         <div className="index-box">
         <Link to={`/profile/${element.ticker}`}><p style={{fontSize: "50px", margin:"0"}}>{element.ticker}</p></Link>
         <p style={{fontSize:"20px"}}>${element.last.toFixed(2)}</p><p>{percentChange.toFixed(2)}%</p>
         </div>
-      </div>
+      </div>)
     })
 
 
