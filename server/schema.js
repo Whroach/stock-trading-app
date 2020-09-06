@@ -59,8 +59,9 @@ const RootQuery = new GraphQLObjectType({
     equities: {
       type: new GraphQLList(EquityType),
       resolve: async(parent, args) => {
+        let finalData =[] 
 
-        let finalData = await axios.get(`https://api.tiingo.com/iex?token=${tiingo_token}`)
+        await axios.get(`https://api.tiingo.com/iex?token=${tiingo_token}`)
         .then(res => {
           let newArray = [...res.data]
           let gainArray = []
@@ -72,7 +73,7 @@ const RootQuery = new GraphQLObjectType({
           const date = '2020-09'
 
 
-          for(var i = 0; i < newArray.length; i++){
+          for(let i = 0; i < newArray.length; i++){
 
           if(newArray[i].ticker === "QQQ" || newArray[i].ticker === "SPY" || newArray[i].ticker === "DIA"){
               indexArray.push(newArray[i])
@@ -93,8 +94,6 @@ const RootQuery = new GraphQLObjectType({
           }
 
         };
-
-        //syrs
 
         const newGain = gainArray.map(function(el) {
           var newObj = Object.assign({}, el);
@@ -130,14 +129,18 @@ const RootQuery = new GraphQLObjectType({
 
         })
 
+        const newIndex = [...indexArray]
+        const newGainer = [...positiveList.splice(0,n)]
+        const newLoser = [...negativeList.splice(0,n)]
+        const newActive = [...activeList.splice(0,200)]
 
-        const result = [...indexArray,...positiveList.slice(0,n), ...negativeList.slice(0,n), ...activeList.slice(0,200)]
-
-        return result
+        // const result = [...indexArray,...positiveList.slice(0,n), ...negativeList.slice(0,n), ...activeList.slice(0,200)]
+        
+        
+        finalData = newIndex.concat(newGainer, newLoser, newActive)
 
         })
         .catch(error => console.log(error))
-
 
         return finalData
 

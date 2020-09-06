@@ -5,99 +5,89 @@ import { Link } from 'react-router-dom'
 
 
 export default function Equity(props) {
-  const  { equities }  = props.value
 
-    const index = equities.splice(0,3)
-    const gainers = equities.splice(0,100)
-    const losers = equities.slice(0,100)
-    const active = equities.slice(100,243)
+  const { equities } = props.value
 
 
+    const mappedIndex = Object.entries(equities).slice(0,3).map((element,index)=>{
 
-    
-
-    const mappedActive = active.map((element,index) =>{
-
-      return (<div key={index} className="active-container-list">
-        <Link to={`/profile/${element.ticker}`}><p className="active-p">{element.ticker}</p></Link>
-        <p className="active-p">${element.last}</p>
-        <p className="active-p">{element.high}</p>
-        <p className="active-p">{element.low}</p>
-        <p className="active-p">{element.volume}</p>
-      </div>)
-    })
-
-
-
-
-
-    const mappedGainers = gainers.map((element, index) =>{
-      let finalChange;
-
-      // let pointChange = element.last / element.prev
-      //percentage change
-       if(element.last / element.prevClose != null){
-         let difference = element.last - element.prevClose
-         finalChange = (difference / element.prevClose * 100)
-
-      }
-
-      return (<div key={index} style={{width: "20vw", backgroundColor: "white"}}>
-        <div style={{display: "flex", justifyContent: "space-evenly"}}>
-          <div>
-          <Link to={`/profile/${element.ticker}`}><p>{element.ticker}</p></Link>
-          </div>
-            <p style={{color:"green"}}>{element.last}</p>
-            <p style={{color:"green"}}>+{finalChange.toFixed(2)}%</p>
-        </div>
-      </div>)
-    })
-
-    const mappedLosers = losers.map((element, index) =>{
-      let finalChange;
-
-      // let pointChange = element.last / element.prev
-      //percentage change
-       if(element.last / element.prevClose != null){
-         let difference = element.prevClose - element.last
-         finalChange = (difference / element.prevClose * 100)
-
-      }
-      return (<div key={index} style={{width: "20vw", backgroundColor: "white"}}>
-        <div style={{display: "flex", justifyContent: "space-evenly"}}>
-          <div>
-          <Link to={`/profile/${element.ticker}`}><p>{element.ticker}</p></Link>
-          </div>
-            <p style={{color:"red"}}>{element.last}</p>
-            <p style={{color:"red"}}>-{finalChange.toFixed(2)}%</p>
-        </div>
-      </div>)
-    })
-
-    const mappedIndex = index.map((element,index)=>{
       // point change
-      let pointChange = element.last / element.prevClose
+      let pointChange = element[1].last / element[1].prevClose
       //percentage change
-      let difference = element.last - element.prevClose
-      let percentChange = (difference / element.prevClose * 100)
+      let difference = element[1].last - element[1].prevClose
+      let percentChange = (difference / element[1].prevClose * 100)
 
       return (<div key={index} >
         <div className="index-box">
-        <Link to={`/profile/${element.ticker}`}><p style={{fontSize: "50px", margin:"0"}}>{element.ticker}</p></Link>
-        <p style={{fontSize:"20px"}}>${element.last.toFixed(2)}</p><p>{percentChange.toFixed(2)}%</p>
+        <Link to={`/profile/${element[1].ticker}`}><p style={{fontSize: "50px", margin:"0"}}>{element[1].ticker}</p></Link>
+        <p style={{fontSize:"20px"}}>${element[1].last}</p><p>{percentChange.toFixed(0,4)}%</p>
         </div>
       </div>)
     })
 
+
+
+    const mappedGainers = Object.entries(equities).slice(4,103).map((element, index) =>{
+      let finalChange;
+
+      // let pointChange = element.last / element.prev
+      //percentage change
+       if(element[1].last / element[1].prevClose != null){
+         let difference = element[1].last - element[1].prevClose
+         finalChange = (difference / element[1].prevClose * 100)
+
+      }
+
+      return (<div key={index} style={{width: "20vw", backgroundColor: "white"}}>
+        <div style={{display: "flex", justifyContent: "space-evenly"}}>
+          <div>
+          <Link to={`/profile/${element[1].ticker}`}><p>{element[1].ticker}</p></Link>
+          </div>
+            <p style={{color:"green"}}>{element[1].last}</p>
+            <p style={{color:"green"}}>+{finalChange.toFixed(0,4)}%</p>
+        </div>
+      </div>)
+    })
+
+    const mappedLosers = Object.entries(equities).slice(104,203).map((element, index) =>{
+      let finalChange;
+
+      // let pointChange = element.last / element.prev
+      //percentage change
+       if(element[1].last / element[1].prevClose != null){
+         let difference = element[1].prevClose - element[1].last
+         finalChange = (difference / element[1].prevClose * 100)
+
+      }
+      return (<div key={index} style={{width: "20vw", backgroundColor: "white"}}>
+        <div style={{display: "flex", justifyContent: "space-evenly"}}>
+          <div>
+          <Link to={`/profile/${element[1].ticker}`}><p>{element[1].ticker}</p></Link>
+          </div>
+            <p style={{color:"red"}}>{element[1].last}</p>
+            <p style={{color:"red"}}>-{finalChange.toFixed(0,4)}%</p>
+        </div>
+      </div>)
+    })
+
+
+
+    const mappedActive = Object.entries(equities).slice(204,303).map((element,index) =>{
+      console.log(element[1].ticker)
+
+      return (<div key={index} className="active-container-list">
+        <Link to={`/profile/${element[1].ticker}`}><p className="active-p">{element[1].ticker}</p></Link>
+        <p className="active-p">${element[1].last}</p>
+        <p className="active-p">{element[1].high}</p>
+        <p className="active-p">{element[1].low}</p>
+        <p className="active-p">{element[1].volume}</p>
+      </div>)
+    })
 
 
     return (
 
       <div  className="body-e">
-        {/* <div id="img-container">
-          <img id="img-b"style={{height: "15vh" ,width: "90vw"}}src="https://biltmorecap.com/wp-content/uploads/2017/05/Equity.jpg"/>
-        </div>
-          <h1 style={{fontWeight: "bold",color:"white", position: "relative", left: "45%", bottom: "8%"}}>Equity Market</h1> */}
           <div style={{position: "relative", top:"5%",height: "30vh" ,width: "90vw", display: "flex", justifyContent: "space-evenly"}}>
             {mappedIndex}
           </div>

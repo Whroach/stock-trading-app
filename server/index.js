@@ -32,7 +32,7 @@ const express = require('express'),
     
     app.use('/graphql', graphqlHTTP({
         schema,
-        graphiql: true
+        graphiql: process.env.NODE_ENV === 'development'
     }))
     
 
@@ -57,7 +57,6 @@ const express = require('express'),
 
     //API endpoint
     app.get('/api/profile/:ticker', apiCtrl.getProfile)
-    app.get('/api/rates', apiCtrl.getForexRates)
     app.get('/api/report/:ticker', apiCtrl.getFinancialReport)
     //Authentication endpoints
     app.get('/auth/session',authCtrl.getSession)

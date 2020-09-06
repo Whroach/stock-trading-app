@@ -1,13 +1,11 @@
 import React, {useState,useEffect} from 'react'
 import './History.css'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+
 
 export default function ShowHistory(props) {
     const { id } = props.match.params
     const [list, setList] = useState([])
-    const [edit, setEdit] = useState('')
-    const [toggle, setToggle] = useState('false')
 
 
     useEffect(() => {
@@ -21,17 +19,10 @@ export default function ShowHistory(props) {
     const mappedList = list.map((element,index)=>{
 
         return <div id="timestamp-h" key={index} style={{borderBottom: "solid black 1px"}}>
-            {/* style={{margin: 0, position: "relative",display: "flex", justifyContent:"space-evenly", verticalAlign: "middle"}} */}
             <div className="content-container-sh">
                     <p>{element.timestamp.slice(0,10)}</p>
                     <p>{element.action_type}</p>
                     <p id="symbolxQ">{element.symbol} x {element.quantity}s</p>
-                    {/* <div id="desc">
-                        <p id="p-desc">{element.description}</p>
-                    </div>
-                    <div>
-                        <Link to={`/post/${element.history_id}`}><button>Edit</button></Link>
-                    </div> */}
             </div>
         </div>
     })

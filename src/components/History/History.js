@@ -1,34 +1,10 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import './History.css'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { Link } from 'react-router-dom'
-import axios from 'axios'
  
 function History(props) {
-    // const [history, setHistory] = useState([])
 
-
-    // useEffect(() => {
-    //     getAccountHistory()
-
-
-    //   },[])
-
-
-    // const getAccountHistory = () =>{
-    //     const id = props.id
-    //     axios.get(`/api/history/${id}`)
-    //     .then(res => {
-    //         if(res.data && res.data.length !== history.length){
-    //             setHistory(res.data)
-    //         }
-
-    //     })
-    //     .catch(() => console.log('error in getAccountHistory'))
-
-    // }
-
-    // history.reverse()
 
     const mappedHistory = props.history.map((element,index) => {
         return <div key={index} >

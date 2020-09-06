@@ -30,3 +30,9 @@ overflow-x: hidden;
 }
 
 
+.statement-error{
+    font-size: 30px;
+    font-weight: bold;
+    margin-top:5%;
+    margin-left: 25%
+}

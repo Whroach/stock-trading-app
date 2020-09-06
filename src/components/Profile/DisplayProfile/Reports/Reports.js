@@ -24,6 +24,7 @@ function Reports(props) {
                       <Button style={{width: "33.33%", color:"black", fontWeight: "bold"}} className='buttons-r' onClick={() => displayPage('cash')}>Cash Flow</Button>
         </ButtonGroup>
       </div>
+      {props.report.length <= 0  ? <div className="statement-error"><p>Statements limited to DOW-30 companies (ex: MSFT, AAPL, WMT, etc.) </p></div> : 
       <div className="list-r">
         {page === 'balance'
         ?
@@ -61,7 +62,7 @@ function Reports(props) {
           </div>
 
         })};
-      </div>
+      </div>}
     </div>
   )
 }

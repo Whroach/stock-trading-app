@@ -27,8 +27,7 @@ export default function Markets(props) {
     if(loading) return <div style={{height: "100vh", width: "100vw"}}><p>Loading....</p></div>
     if(error) console.log(error)
 
-
-
+    
     return (
         <Fragment>
             <div className="body-m" >
