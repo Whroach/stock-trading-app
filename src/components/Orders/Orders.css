@@ -9,8 +9,8 @@
 
 .orders-container{
     color: white;
-    position: absolute;
-    top: 10%;
+    position: relative;
+    top: 4%;
 }
 
 #upper-section{
@@ -28,7 +28,6 @@
 .button-containter-o{
     height: 5.25vh;
     display: flex;
-    position: relative;
 }
 
 .buttons-o{
