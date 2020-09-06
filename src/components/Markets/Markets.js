@@ -51,7 +51,7 @@ export default function Markets(props) {
         <Fragment>
             <div className="body-m" >
                 <div>
-                  <Equity value={equities}/>
+                  <Equity value={data}/>
                 </div>
             </div>
         </Fragment>
