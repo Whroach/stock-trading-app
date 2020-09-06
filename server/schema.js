@@ -24,7 +24,8 @@ const EquityType = new GraphQLObjectType({
     low: { type: GraphQLNonNull(GraphQLFloat)},
     volume: { type: GraphQLNonNull(GraphQLFloat)},
     bidPrice: { type: GraphQLFloat},
-    askPrice: { type: GraphQLFloat}
+    askPrice: { type: GraphQLFloat},
+    lastSaleTimestamp: {type: GraphQLFloat}
 
   })
 });

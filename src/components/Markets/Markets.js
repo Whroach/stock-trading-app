@@ -24,6 +24,7 @@ const EQUITIES_QUERY = gql`
 export default function Markets(props) {
 
     const {loading, error, data} = useQuery(EQUITIES_QUERY)
+
     if(loading) return <div style={{height: "100vh", width: "100vw"}}><p>Loading....</p></div>
     if(error) console.log(error)
 
