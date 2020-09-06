@@ -24,27 +24,27 @@ const EQUITIES_QUERY = gql`
 
 export default function Markets(props) {
 
-    const [equities, setEquities] = useState({})
+    // const [equities, setEquities] = useState({})
 
 
 
-    // const {loading, error, data} = useQuery(EQUITIES_QUERY)
+    const {loading, error, data} = useQuery(EQUITIES_QUERY)
 
-    //   if(loading) return <div style={{height: "100vh", width: "100vw"}}><p>Loading....</p></div>
-    //   if(error) console.log(error)
+      if(loading) return <div style={{height: "100vh", width: "100vw"}}><p>Loading....</p></div>
+      if(error) console.log(error)
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-      getQuotes()
+    //   getQuotes()
 
-    }, [])
+    // }, [])
 
-    const getQuotes = async () =>{
-      await Axios.get('api/quotes')
-      .then( res => setEquities(res.data))
-      .catch(error => console.log(error))
-    }
+    // const getQuotes = async () =>{
+    //   await Axios.get('api/quotes')
+    //   .then( res => setEquities(res.data))
+    //   .catch(error => console.log(error))
+    // }
 
 
     return (

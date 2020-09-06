@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 
 
 export default function Equity(props) {
-  // const { equities } = props.value
+  const { equities } = props.value
 
-    const mappedIndex = Object.entries(props.value).slice(0,3).map((element,index)=>{
+    const mappedIndex = Object.entries(equities ).slice(0,3).map((element,index)=>{
 
       // point change
       let pointChange = element[1].last / element[1].prevClose
@@ -25,7 +25,7 @@ export default function Equity(props) {
 
 
 
-    const mappedGainers = Object.entries(props.value).slice(4,103).map((element, index) =>{
+    const mappedGainers = Object.entries(equities ).slice(4,103).map((element, index) =>{
       let finalChange;
 
       // let pointChange = element.last / element.prev
@@ -47,7 +47,7 @@ export default function Equity(props) {
       </div>)
     })
 
-    const mappedLosers = Object.entries(props.value).slice(104,203).map((element, index) =>{
+    const mappedLosers = Object.entries(equities ).slice(104,203).map((element, index) =>{
       let finalChange;
 
       // let pointChange = element.last / element.prev
@@ -70,7 +70,7 @@ export default function Equity(props) {
 
 
 
-    const mappedActive = Object.entries(props.value).slice(204,303).map((element,index) =>{
+    const mappedActive = Object.entries(equities ).slice(204,303).map((element,index) =>{
 
       return (<div key={index} className="active-container-list">
         <Link to={`/profile/${element[1].ticker}`}><p className="active-p">{element[1].ticker}</p></Link>
