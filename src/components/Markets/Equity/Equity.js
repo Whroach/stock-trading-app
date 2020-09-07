@@ -9,9 +9,6 @@ export default function Equity(props) {
 
     const mappedIndex = Object.entries(equities ).slice(0,3).map((element,index)=>{
 
-      // point change
-      let pointChange = element[1].last / element[1].prevClose
-      //percentage change
       let difference = element[1].last - element[1].prevClose
       let percentChange = (difference / element[1].prevClose * 100)
 
@@ -27,9 +24,7 @@ export default function Equity(props) {
 
     const mappedGainers = Object.entries(equities ).slice(4,103).map((element, index) =>{
       let finalChange;
-
-      // let pointChange = element.last / element.prev
-      //percentage change
+      
        if(element[1].last / element[1].prevClose != null){
          let difference = element[1].last - element[1].prevClose
          finalChange = (difference / element[1].prevClose * 100)
@@ -50,8 +45,6 @@ export default function Equity(props) {
     const mappedLosers = Object.entries(equities ).slice(104,203).map((element, index) =>{
       let finalChange;
 
-      // let pointChange = element.last / element.prev
-      //percentage change
        if(element[1].last / element[1].prevClose != null){
          let difference = element[1].prevClose - element[1].last
          finalChange = (difference / element[1].prevClose * 100)
