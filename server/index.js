@@ -56,7 +56,6 @@ const express = require('express'),
     
 
     //API endpoint
-    app.get('/api/quotes', apiCtrl.getAllQuotes)
     app.get('/api/profile/:ticker', apiCtrl.getProfile)
     app.get('/api/report/:ticker', apiCtrl.getFinancialReport)
     //Authentication endpoints

@@ -60,10 +60,10 @@ const RootQuery = new GraphQLObjectType({
     equities: {
       type: new GraphQLList(EquityType),
       resolve: async(parent, args) => {
-        let finalData =[] 
 
-        await axios.get(`https://api.tiingo.com/iex?token=${tiingo_token}`)
+        return await axios.get(`https://api.tiingo.com/iex?token=${tiingo_token}`)
         .then(res => {
+          const date = '2020-10'
           let newArray = [...res.data]
           let gainArray = []
           let declineArray = []
@@ -71,62 +71,71 @@ const RootQuery = new GraphQLObjectType({
           let activeArray = []
           const n = 100
 
-          const date = '2020-09'
-
-
           for(let i = 0; i < newArray.length; i++){
-
           if(newArray[i].ticker === "QQQ" || newArray[i].ticker === "SPY" || newArray[i].ticker === "DIA"){
               indexArray.push(newArray[i])
           }
 
-          if(newArray[i].last > newArray[i].prevClose && newArray[i].prevClose > .50 && newArray[i].volume > 500000 && newArray[i].lastSaleTimestamp.slice(0,7) === date){
+          if(newArray[i].last > newArray[i].prevClose && newArray[i].last > .50){
             gainArray.push(newArray[i])
 
           }
           
-          if(newArray[i].last < newArray[i].prevClose && newArray[i].last > .50 && newArray[i].volume > 500000 && newArray[i].lastSaleTimestamp.slice(0,7) === date){
+          if(newArray[i].last < newArray[i].prevClose && newArray[i].last > .50){
             declineArray.push(newArray[i])
           };
 
-          if(newArray[i].volume > 10000000 && newArray[i].last > 1 && newArray[i].lastSaleTimestamp.slice(0,7) === date){
-            activeArray.push(newArray[i])
-
+          if(newArray[i].volume > 1000000 && newArray[i].last > 1){
+              activeArray.push(newArray[i])
           }
 
         };
 
-        const newGain = gainArray.map(function(el) {
-          var newObj = Object.assign({}, el);
 
-          newObj.percentChange = 100 * Math.abs((el.last - el.prevClose) / el.prevClose)
-      
-          return newObj;
-        
+        const newGain = gainArray.filter(function(el) {
+          if(el.timestamp.includes(date)){
+            let newObj = Object.assign({}, el);
+
+            newObj.percentChange = 100 * Math.abs((el.last - el.prevClose) / el.prevClose)
+
+            return newObj;
+            
+          }
         })
-        
-
-        const newDecline = declineArray.map(function(el) {
-          var newObj = Object.assign({}, el);
-          newObj.percentChange = 100 * Math.abs((el.last - el.prevClose) / el.prevClose)
-      
-          return newObj;
-        
-        })
-
-        
+                
         const positiveList = newGain.sort(function(a,b){
           return b.percentChange - a.percentChange
         })
 
-        const activeList = activeArray.sort((a,b)=>{
-          return b.volume - a.volume
+
+        const newDecline = declineArray.filter(function(el) {
+          if(el.timestamp.includes(date)){
+          let newObj = Object.assign({}, el);
+          newObj.percentChange = 100 * Math.abs((el.last - el.prevClose) / el.prevClose)
+      
+          return newObj;
+          }
+        
+        })
+
+        const negativeList = newDecline.sort((a,b)=>{
+          return a.last / a.prevClose - b.last / b.prevClose 
 
         })
 
 
-        const negativeList = newDecline.sort((a,b)=>{
-          return a.last / a.prevClose - b.last / b.prevClose 
+
+        const filterActive = activeArray.filter(function(el){
+          if(el.timestamp.includes(date)){
+            return el
+          }
+        })
+
+
+        
+
+        const activeList = filterActive.sort((a,b)=>{
+          return b.volume - a.volume
 
         })
 
@@ -135,15 +144,10 @@ const RootQuery = new GraphQLObjectType({
         const newLoser = [...negativeList.splice(0,n)]
         const newActive = [...activeList.splice(0,200)]
 
-        // const result = [...indexArray,...positiveList.slice(0,n), ...negativeList.slice(0,n), ...activeList.slice(0,200)]
-        
-        
-        finalData = newIndex.concat(newGainer, newLoser, newActive)
+        return finalData = newIndex.concat(newGainer, newLoser, newActive)
 
         })
         .catch(error => console.log(error))
-
-        return finalData
 
       }
     },
